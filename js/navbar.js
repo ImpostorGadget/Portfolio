@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="container nav">
 
+                <!-- LOGO -->
 
                 <a
                     href="/index.html"
@@ -22,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     AG<span>.</span>
                 </a>
 
+
+                <!-- NAVEGACIÓN -->
 
                 <nav
                     class="navbar-menu"
@@ -36,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         Inicio
                     </a>
 
-
                     <a
                         href="/pages/stack.html"
                         class="nav-link"
@@ -44,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                         Stack
                     </a>
-
 
                     <a
                         href="/pages/proyectos.html"
@@ -54,6 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         Proyectos
                     </a>
 
+                    <a
+                        href="/writeups/writeups.html"
+                        class="nav-link"
+                        data-page="writeups"
+                    >
+                        Writeups
+                    </a>
 
                     <a
                         href="/cheatsheets/index.html"
@@ -62,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                         Cheatsheets
                     </a>
-
 
                     <a
                         href="/pages/sobre-mi.html"
@@ -74,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </nav>
 
+
+                <!-- GITHUB -->
 
                 <div class="navbar-actions">
 
@@ -89,6 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
 
+                <!-- MENÚ MÓVIL -->
+
                 <button
                     id="navbar-toggle"
                     class="navbar-toggle"
@@ -103,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </button>
 
-
             </div>
 
         </header>
@@ -112,17 +122,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     activarPaginaActual();
-
     activarMenuMovil();
 
 });
 
 
+/* =========================
+   PÁGINA ACTUAL
+========================= */
+
 function activarPaginaActual() {
 
     const path =
         window.location.pathname;
-
 
     let pagina = "inicio";
 
@@ -139,10 +151,13 @@ function activarPaginaActual() {
 
         pagina = "sobre-mi";
 
+    } else if (path.includes("/writeups")) {
+
+        pagina = "writeups";
+
     } else if (path.includes("/cheatsheets")) {
 
         pagina = "cheatsheets";
-
     }
 
 
@@ -161,17 +176,17 @@ function activarPaginaActual() {
 }
 
 
+/* =========================
+   MENÚ MÓVIL
+========================= */
+
 function activarMenuMovil() {
 
     const button =
-        document.querySelector(
-            "#navbar-toggle"
-        );
+        document.querySelector("#navbar-toggle");
 
     const menu =
-        document.querySelector(
-            ".navbar-menu"
-        );
+        document.querySelector(".navbar-menu");
 
 
     if (!button || !menu) {
@@ -189,6 +204,41 @@ function activarMenuMovil() {
             "aria-expanded",
             abierto
         );
+
+
+        button.setAttribute(
+            "aria-label",
+            abierto
+                ? "Cerrar menú"
+                : "Abrir menú"
+        );
+
+    });
+
+
+    const enlaces =
+        menu.querySelectorAll(".nav-link");
+
+
+    enlaces.forEach((enlace) => {
+
+        enlace.addEventListener("click", () => {
+
+            menu.classList.remove("active");
+
+
+            button.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            button.setAttribute(
+                "aria-label",
+                "Abrir menú"
+            );
+
+        });
 
     });
 

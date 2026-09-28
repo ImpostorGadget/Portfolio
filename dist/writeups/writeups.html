@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Documentación técnica y writeups de ciberseguridad de Ángel García."
+    >
+
+    <title>Writeups | Ángel García</title>
+
+
+  <script type="module" crossorigin src="/assets/navbar-CTgxvK4O.js"></script>
+  <script type="module" crossorigin src="/assets/app-D13itZAJ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/styles-D1uMWF_N.css">
+</head>
+
+
+<body>
+
+    <div id="navbar"></div>
+
+
+    <main>
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <section class="writeups-hero">
+
+            <div class="container">
+
+                <div class="writeups-hero-content">
+
+                    <span class="section-label">
+                        TECHNICAL DOCUMENTATION
+                    </span>
+
+                    <h1>
+                        Writeups
+                    </h1>
+
+                    <p>
+                        Laboratorios, análisis y ejercicios técnicos
+                        documentados paso a paso.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             WRITEUPS
+        ========================== -->
+
+        <section class="section writeups-section">
+
+            <div class="container">
+
+                <div class="writeups-toolbar">
+
+                    <div>
+
+                        <span class="writeups-count-label">
+                            DOCUMENTACIÓN
+                        </span>
+
+                        <h2>
+                            Laboratorios y análisis
+                        </h2>
+
+                    </div>
+
+                    <span class="writeups-terminal">
+                        /security/writeups
+                    </span>
+
+                </div>
+
+
+                <!-- Filtros por categoría -->
+                <div
+                    class="writeups-filters"
+                    id="writeups-filters"
+                >
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="pwn">Pwn</button>
+                    <button class="filter-btn" data-filter="crypto">Crypto</button>
+                    <button class="filter-btn" data-filter="reverse">Reverse</button>
+                    <button class="filter-btn" data-filter="forensics">Forensics</button>
+                    <button class="filter-btn" data-filter="misc">Misc</button>
+                </div>
+
+
+                <!-- Grid de writeups (lo rellena app.js) -->
+                <div
+                    id="writeups-container"
+                    class="writeups-grid"
+                ></div>
+
+
+                <!-- Mensaje vacío -->
+                <div
+                    class="empty-state"
+                    id="empty-state"
+                    hidden
+                >
+                    No hay writeups para esta categoría.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                ©
+                <span id="year"></span>
+                Ángel García
+            </p>
+
+            <p>
+                Portfolio técnico
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+
+</body>
+
+</html>
