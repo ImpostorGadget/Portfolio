@@ -152,6 +152,35 @@ function cargarProyectos(projects) {
                 : "";
 
 
+        const links = [];
+
+        if (project.github && project.github !== "#") {
+            links.push(`
+                <a
+                    href="${project.github}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                >
+                    GitHub
+                </a>
+            `);
+        }
+
+        if (project.demo && project.demo !== "#") {
+            links.push(`
+                <a
+                    href="${project.demo}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link primary"
+                >
+                    Ver proyecto
+                </a>
+            `);
+        }
+
+
         card.innerHTML = `
             <h3>
                 ${project.title}
@@ -168,6 +197,16 @@ function cargarProyectos(projects) {
             <small>
                 ${project.status}
             </small>
+
+            ${
+                links.length
+                    ? `
+                        <div class="project-links">
+                            ${links.join("")}
+                        </div>
+                    `
+                    : ""
+            }
         `;
 
         container.appendChild(card);
