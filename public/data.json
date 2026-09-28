@@ -127,21 +127,7 @@
             ],
             "status": "En desarrollo",
             "github": "#",
-            "demo": "#"
-        },
-
-        {
-            "title": "SecureAudit",
-            "description": "Proyecto experimental orientado a auditoría y monitorización de sistemas.",
-            "technologies": [
-                "React",
-                "Spring",
-                "PostgreSQL",
-                "Nmap"
-            ],
-            "status": "Experimental",
-            "github": "#",
-            "demo": "#"
+            "demo": "https://guiahoreca.netlify.app/"
         }
 
     ]
