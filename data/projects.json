@@ -1,0 +1,37 @@
+[
+    {
+        "title": "PlayTrace",
+        "description": "Aplicación web para gestionar y organizar una colección de videojuegos.",
+        "technologies": [
+            "Laravel",
+            "PHP",
+            "MySQL",
+            "JavaScript"
+        ],
+        "status": "En desarrollo",
+        "featured": true
+    },
+    {
+        "title": "HORECA Chinata",
+        "description": "Aplicación web turística orientada a mostrar información y recursos de interés.",
+        "technologies": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+        "status": "En desarrollo",
+        "featured": true
+    },
+    {
+        "title": "SecureAudit",
+        "description": "Proyecto experimental orientado a auditoría y monitorización de sistemas.",
+        "technologies": [
+            "React",
+            "Spring",
+            "PostgreSQL",
+            "Nmap"
+        ],
+        "status": "Experimental",
+        "featured": true
+    }
+]

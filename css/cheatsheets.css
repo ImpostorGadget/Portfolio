@@ -1,0 +1,321 @@
+/* =========================================
+   CHEATSHEETS — Compacto
+========================================= */
+
+/* Contenedor */
+
+.page-container {
+    width: min(1250px, calc(100% - 80px));
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   CABECERA
+========================================= */
+
+.page-header {
+    padding-top: 3rem;
+    padding-bottom: 0.5rem;
+}
+
+.page-header h1 {
+    margin: 0.4rem 0 0.6rem;
+
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.1;
+}
+
+.page-header p {
+    max-width: 640px;
+
+    margin: 0;
+
+    color: #a0a0a0;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.section-tag {
+    color: #00ffaa;
+
+    font-family: monospace;
+    font-size: 0.75rem;
+}
+
+
+/* =========================================
+   SECCIÓN + GRID
+========================================= */
+
+.cheatsheets-section {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Grid denso: muchas tarjetas pequeñas por fila */
+
+.cheatsheets-grid {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+    gap: 1rem;
+}
+
+
+/* =========================================
+   TARJETA
+========================================= */
+
+.cheatsheet-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 0;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.cheatsheet-card:hover {
+    background: rgba(0, 255, 170, 0.03);
+
+    border-color: rgba(0, 255, 170, 0.35);
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   CABECERA DE LA TARJETA (toggle si acordeón)
+========================================= */
+
+.cheatsheet-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    width: 100%;
+
+    padding: 0.65rem 0.9rem;
+
+    color: #ffffff;
+    text-align: left;
+
+    background: transparent;
+    border: none;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    cursor: pointer;
+
+    font-family: inherit;
+}
+
+.cheatsheet-toggle h3 {
+    margin: 0;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
+
+    letter-spacing: -0.01em;
+}
+
+.cheatsheet-count {
+    flex-shrink: 0;
+
+    padding: 0.15rem 0.5rem;
+
+    color: #00ffaa;
+
+    background: rgba(0, 255, 170, 0.08);
+
+    border: 1px solid rgba(0, 255, 170, 0.2);
+
+    border-radius: 999px;
+
+    font-family: monospace;
+    font-size: 0.65rem;
+
+    line-height: 1;
+}
+
+.cheatsheet-toggle::after {
+    content: "+";
+
+    color: #00ffaa;
+
+    font-family: monospace;
+    font-size: 0.9rem;
+
+    transition: transform 0.15s ease;
+}
+
+.cheatsheet-card.open .cheatsheet-toggle::after {
+    transform: rotate(45deg);
+}
+
+
+/* =========================================
+   LISTA DE COMANDOS
+========================================= */
+
+/* Si usas acordeón, por defecto oculto: */
+.cheatsheet-list {
+    display: none;
+
+    flex-direction: column;
+
+    gap: 0;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.cheatsheet-card.open .cheatsheet-list {
+    display: flex;
+}
+
+/* Si prefieres SIN acordeón (siempre visibles), cambia la regla de arriba por:
+   .cheatsheet-list { display: flex; } */
+
+.cheatsheet-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    padding: 0.45rem 0.9rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+    font-size: 0.78rem;
+}
+
+.cheatsheet-item:last-child {
+    border-bottom: none;
+}
+
+.cheatsheet-item:hover {
+    background: rgba(0, 255, 170, 0.04);
+}
+
+.cheatsheet-command {
+    color: #00ffaa;
+
+    font-family: monospace;
+    font-size: 0.78rem;
+
+    word-break: break-word;
+}
+
+.cheatsheet-desc {
+    color: #9a9a9a;
+
+    font-size: 0.72rem;
+    line-height: 1.35;
+}
+
+
+/* =========================================
+   SCROLLBAR COMPACTA (en la lista)
+========================================= */
+
+.cheatsheet-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cheatsheet-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cheatsheet-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 170, 0.2);
+    border-radius: 3px;
+}
+
+.cheatsheet-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 170, 0.4);
+}
+
+
+/* =========================================
+   ESTADOS
+========================================= */
+
+.loading,
+.empty-state,
+.error-state {
+    grid-column: 1 / -1;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    color: #999;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    font-size: 0.85rem;
+}
+
+.error-state {
+    border-color: rgba(255, 80, 80, 0.3);
+    background: rgba(255, 80, 80, 0.025);
+}
+
+.error-state h2 {
+    margin-top: 0;
+    color: #ff7070;
+    font-size: 1rem;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .page-container {
+        width: calc(100% - 30px);
+    }
+
+    .cheatsheets-grid {
+        grid-template-columns: 1fr;
+
+        gap: 0.75rem;
+    }
+
+    .cheatsheet-toggle {
+        padding: 0.55rem 0.75rem;
+    }
+
+    .cheatsheet-item {
+        padding: 0.4rem 0.75rem;
+    }
+
+}

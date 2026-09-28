@@ -1,0 +1,87 @@
+[
+    {
+        "name": "HTML5",
+        "category": "Frontend",
+        "level": "Intermedio"
+    },
+    {
+        "name": "CSS3",
+        "category": "Frontend",
+        "level": "Intermedio"
+    },
+    {
+        "name": "JavaScript",
+        "category": "Frontend",
+        "level": "Intermedio"
+    },
+    {
+        "name": "PHP",
+        "category": "Backend",
+        "level": "En aprendizaje"
+    },
+    {
+        "name": "Laravel",
+        "category": "Backend",
+        "level": "En aprendizaje"
+    },
+    {
+        "name": "MySQL",
+        "category": "Bases de datos",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Java",
+        "category": "Programación",
+        "level": "Básico"
+    },
+    {
+        "name": "Python",
+        "category": "Programación",
+        "level": "Básico"
+    },
+    {
+        "name": "Git",
+        "category": "Herramientas",
+        "level": "Intermedio"
+    },
+    {
+        "name": "npm",
+        "category": "Herramientas",
+        "level": "En aprendizaje"
+    },
+    {
+        "name": "Vite",
+        "category": "Frontend",
+        "level": "En aprendizaje"
+    },
+    {
+        "name": "Docker",
+        "category": "DevOps",
+        "level": "En aprendizaje"
+    },
+    {
+        "name": "Linux",
+        "category": "Sistemas",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Windows Server",
+        "category": "Sistemas",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Active Directory",
+        "category": "Sistemas",
+        "level": "Intermedio"
+    },
+    {
+        "name": "PowerShell",
+        "category": "Scripting",
+        "level": "Básico"
+    },
+    {
+        "name": "Nmap",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    }
+]

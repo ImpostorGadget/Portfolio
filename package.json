@@ -1,0 +1,14 @@
+{
+    "name": "portfolio-angel",
+    "version": "1.0.0",
+    "description": "Portfolio técnico de Ángel García",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "vite": "latest"
+    }
+}
