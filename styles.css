@@ -504,6 +504,7 @@ a {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
+    background: transparent;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
@@ -520,8 +521,15 @@ a {
 }
 
 .project-link.primary {
-    color: var(--primary);
-    border-color: var(--primary-border);
+    color: #04121b;
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.project-link.primary:hover {
+    color: #04121b;
+    background: #5cc9fa;
+    border-color: #5cc9fa;
 }
 /* =========================
    SKILLS
