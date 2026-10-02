@@ -1,687 +1,730 @@
 {
-  "cheatsheet": "Git & GitHub + Linux + JavaScript + PHP",
+  "cheatsheet": "Git & GitHub + Linux + JavaScript + PHP + SysAdmin + Cybersecurity",
   "secciones": [
-    {
-      "titulo": "Configuración",
-      "comandos": [
-        { "comando": "git config --global user.name \"Tu Nombre\"", "descripcion": "Configura el nombre de usuario global" },
-        { "comando": "git config --global user.email \"tu@email.com\"", "descripcion": "Configura el email global" },
-        { "comando": "git config --list", "descripcion": "Muestra toda la configuración actual" },
-        { "comando": "git config --global core.editor \"code --wait\"", "descripcion": "Configura el editor por defecto" },
-        { "comando": "git config --global init.defaultBranch main", "descripcion": "Establece 'main' como rama por defecto" },
-        { "comando": "git config --global alias.st status", "descripcion": "Crea un alias para un comando" }
-      ]
-    },
-    {
-      "titulo": "Repositorios",
-      "comandos": [
-        { "comando": "git init", "descripcion": "Inicializa un repositorio local" },
-        { "comando": "git clone <url>", "descripcion": "Clona un repositorio remoto" },
-        { "comando": "git clone <url> <directorio>", "descripcion": "Clona en un directorio específico" },
-        { "comando": "git remote -v", "descripcion": "Lista los repositorios remotos" },
-        { "comando": "git remote add origin <url>", "descripcion": "Añade un remoto llamado origin" },
-        { "comando": "git remote remove origin", "descripcion": "Elimina un remoto" }
-      ]
-    },
-    {
-      "titulo": "Estado",
-      "comandos": [
-        { "comando": "git status", "descripcion": "Muestra el estado del working directory" },
-        { "comando": "git status -s", "descripcion": "Estado en formato corto" },
-        { "comando": "git diff", "descripcion": "Muestra cambios no staged" },
-        { "comando": "git diff --staged", "descripcion": "Muestra cambios staged" },
-        { "comando": "git log", "descripcion": "Historial de commits" },
-        { "comando": "git log --oneline --graph --all", "descripcion": "Historial compacto con gráfico" },
-        { "comando": "git show <commit>", "descripcion": "Muestra detalles de un commit" }
-      ]
-    },
-    {
-      "titulo": "Commits",
-      "comandos": [
-        { "comando": "git add <archivo>", "descripcion": "Añade un archivo al staging area" },
-        { "comando": "git add .", "descripcion": "Añade todos los cambios al staging" },
-        { "comando": "git add -p", "descripcion": "Añade cambios de forma interactiva" },
-        { "comando": "git commit -m \"mensaje\"", "descripcion": "Crea un commit con mensaje" },
-        { "comando": "git commit -am \"mensaje\"", "descripcion": "Add + commit de archivos ya trackeados" },
-        { "comando": "git commit --amend", "descripcion": "Modifica el último commit" },
-        { "comando": "git reset HEAD~1", "descripcion": "Deshace el último commit manteniendo cambios" },
-        { "comando": "git reset --hard HEAD~1", "descripcion": "Deshace el último commit descartando cambios" },
-        { "comando": "git revert <commit>", "descripcion": "Crea un commit que revierte otro" }
-      ]
-    },
-    {
-      "titulo": "Ramas",
-      "comandos": [
-        { "comando": "git branch", "descripcion": "Lista las ramas locales" },
-        { "comando": "git branch -a", "descripcion": "Lista ramas locales y remotas" },
-        { "comando": "git branch <nombre>", "descripcion": "Crea una nueva rama" },
-        { "comando": "git checkout <rama>", "descripcion": "Cambia a una rama" },
-        { "comando": "git checkout -b <rama>", "descripcion": "Crea y cambia a una nueva rama" },
-        { "comando": "git switch <rama>", "descripcion": "Cambia de rama (moderno)" },
-        { "comando": "git switch -c <rama>", "descripcion": "Crea y cambia de rama (moderno)" },
-        { "comando": "git branch -d <rama>", "descripcion": "Elimina una rama fusionada" },
-        { "comando": "git branch -D <rama>", "descripcion": "Fuerza la eliminación de una rama" },
-        { "comando": "git branch -m <nuevo>", "descripcion": "Renombra la rama actual" }
-      ]
-    },
-    {
-      "titulo": "Merge",
-      "comandos": [
-        { "comando": "git merge <rama>", "descripcion": "Fusiona una rama en la actual" },
-        { "comando": "git merge --no-ff <rama>", "descripcion": "Merge sin fast-forward" },
-        { "comando": "git merge --squash <rama>", "descripcion": "Squash de commits al fusionar" },
-        { "comando": "git merge --abort", "descripcion": "Cancela un merge en conflicto" },
-        { "comando": "git mergetool", "descripcion": "Abre herramienta para resolver conflictos" }
-      ]
-    },
-    {
-      "titulo": "Rebase",
-      "comandos": [
-        { "comando": "git rebase <rama>", "descripcion": "Reaplica commits sobre otra rama" },
-        { "comando": "git rebase -i HEAD~n", "descripcion": "Rebase interactivo de los últimos n commits" },
-        { "comando": "git rebase --continue", "descripcion": "Continúa un rebase tras resolver conflicto" },
-        { "comando": "git rebase --abort", "descripcion": "Cancela el rebase actual" },
-        { "comando": "git rebase --skip", "descripcion": "Salta el commit actual en conflicto" },
-        { "comando": "git pull --rebase", "descripcion": "Pull con rebase en lugar de merge" }
-      ]
-    },
-    {
-      "titulo": "Stash",
-      "comandos": [
-        { "comando": "git stash", "descripcion": "Guarda cambios temporalmente" },
-        { "comando": "git stash push -m \"mensaje\"", "descripcion": "Guarda con mensaje descriptivo" },
-        { "comando": "git stash list", "descripcion": "Lista los stash guardados" },
-        { "comando": "git stash apply", "descripcion": "Aplica el último stash sin eliminarlo" },
-        { "comando": "git stash pop", "descripcion": "Aplica y elimina el último stash" },
-        { "comando": "git stash drop", "descripcion": "Elimina el último stash" },
-        { "comando": "git stash clear", "descripcion": "Elimina todos los stash" },
-        { "comando": "git stash show -p stash@{n}", "descripcion": "Muestra el diff de un stash" }
-      ]
-    },
-    {
-      "titulo": "Tags",
-      "comandos": [
-        { "comando": "git tag", "descripcion": "Lista todos los tags" },
-        { "comando": "git tag <nombre>", "descripcion": "Crea un tag ligero" },
-        { "comando": "git tag -a <nombre> -m \"mensaje\"", "descripcion": "Crea un tag anotado" },
-        { "comando": "git show <tag>", "descripcion": "Muestra información del tag" },
-        { "comando": "git push origin <tag>", "descripcion": "Sube un tag al remoto" },
-        { "comando": "git push origin --tags", "descripcion": "Sube todos los tags" },
-        { "comando": "git tag -d <nombre>", "descripcion": "Elimina un tag local" },
-        { "comando": "git push origin --delete <tag>", "descripcion": "Elimina un tag remoto" }
-      ]
-    },
-    {
-      "titulo": "Remote",
-      "comandos": [
-        { "comando": "git remote -v", "descripcion": "Lista remotos con URLs" },
-        { "comando": "git remote add <nombre> <url>", "descripcion": "Añade un nuevo remoto" },
-        { "comando": "git remote set-url origin <url>", "descripcion": "Cambia la URL del remoto" },
-        { "comando": "git fetch", "descripcion": "Descarga cambios sin fusionar" },
-        { "comando": "git fetch --prune", "descripcion": "Elimina refs remotas obsoletas" },
-        { "comando": "git pull", "descripcion": "Fetch + merge" },
-        { "comando": "git push", "descripcion": "Sube cambios al remoto" },
-        { "comando": "git push -u origin <rama>", "descripcion": "Sube y establece upstream" },
-        { "comando": "git push --force-with-lease", "descripcion": "Force push seguro" },
-        { "comando": "git push origin --delete <rama>", "descripcion": "Elimina una rama remota" }
-      ]
-    },
-    {
-      "titulo": "GitHub",
-      "comandos": [
-        { "comando": "gh auth login", "descripcion": "Autenticación con GitHub CLI" },
-        { "comando": "gh repo create <nombre>", "descripcion": "Crea un repositorio en GitHub" },
-        { "comando": "gh repo clone <owner>/<repo>", "descripcion": "Clona un repositorio de GitHub" },
-        { "comando": "gh pr create", "descripcion": "Crea un Pull Request" },
-        { "comando": "gh pr list", "descripcion": "Lista Pull Requests abiertos" },
-        { "comando": "gh pr checkout <n>", "descripcion": "Checkout de un PR localmente" },
-        { "comando": "gh pr merge <n>", "descripcion": "Fusiona un Pull Request" },
-        { "comando": "gh issue create", "descripcion": "Crea un issue" },
-        { "comando": "gh issue list", "descripcion": "Lista issues" },
-        { "comando": "gh release create <tag>", "descripcion": "Crea una release" },
-        { "comando": "gh gist create <archivo>", "descripcion": "Crea un gist" }
-      ]
-    },
-    {
-      "titulo": "Navegación",
-      "comandos": [
-        { "comando": "pwd", "descripcion": "Muestra el directorio actual" },
-        { "comando": "ls", "descripcion": "Lista archivos y directorios" },
-        { "comando": "ls -la", "descripcion": "Lista con detalles y archivos ocultos" },
-        { "comando": "cd <directorio>", "descripcion": "Cambia de directorio" },
-        { "comando": "cd ..", "descripcion": "Sube un nivel en el árbol" },
-        { "comando": "cd ~", "descripcion": "Va al directorio home" },
-        { "comando": "cd -", "descripcion": "Vuelve al directorio anterior" },
-        { "comando": "tree", "descripcion": "Muestra estructura de directorios" },
-        { "comando": "find <ruta> -name <patrón>", "descripcion": "Busca archivos por nombre" },
-        { "comando": "which <comando>", "descripcion": "Muestra la ruta de un comando" }
-      ]
-    },
-    {
-      "titulo": "Archivos",
-      "comandos": [
-        { "comando": "touch <archivo>", "descripcion": "Crea un archivo vacío" },
-        { "comando": "mkdir <dir>", "descripcion": "Crea un directorio" },
-        { "comando": "mkdir -p <a/b/c>", "descripcion": "Crea directorios anidados" },
-        { "comando": "cp <origen> <destino>", "descripcion": "Copia archivos o directorios" },
-        { "comando": "cp -r <dir> <destino>", "descripcion": "Copia recursivamente" },
-        { "comando": "mv <origen> <destino>", "descripcion": "Mueve o renombra" },
-        { "comando": "rm <archivo>", "descripcion": "Elimina un archivo" },
-        { "comando": "rm -rf <dir>", "descripcion": "Elimina directorio recursivamente" },
-        { "comando": "cat <archivo>", "descripcion": "Muestra el contenido de un archivo" },
-        { "comando": "less <archivo>", "descripcion": "Visualiza archivo paginado" },
-        { "comando": "head -n <n> <archivo>", "descripcion": "Muestra las primeras n líneas" },
-        { "comando": "tail -f <archivo>", "descripcion": "Sigue las últimas líneas en vivo" },
-        { "comando": "ln -s <origen> <enlace>", "descripcion": "Crea enlace simbólico" }
-      ]
-    },
-    {
-      "titulo": "Permisos",
-      "comandos": [
-        { "comando": "chmod 755 <archivo>", "descripcion": "Establece permisos rwxr-xr-x" },
-        { "comando": "chmod +x <archivo>", "descripcion": "Añade permiso de ejecución" },
-        { "comando": "chmod -R 644 <dir>", "descripcion": "Permisos recursivos" },
-        { "comando": "chown <usuario>:<grupo> <archivo>", "descripcion": "Cambia propietario y grupo" },
-        { "comando": "chown -R <usuario> <dir>", "descripcion": "Cambia propietario recursivamente" },
-        { "comando": "umask", "descripcion": "Muestra la máscara de permisos" },
-        { "comando": "ls -l", "descripcion": "Ver permisos de archivos" }
-      ]
-    },
-    {
-      "titulo": "Usuarios",
-      "comandos": [
-        { "comando": "whoami", "descripcion": "Muestra el usuario actual" },
-        { "comando": "id", "descripcion": "Muestra UID, GID y grupos" },
-        { "comando": "useradd <usuario>", "descripcion": "Crea un usuario" },
-        { "comando": "userdel -r <usuario>", "descripcion": "Elimina usuario y su home" },
-        { "comando": "passwd <usuario>", "descripcion": "Cambia contraseña de usuario" },
-        { "comando": "usermod -aG <grupo> <usuario>", "descripcion": "Añade usuario a un grupo" },
-        { "comando": "groupadd <grupo>", "descripcion": "Crea un grupo" },
-        { "comando": "su - <usuario>", "descripcion": "Cambia de usuario" },
-        { "comando": "sudo <comando>", "descripcion": "Ejecuta como superusuario" },
-        { "comando": "cat /etc/passwd", "descripcion": "Lista usuarios del sistema" }
-      ]
-    },
-    {
-      "titulo": "Procesos",
-      "comandos": [
-        { "comando": "ps aux", "descripcion": "Lista todos los procesos" },
-        { "comando": "ps -ef", "descripcion": "Lista procesos con formato completo" },
-        { "comando": "top", "descripcion": "Monitor de procesos en tiempo real" },
-        { "comando": "htop", "descripcion": "Monitor interactivo de procesos" },
-        { "comando": "kill <pid>", "descripcion": "Termina un proceso por PID" },
-        { "comando": "kill -9 <pid>", "descripcion": "Fuerza la terminación de un proceso" },
-        { "comando": "pkill <nombre>", "descripcion": "Mata procesos por nombre" },
-        { "comando": "bg", "descripcion": "Envía proceso a segundo plano" },
-        { "comando": "fg", "descripcion": "Trae proceso a primer plano" },
-        { "comando": "jobs", "descripcion": "Lista trabajos en background" },
-        { "comando": "nohup <comando> &", "descripcion": "Ejecuta comando inmune a cierre de sesión" }
-      ]
-    },
-    {
-      "titulo": "Servicios",
-      "comandos": [
-        { "comando": "systemctl start <servicio>", "descripcion": "Inicia un servicio" },
-        { "comando": "systemctl stop <servicio>", "descripcion": "Detiene un servicio" },
-        { "comando": "systemctl restart <servicio>", "descripcion": "Reinicia un servicio" },
-        { "comando": "systemctl status <servicio>", "descripcion": "Estado del servicio" },
-        { "comando": "systemctl enable <servicio>", "descripcion": "Habilita al arranque" },
-        { "comando": "systemctl disable <servicio>", "descripcion": "Deshabilita al arranque" },
-        { "comando": "systemctl list-units --type=service", "descripcion": "Lista servicios activos" },
-        { "comando": "service <servicio> restart", "descripcion": "Reinicia servicio (sysvinit)" },
-        { "comando": "journalctl -u <servicio>", "descripcion": "Logs de un servicio" }
-      ]
-    },
-    {
-      "titulo": "Red",
-      "comandos": [
-        { "comando": "ip a", "descripcion": "Muestra interfaces de red" },
-        { "comando": "ip r", "descripcion": "Muestra tabla de rutas" },
-        { "comando": "ifconfig", "descripcion": "Configuración de interfaces (clásico)" },
-        { "comando": "ping <host>", "descripcion": "Prueba conectividad" },
-        { "comando": "traceroute <host>", "descripcion": "Traza la ruta a un host" },
-        { "comando": "netstat -tulpn", "descripcion": "Puertos en escucha" },
-        { "comando": "ss -tulpn", "descripcion": "Puertos y sockets (moderno)" },
-        { "comando": "curl <url>", "descripcion": "Realiza petición HTTP" },
-        { "comando": "wget <url>", "descripcion": "Descarga archivos de la web" },
-        { "comando": "dig <dominio>", "descripcion": "Consulta DNS" },
-        { "comando": "nslookup <dominio>", "descripcion": "Consulta DNS interactiva" },
-        { "comando": "nmap <host>", "descripcion": "Escanea puertos" }
-      ]
-    },
-    {
-      "titulo": "SSH",
-      "comandos": [
-        { "comando": "ssh <usuario>@<host>", "descripcion": "Conexión SSH remota" },
-        { "comando": "ssh -p <puerto> <usuario>@<host>", "descripcion": "SSH en puerto personalizado" },
-        { "comando": "ssh-keygen -t ed25519 -C \"email\"", "descripcion": "Genera par de claves SSH" },
-        { "comando": "ssh-copy-id <usuario>@<host>", "descripcion": "Copia la clave pública al remoto" },
-        { "comando": "scp <archivo> <usuario>@<host>:<ruta>", "descripcion": "Copia archivos por SSH" },
-        { "comando": "scp -r <dir> <usuario>@<host>:<ruta>", "descripcion": "Copia directorio por SSH" },
-        { "comando": "ssh -L <local>:<host>:<remoto> <usuario>@<host>", "descripcion": "Túnel SSH local" },
-        { "comando": "ssh -i <clave> <usuario>@<host>", "descripcion": "SSH con clave específica" },
-        { "comando": "cat ~/.ssh/id_ed25519.pub", "descripcion": "Muestra clave pública" }
-      ]
-    },
-    {
-      "titulo": "APT",
-      "comandos": [
-        { "comando": "sudo apt update", "descripcion": "Actualiza índices de paquetes" },
-        { "comando": "sudo apt upgrade", "descripcion": "Actualiza paquetes instalados" },
-        { "comando": "sudo apt full-upgrade", "descripcion": "Actualización completa" },
-        { "comando": "sudo apt install <paquete>", "descripcion": "Instala un paquete" },
-        { "comando": "sudo apt remove <paquete>", "descripcion": "Elimina un paquete" },
-        { "comando": "sudo apt purge <paquete>", "descripcion": "Elimina paquete y configuración" },
-        { "comando": "sudo apt autoremove", "descripcion": "Elimina dependencias huérfanas" },
-        { "comando": "apt search <término>", "descripcion": "Busca paquetes" },
-        { "comando": "apt show <paquete>", "descripcion": "Muestra info de un paquete" },
-        { "comando": "dpkg -l", "descripcion": "Lista paquetes instalados" },
-        { "comando": "sudo dpkg -i <archivo.deb>", "descripcion": "Instala paquete .deb" }
-      ]
-    },
-    {
-      "titulo": "Logs",
-      "comandos": [
-        { "comando": "tail -f /var/log/syslog", "descripcion": "Sigue el log del sistema" },
-        { "comando": "tail -f /var/log/auth.log", "descripcion": "Logs de autenticación" },
-        { "comando": "journalctl -xe", "descripcion": "Últimos logs del sistema" },
-        { "comando": "journalctl -f", "descripcion": "Sigue logs en tiempo real" },
-        { "comando": "journalctl --since \"1 hour ago\"", "descripcion": "Logs de la última hora" },
-        { "comando": "journalctl -b", "descripcion": "Logs del arranque actual" },
-        { "comando": "dmesg", "descripcion": "Mensajes del kernel" },
-        { "comando": "grep -i error /var/log/syslog", "descripcion": "Busca errores en logs" },
-        { "comando": "less /var/log/nginx/access.log", "descripcion": "Ver logs de nginx" }
-      ]
-    },
-    {
-      "titulo": "Compresión",
-      "comandos": [
-        { "comando": "tar -czvf <archivo>.tar.gz <dir>", "descripcion": "Comprime en tar.gz" },
-        { "comando": "tar -xzvf <archivo>.tar.gz", "descripcion": "Descomprime tar.gz" },
-        { "comando": "tar -cjvf <archivo>.tar.bz2 <dir>", "descripcion": "Comprime en tar.bz2" },
-        { "comando": "tar -xjvf <archivo>.tar.bz2", "descripcion": "Descomprime tar.bz2" },
-        { "comando": "zip -r <archivo>.zip <dir>", "descripcion": "Comprime en zip" },
-        { "comando": "unzip <archivo>.zip", "descripcion": "Descomprime zip" },
-        { "comando": "gzip <archivo>", "descripcion": "Comprime con gzip" },
-        { "comando": "gunzip <archivo>.gz", "descripcion": "Descomprime gzip" },
-        { "comando": "7z x <archivo>.7z", "descripcion": "Descomprime 7z" }
-      ]
-    },
-    {
-      "titulo": "Variables",
-      "comandos": [
-        { "comando": "let nombre = \"Juan\";", "descripcion": "Variable mutable" },
-        { "comando": "const PI = 3.14;", "descripcion": "Constante inmutable" },
-        { "comando": "var viejo = 1;", "descripcion": "Variable con scope de función (evitar)" },
-        { "comando": "typeof variable", "descripcion": "Devuelve el tipo" },
-        { "comando": "let a = 1, b = 2;", "descripcion": "Declaración múltiple" },
-        { "comando": "let x;", "descripcion": "Variable sin inicializar (undefined)" }
-      ]
-    },
-    {
-      "titulo": "Tipos de datos",
-      "comandos": [
-        { "comando": "let n = 42;", "descripcion": "Number" },
-        { "comando": "let s = \"texto\";", "descripcion": "String" },
-        { "comando": "let b = true;", "descripcion": "Boolean" },
-        { "comando": "let nulo = null;", "descripcion": "Null" },
-        { "comando": "let indef;", "descripcion": "Undefined" },
-        { "comando": "let sym = Symbol('id');", "descripcion": "Symbol" },
-        { "comando": "let big = 123n;", "descripcion": "BigInt" },
-        { "comando": "Number(\"42\")", "descripcion": "Conversión a número" },
-        { "comando": "String(42)", "descripcion": "Conversión a string" },
-        { "comando": "Boolean(0)", "descripcion": "Conversión a boolean" }
-      ]
-    },
-    {
-      "titulo": "Arrays",
-      "comandos": [
-        { "comando": "let arr = [1, 2, 3];", "descripcion": "Declaración de array" },
-        { "comando": "arr.push(4)", "descripcion": "Añade al final" },
-        { "comando": "arr.pop()", "descripcion": "Elimina el último" },
-        { "comando": "arr.unshift(0)", "descripcion": "Añade al inicio" },
-        { "comando": "arr.shift()", "descripcion": "Elimina el primero" },
-        { "comando": "arr.length", "descripcion": "Longitud del array" },
-        { "comando": "arr.map(x => x * 2)", "descripcion": "Transforma cada elemento" },
-        { "comando": "arr.filter(x => x > 2)", "descripcion": "Filtra elementos" },
-        { "comando": "arr.reduce((a, b) => a + b, 0)", "descripcion": "Reduce a un valor" },
-        { "comando": "arr.find(x => x === 2)", "descripcion": "Encuentra el primer match" },
-        { "comando": "arr.includes(2)", "descripcion": "Comprueba si existe" },
-        { "comando": "arr.slice(1, 3)", "descripcion": "Extrae subarray" },
-        { "comando": "arr.splice(1, 1)", "descripcion": "Elimina/inserta elementos" },
-        { "comando": "arr.sort((a, b) => a - b)", "descripcion": "Ordena numéricamente" },
-        { "comando": "arr.join(\", \")", "descripcion": "Une en string" }
-      ]
-    },
-    {
-      "titulo": "Objetos",
-      "comandos": [
-        { "comando": "let obj = { nombre: \"Juan\", edad: 30 };", "descripcion": "Declaración de objeto" },
-        { "comando": "obj.nombre", "descripcion": "Acceso por punto" },
-        { "comando": "obj[\"nombre\"]", "descripcion": "Acceso por corchetes" },
-        { "comando": "obj.email = \"a@b.com\"", "descripcion": "Añade/modifica propiedad" },
-        { "comando": "delete obj.edad", "descripcion": "Elimina propiedad" },
-        { "comando": "Object.keys(obj)", "descripcion": "Devuelve claves" },
-        { "comando": "Object.values(obj)", "descripcion": "Devuelve valores" },
-        { "comando": "Object.entries(obj)", "descripcion": "Devuelve pares [clave, valor]" },
-        { "comando": "Object.assign({}, obj)", "descripcion": "Copia propiedades" },
-        { "comando": "{ ...obj, extra: 1 }", "descripcion": "Spread de objeto" }
-      ]
-    },
-    {
-      "titulo": "Funciones",
-      "comandos": [
-        { "comando": "function suma(a, b) { return a + b; }", "descripcion": "Función declarada" },
-        { "comando": "const suma = function(a, b) { return a + b; }", "descripcion": "Expresión de función" },
-        { "comando": "suma(2, 3)", "descripcion": "Llamada a función" },
-        { "comando": "function f(a = 1) {}", "descripcion": "Parámetro por defecto" },
-        { "comando": "function f(...args) {}", "descripcion": "Rest parameters" },
-        { "comando": "function f() { return; }", "descripcion": "Return implícito undefined" },
-        { "comando": "(function() {})()", "descripcion": "IIFE" },
-        { "comando": "function f() { return arguments; }", "descripcion": "Objeto arguments" }
-      ]
-    },
-    {
-      "titulo": "Arrow functions",
-      "comandos": [
-        { "comando": "const suma = (a, b) => a + b;", "descripcion": "Arrow function compacta" },
-        { "comando": "const cuadrado = x => x * x;", "descripcion": "Un solo parámetro sin paréntesis" },
-        { "comando": "const f = () => { return 1; }", "descripcion": "Con cuerpo y return" },
-        { "comando": "const f = () => ({ a: 1 })", "descripcion": "Retorna objeto (paréntesis)" },
-        { "comando": "arr.map(x => x * 2)", "descripcion": "Uso común en callbacks" },
-        { "comando": "const f = (...args) => args.length", "descripcion": "Con rest parameters" }
-      ]
-    },
-    {
-      "titulo": "Destructuring",
-      "comandos": [
-        { "comando": "const [a, b] = [1, 2];", "descripcion": "Destructuring de array" },
-        { "comando": "const [a, , c] = [1, 2, 3];", "descripcion": "Saltar elementos" },
-        { "comando": "const { nombre, edad } = obj;", "descripcion": "Destructuring de objeto" },
-        { "comando": "const { nombre: n } = obj;", "descripcion": "Renombrar propiedad" },
-        { "comando": "const { a = 1 } = obj;", "descripcion": "Valor por defecto" },
-        { "comando": "const [x, ...resto] = [1, 2, 3];", "descripcion": "Rest en destructuring" },
-        { "comando": "function f({ nombre }) {}", "descripcion": "Destructuring en parámetros" }
-      ]
-    },
-    {
-      "titulo": "DOM",
-      "comandos": [
-        { "comando": "document.getElementById(\"id\")", "descripcion": "Selecciona por ID" },
-        { "comando": "document.querySelector(\".clase\")", "descripcion": "Selecciona el primer match CSS" },
-        { "comando": "document.querySelectorAll(\"div\")", "descripcion": "Selecciona todos los matches" },
-        { "comando": "document.createElement(\"div\")", "descripcion": "Crea un elemento" },
-        { "comando": "padre.appendChild(hijo)", "descripcion": "Añade hijo al DOM" },
-        { "comando": "elemento.remove()", "descripcion": "Elimina elemento del DOM" },
-        { "comando": "elemento.textContent = \"Hola\"", "descripcion": "Cambia texto" },
-        { "comando": "elemento.innerHTML = \"<b>Hola</b>\"", "descripcion": "Cambia HTML interno" },
-        { "comando": "elemento.setAttribute(\"href\", \"#\")", "descripcion": "Establece atributo" },
-        { "comando": "elemento.classList.add(\"activo\")", "descripcion": "Añade clase" },
-        { "comando": "elemento.classList.remove(\"activo\")", "descripcion": "Elimina clase" },
-        { "comando": "elemento.classList.toggle(\"activo\")", "descripcion": "Alterna clase" },
-        { "comando": "elemento.style.color = \"red\"", "descripcion": "Cambia estilo inline" }
-      ]
-    },
-    {
-      "titulo": "Eventos",
-      "comandos": [
-        { "comando": "elemento.addEventListener(\"click\", fn)", "descripcion": "Añade listener" },
-        { "comando": "elemento.removeEventListener(\"click\", fn)", "descripcion": "Elimina listener" },
-        { "comando": "evento.preventDefault()", "descripcion": "Previene comportamiento por defecto" },
-        { "comando": "evento.stopPropagation()", "descripcion": "Detiene la propagación" },
-        { "comando": "evento.target", "descripcion": "Elemento que disparó el evento" },
-        { "comando": "document.addEventListener(\"DOMContentLoaded\", fn)", "descripcion": "DOM listo" },
-        { "comando": "\"click\", \"input\", \"submit\", \"keydown\"", "descripcion": "Eventos comunes" },
-        { "comando": "elemento.onclick = fn", "descripcion": "Asignación directa (menos flexible)" }
-      ]
-    },
-    {
-      "titulo": "Fetch",
-      "comandos": [
-        { "comando": "fetch(url)", "descripcion": "Petición GET básica" },
-        { "comando": "fetch(url).then(res => res.json())", "descripcion": "Parsear JSON" },
-        { "comando": "fetch(url, { method: \"POST\" })", "descripcion": "Petición POST" },
-        { "comando": "fetch(url, { headers: { \"Content-Type\": \"application/json\" } })", "descripcion": "Con headers" },
-        { "comando": "fetch(url, { body: JSON.stringify(data) })", "descripcion": "Enviar body JSON" },
-        { "comando": "if (!res.ok) throw new Error(res.status)", "descripcion": "Manejo de errores HTTP" },
-        { "comando": "res.text()", "descripcion": "Respuesta como texto" },
-        { "comando": "res.blob()", "descripcion": "Respuesta como blob" }
-      ]
-    },
-    {
-      "titulo": "Async/Await",
-      "comandos": [
-        { "comando": "async function f() {}", "descripcion": "Función asíncrona" },
-        { "comando": "await promesa", "descripcion": "Espera resolución de promesa" },
-        { "comando": "const data = await fetch(url)", "descripcion": "Fetch con await" },
-        { "comando": "try { await f() } catch (e) {}", "descripcion": "Manejo de errores" },
-        { "comando": "const [a, b] = await Promise.all([p1, p2])", "descripcion": "Ejecución paralela" },
-        { "comando": "await Promise.allSettled([p1, p2])", "descripcion": "Espera todas sin fallar" },
-        { "comando": "await Promise.race([p1, p2])", "descripcion": "Primera en resolverse" },
-        { "comando": "new Promise((resolve, reject) => {})", "descripcion": "Crear promesa" }
-      ]
-    },
-    {
-      "titulo": "JSON",
-      "comandos": [
-        { "comando": "JSON.stringify(obj)", "descripcion": "Objeto a string JSON" },
-        { "comando": "JSON.stringify(obj, null, 2)", "descripcion": "JSON formateado" },
-        { "comando": "JSON.parse(str)", "descripcion": "String JSON a objeto" },
-        { "comando": "JSON.parse(str, reviver)", "descripcion": "Parse con función reviver" },
-        { "comando": "JSON.stringify(obj, [\"a\", \"b\"])", "descripcion": "Filtrar propiedades" },
-        { "comando": "JSON.stringify(obj, replacer)", "descripcion": "Personalizar serialización" }
-      ]
-    },
-    {
-      "titulo": "LocalStorage",
-      "comandos": [
-        { "comando": "localStorage.setItem(\"clave\", \"valor\")", "descripcion": "Guardar dato" },
-        { "comando": "localStorage.getItem(\"clave\")", "descripcion": "Obtener dato" },
-        { "comando": "localStorage.removeItem(\"clave\")", "descripcion": "Eliminar dato" },
-        { "comando": "localStorage.clear()", "descripcion": "Limpiar todo" },
-        { "comando": "localStorage.key(0)", "descripcion": "Obtener clave por índice" },
-        { "comando": "localStorage.length", "descripcion": "Número de elementos" },
-        { "comando": "JSON.parse(localStorage.getItem(\"k\"))", "descripcion": "Recuperar objeto" },
-        { "comando": "localStorage.setItem(\"k\", JSON.stringify(obj))", "descripcion": "Guardar objeto" },
-        { "comando": "sessionStorage.setItem(\"k\", \"v\")", "descripcion": "Almacenamiento de sesión" }
-      ]
-    },
-    {
-      "titulo": "Sintaxis",
-      "comandos": [
-        { "comando": "<?php echo \"Hola\"; ?>", "descripcion": "Imprimir en PHP" },
-        { "comando": "<?php // comentario ?>", "descripcion": "Comentario de línea" },
-        { "comando": "<?php /* bloque */ ?>", "descripcion": "Comentario de bloque" },
-        { "comando": "$variable = 5;", "descripcion": "Declaración de variable" },
-        { "comando": "echo $variable;", "descripcion": "Imprimir variable" },
-        { "comando": "print \"texto\";", "descripcion": "Alternativa a echo" },
-        { "comando": "var_dump($var);", "descripcion": "Debug de variable" },
-        { "comando": "print_r($array);", "descripcion": "Imprime array legible" },
-        { "comando": "require 'archivo.php';", "descripcion": "Incluye archivo obligatorio" },
-        { "comando": "include 'archivo.php';", "descripcion": "Incluye archivo opcional" },
-        { "comando": "declare(strict_types=1);", "descripcion": "Tipado estricto" }
-      ]
-    },
-    {
-      "titulo": "Variables",
-      "comandos": [
-        { "comando": "$nombre = \"Juan\";", "descripcion": "String" },
-        { "comando": "$edad = 30;", "descripcion": "Entero" },
-        { "comando": "$precio = 19.99;", "descripcion": "Float" },
-        { "comando": "$activo = true;", "descripcion": "Boolean" },
-        { "comando": "$nulo = null;", "descripcion": "Null" },
-        { "comando": "define(\"PI\", 3.14);", "descripcion": "Constante" },
-        { "comando": "const PI = 3.14;", "descripcion": "Constante moderna" },
-        { "comando": "gettype($var);", "descripcion": "Tipo de variable" },
-        { "comando": "isset($var);", "descripcion": "Comprueba si existe" },
-        { "comando": "unset($var);", "descripcion": "Elimina variable" },
-        { "comando": "$$nombre = \"valor\";", "descripcion": "Variable variable" },
-        { "comando": "global $var;", "descripcion": "Acceso a variable global" }
-      ]
-    },
-    {
-      "titulo": "Arrays",
-      "comandos": [
-        { "comando": "$arr = [1, 2, 3];", "descripcion": "Array indexado" },
-        { "comando": "$arr = array(1, 2, 3);", "descripcion": "Sintaxis clásica" },
-        { "comando": "$asoc = [\"a\" => 1, \"b\" => 2];", "descripcion": "Array asociativo" },
-        { "comando": "$arr[] = 4;", "descripcion": "Añadir al final" },
-        { "comando": "count($arr);", "descripcion": "Número de elementos" },
-        { "comando": "array_push($arr, 5);", "descripcion": "Añadir elemento" },
-        { "comando": "array_pop($arr);", "descripcion": "Quitar último" },
-        { "comando": "array_shift($arr);", "descripcion": "Quitar primero" },
-        { "comando": "array_unshift($arr, 0);", "descripcion": "Añadir al inicio" },
-        { "comando": "in_array(2, $arr);", "descripcion": "Comprueba existencia" },
-        { "comando": "array_keys($asoc);", "descripcion": "Claves del array" },
-        { "comando": "array_values($asoc);", "descripcion": "Valores del array" },
-        { "comando": "array_merge($a, $b);", "descripcion": "Fusiona arrays" },
-        { "comando": "array_map(fn($x) => $x * 2, $arr);", "descripcion": "Transforma elementos" },
-        { "comando": "array_filter($arr, fn($x) => $x > 2);", "descripcion": "Filtra elementos" },
-        { "comando": "array_reduce($arr, fn($a, $b) => $a + $b, 0);", "descripcion": "Reduce array" },
-        { "comando": "sort($arr);", "descripcion": "Ordena ascendente" },
-        { "comando": "rsort($arr);", "descripcion": "Ordena descendente" },
-        { "comando": "ksort($asoc);", "descripcion": "Ordena por clave" },
-        { "comando": "implode(\", \", $arr);", "descripcion": "Array a string" },
-        { "comando": "explode(\",\", $str);", "descripcion": "String a array" }
-      ]
-    },
-    {
-      "titulo": "Funciones",
-      "comandos": [
-        { "comando": "function suma($a, $b) { return $a + $b; }", "descripcion": "Declaración" },
-        { "comando": "suma(2, 3);", "descripcion": "Llamada" },
-        { "comando": "function f($a = 1) {}", "descripcion": "Parámetro por defecto" },
-        { "comando": "function f(int $a): int {}", "descripcion": "Tipado de parámetros y retorno" },
-        { "comando": "function f(...$args) {}", "descripcion": "Variadic" },
-        { "comando": "function f(&$ref) {}", "descripcion": "Por referencia" },
-        { "comando": "$f = fn($x) => $x * 2;", "descripcion": "Arrow function" },
-        { "comando": "$f = function($x) use ($y) {};", "descripcion": "Closure con use" },
-        { "comando": "function f(): void {}", "descripcion": "Sin retorno" },
-        { "comando": "function f(): ?int {}", "descripcion": "Retorno nullable" }
-      ]
-    },
-    {
-      "titulo": "Condicionales",
-      "comandos": [
-        { "comando": "if ($a > $b) { }", "descripcion": "If simple" },
-        { "comando": "if ($a) { } elseif ($b) { } else { }", "descripcion": "If-elseif-else" },
-        { "comando": "$r = $a ? $b : $c;", "descripcion": "Operador ternario" },
-        { "comando": "$r = $a ?? $b;", "descripcion": "Null coalescing" },
-        { "comando": "$r = $a ?: $b;", "descripcion": "Elvis operator" },
-        { "comando": "switch ($x) { case 1: break; default: break; }", "descripcion": "Switch" },
-        { "comando": "match($x) { 1 => \"a\", default => \"b\" };", "descripcion": "Match (PHP 8)" },
-        { "comando": "$a == $b", "descripcion": "Comparación débil" },
-        { "comando": "$a === $b", "descripcion": "Comparación estricta" },
-        { "comando": "$a <=> $b", "descripcion": "Spaceship operator" }
-      ]
-    },
-    {
-      "titulo": "Bucles",
-      "comandos": [
-        { "comando": "for ($i = 0; $i < 10; $i++) {}", "descripcion": "Bucle for" },
-        { "comando": "while ($cond) {}", "descripcion": "Bucle while" },
-        { "comando": "do { } while ($cond);", "descripcion": "Do-while" },
-        { "comando": "foreach ($arr as $v) {}", "descripcion": "Recorre valores" },
-        { "comando": "foreach ($arr as $k => $v) {}", "descripcion": "Recorre clave-valor" },
-        { "comando": "foreach ($arr as &$v) {}", "descripcion": "Por referencia" },
-        { "comando": "break;", "descripcion": "Rompe el bucle" },
-        { "comando": "continue;", "descripcion": "Salta a siguiente iteración" },
-        { "comando": "break 2;", "descripcion": "Rompe dos niveles" },
-        { "comando": "goto etiqueta;", "descripcion": "Salto (evitar)" }
-      ]
-    },
-    {
-      "titulo": "POO",
-      "comandos": [
-        { "comando": "class Persona {}", "descripcion": "Declaración de clase" },
-        { "comando": "$p = new Persona();", "descripcion": "Instanciación" },
-        { "comando": "public $nombre;", "descripcion": "Propiedad pública" },
-        { "comando": "private $edad;", "descripcion": "Propiedad privada" },
-        { "comando": "protected $email;", "descripcion": "Propiedad protegida" },
-        { "comando": "public function saludar() {}", "descripcion": "Método público" },
-        { "comando": "public function __construct($n) {}", "descripcion": "Constructor" },
-        { "comando": "public function __destruct() {}", "descripcion": "Destructor" },
-        { "comando": "$this->nombre", "descripcion": "Acceso a propiedad" },
-        { "comando": "$this->metodo()", "descripcion": "Llamada a método" },
-        { "comando": "self::CONSTANTE", "descripcion": "Acceso a constante de clase" },
-        { "comando": "parent::metodo()", "descripcion": "Llamada al padre" },
-        { "comando": "Persona::class", "descripcion": "Nombre de la clase" },
-        { "comando": "instanceof Persona", "descripcion": "Comprueba instancia" }
-      ]
-    },
-    {
-      "titulo": "Clases",
-      "comandos": [
-        { "comando": "class Persona { public string $nombre; }", "descripcion": "Clase con tipado" },
-        { "comando": "public function __construct(public string $nombre) {}", "descripcion": "Promoción de propiedades (PHP 8)" },
-        { "comando": "const VERSION = \"1.0\";", "descripcion": "Constante de clase" },
-        { "comando": "static public function crear() {}", "descripcion": "Método estático" },
-        { "comando": "self::crear();", "descripcion": "Llamada a método estático" },
-        { "comando": "abstract class Base {}", "descripcion": "Clase abstracta" },
-        { "comando": "abstract public function f();", "descripcion": "Método abstracto" },
-        { "comando": "final class Cerrada {}", "descripcion": "Clase final (no heredable)" },
-        { "comando": "public function __toString(): string {}", "descripcion": "Método mágico toString" },
-        { "comando": "public function __get($name) {}", "descripcion": "Método mágico get" }
-      ]
-    },
-    {
-      "titulo": "Herencia",
-      "comandos": [
-        { "comando": "class Hijo extends Padre {}", "descripcion": "Herencia simple" },
-        { "comando": "parent::__construct();", "descripcion": "Llamada al constructor padre" },
-        { "comando": "public function f(): void { parent::f(); }", "descripcion": "Override con llamada al padre" },
-        { "comando": "trait Loggable {}", "descripcion": "Declaración de trait" },
-        { "comando": "use Loggable;", "descripcion": "Usar trait en clase" },
-        { "comando": "interface Volador {}", "descripcion": "Declaración de interfaz" },
-        { "comando": "class Ave implements Volador {}", "descripcion": "Implementar interfaz" },
-        { "comando": "class A extends B implements C, D {}", "descripcion": "Herencia + interfaces" }
-      ]
-    },
-    {
-      "titulo": "Interfaces",
-      "comandos": [
-        { "comando": "interface Figura { public function area(): float; }", "descripcion": "Declaración de interfaz" },
-        { "comando": "class Circulo implements Figura {}", "descripcion": "Implementación" },
-        { "comando": "interface A extends B {}", "descripcion": "Herencia de interfaces" },
-        { "comando": "class C implements A, B {}", "descripcion": "Múltiples interfaces" },
-        { "comando": "public function area(): float { return 0; }", "descripcion": "Método implementado" },
-        { "comando": "$obj instanceof Figura", "descripcion": "Comprueba interfaz" },
-        { "comando": "interface Contador { const MAX = 100; }", "descripcion": "Constante en interfaz" }
-      ]
-    },
-    {
-      "titulo": "Sesiones",
-      "comandos": [
-        { "comando": "session_start();", "descripcion": "Inicia sesión (al inicio del script)" },
-        { "comando": "$_SESSION['usuario'] = \"Juan\";", "descripcion": "Guardar dato en sesión" },
-        { "comando": "echo $_SESSION['usuario'];", "descripcion": "Leer dato de sesión" },
-        { "comando": "isset($_SESSION['usuario']);", "descripcion": "Comprueba si existe" },
-        { "comando": "unset($_SESSION['usuario']);", "descripcion": "Elimina una variable" },
-        { "comando": "session_unset();", "descripcion": "Elimina todas las variables" },
-        { "comando": "session_destroy();", "descripcion": "Destruye la sesión" },
-        { "comando": "session_regenerate_id(true);", "descripcion": "Regenera ID (seguridad)" },
-        { "comando": "setcookie(\"user\", \"Juan\", time()+3600);", "descripcion": "Crear cookie" },
-        { "comando": "$_COOKIE['user'];", "descripcion": "Leer cookie" }
-      ]
-    },
-    {
-      "titulo": "Formularios",
-      "comandos": [
-        { "comando": "<form method=\"POST\" action=\"procesar.php\">", "descripcion": "Formulario POST" },
-        { "comando": "<input type=\"text\" name=\"nombre\">", "descripcion": "Campo de texto" },
-        { "comando": "<input type=\"email\" name=\"email\" required>", "descripcion": "Campo email obligatorio" },
-        { "comando": "<input type=\"password\" name=\"pass\">", "descripcion": "Campo contraseña" },
-        { "comando": "<input type=\"checkbox\" name=\"acepto\">", "descripcion": "Checkbox" },
-        { "comando": "<input type=\"radio\" name=\"sexo\" value=\"M\">", "descripcion": "Radio button" },
-        { "comando": "<select name=\"pais\"><option>ES</option></select>", "descripcion": "Select" },
-        { "comando": "<textarea name=\"msg\"></textarea>", "descripcion": "Área de texto" },
-        { "comando": "$_POST['nombre'];", "descripcion": "Recibir dato POST" },
-        { "comando": "$_GET['id'];", "descripcion": "Recibir dato GET" },
-        { "comando": "htmlspecialchars($_POST['nombre']);", "descripcion": "Sanitizar salida" },
-        { "comando": "filter_var($email, FILTER_VALIDATE_EMAIL);", "descripcion": "Validar email" },
-        { "comando": "trim($_POST['nombre']);", "descripcion": "Elimina espacios" },
-        { "comando": "empty($_POST['nombre']);", "descripcion": "Comprueba si está vacío" }
-      ]
-    }
+
+    { "categoria": "Git", "titulo": "Configuración", "comandos": [
+      { "comando": "git config --global user.name \"Tu Nombre\"", "descripcion": "Configura el nombre de usuario global" },
+      { "comando": "git config --global user.email \"tu@email.com\"", "descripcion": "Configura el email global" },
+      { "comando": "git config --list", "descripcion": "Muestra toda la configuración actual" },
+      { "comando": "git config --global core.editor \"code --wait\"", "descripcion": "Configura el editor por defecto" },
+      { "comando": "git config --global init.defaultBranch main", "descripcion": "Establece 'main' como rama por defecto" },
+      { "comando": "git config --global alias.st status", "descripcion": "Crea un alias para un comando" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Repositorios", "comandos": [
+      { "comando": "git init", "descripcion": "Inicializa un repositorio local" },
+      { "comando": "git clone <url>", "descripcion": "Clona un repositorio remoto" },
+      { "comando": "git clone <url> <directorio>", "descripcion": "Clona en un directorio específico" },
+      { "comando": "git remote -v", "descripcion": "Lista los repositorios remotos" },
+      { "comando": "git remote add origin <url>", "descripcion": "Añade un remoto llamado origin" },
+      { "comando": "git remote remove origin", "descripcion": "Elimina un remoto" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Estado", "comandos": [
+      { "comando": "git status", "descripcion": "Muestra el estado del working directory" },
+      { "comando": "git status -s", "descripcion": "Estado en formato corto" },
+      { "comando": "git diff", "descripcion": "Muestra cambios no staged" },
+      { "comando": "git diff --staged", "descripcion": "Muestra cambios staged" },
+      { "comando": "git log", "descripcion": "Historial de commits" },
+      { "comando": "git log --oneline --graph --all", "descripcion": "Historial compacto con gráfico" },
+      { "comando": "git show <commit>", "descripcion": "Muestra detalles de un commit" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Commits", "comandos": [
+      { "comando": "git add <archivo>", "descripcion": "Añade un archivo al staging area" },
+      { "comando": "git add .", "descripcion": "Añade todos los cambios al staging" },
+      { "comando": "git add -p", "descripcion": "Añade cambios de forma interactiva" },
+      { "comando": "git commit -m \"mensaje\"", "descripcion": "Crea un commit con mensaje" },
+      { "comando": "git commit -am \"mensaje\"", "descripcion": "Add + commit de archivos ya trackeados" },
+      { "comando": "git commit --amend", "descripcion": "Modifica el último commit" },
+      { "comando": "git reset HEAD~1", "descripcion": "Deshace el último commit manteniendo cambios" },
+      { "comando": "git reset --hard HEAD~1", "descripcion": "Deshace el último commit descartando cambios" },
+      { "comando": "git revert <commit>", "descripcion": "Crea un commit que revierte otro" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Ramas", "comandos": [
+      { "comando": "git branch", "descripcion": "Lista las ramas locales" },
+      { "comando": "git branch -a", "descripcion": "Lista ramas locales y remotas" },
+      { "comando": "git branch <nombre>", "descripcion": "Crea una nueva rama" },
+      { "comando": "git checkout <rama>", "descripcion": "Cambia a una rama" },
+      { "comando": "git checkout -b <rama>", "descripcion": "Crea y cambia a una nueva rama" },
+      { "comando": "git switch <rama>", "descripcion": "Cambia de rama (moderno)" },
+      { "comando": "git switch -c <rama>", "descripcion": "Crea y cambia de rama (moderno)" },
+      { "comando": "git branch -d <rama>", "descripcion": "Elimina una rama fusionada" },
+      { "comando": "git branch -D <rama>", "descripcion": "Fuerza la eliminación de una rama" },
+      { "comando": "git branch -m <nuevo>", "descripcion": "Renombra la rama actual" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Merge", "comandos": [
+      { "comando": "git merge <rama>", "descripcion": "Fusiona una rama en la actual" },
+      { "comando": "git merge --no-ff <rama>", "descripcion": "Merge sin fast-forward" },
+      { "comando": "git merge --squash <rama>", "descripcion": "Squash de commits al fusionar" },
+      { "comando": "git merge --abort", "descripcion": "Cancela un merge en conflicto" },
+      { "comando": "git mergetool", "descripcion": "Abre herramienta para resolver conflictos" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Rebase", "comandos": [
+      { "comando": "git rebase <rama>", "descripcion": "Reaplica commits sobre otra rama" },
+      { "comando": "git rebase -i HEAD~n", "descripcion": "Rebase interactivo de los últimos n commits" },
+      { "comando": "git rebase --continue", "descripcion": "Continúa un rebase tras resolver conflicto" },
+      { "comando": "git rebase --abort", "descripcion": "Cancela el rebase actual" },
+      { "comando": "git rebase --skip", "descripcion": "Salta el commit actual en conflicto" },
+      { "comando": "git pull --rebase", "descripcion": "Pull con rebase en lugar de merge" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Stash", "comandos": [
+      { "comando": "git stash", "descripcion": "Guarda cambios temporalmente" },
+      { "comando": "git stash push -m \"mensaje\"", "descripcion": "Guarda con mensaje descriptivo" },
+      { "comando": "git stash list", "descripcion": "Lista los stash guardados" },
+      { "comando": "git stash apply", "descripcion": "Aplica el último stash sin eliminarlo" },
+      { "comando": "git stash pop", "descripcion": "Aplica y elimina el último stash" },
+      { "comando": "git stash drop", "descripcion": "Elimina el último stash" },
+      { "comando": "git stash clear", "descripcion": "Elimina todos los stash" },
+      { "comando": "git stash show -p stash@{n}", "descripcion": "Muestra el diff de un stash" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Tags", "comandos": [
+      { "comando": "git tag", "descripcion": "Lista todos los tags" },
+      { "comando": "git tag <nombre>", "descripcion": "Crea un tag ligero" },
+      { "comando": "git tag -a <nombre> -m \"mensaje\"", "descripcion": "Crea un tag anotado" },
+      { "comando": "git show <tag>", "descripcion": "Muestra información del tag" },
+      { "comando": "git push origin <tag>", "descripcion": "Sube un tag al remoto" },
+      { "comando": "git push origin --tags", "descripcion": "Sube todos los tags" },
+      { "comando": "git tag -d <nombre>", "descripcion": "Elimina un tag local" },
+      { "comando": "git push origin --delete <tag>", "descripcion": "Elimina un tag remoto" }
+    ]},
+
+    { "categoria": "Git", "titulo": "Remote", "comandos": [
+      { "comando": "git remote -v", "descripcion": "Lista remotos con URLs" },
+      { "comando": "git remote add <nombre> <url>", "descripcion": "Añade un nuevo remoto" },
+      { "comando": "git remote set-url origin <url>", "descripcion": "Cambia la URL del remoto" },
+      { "comando": "git fetch", "descripcion": "Descarga cambios sin fusionar" },
+      { "comando": "git fetch --prune", "descripcion": "Elimina refs remotas obsoletas" },
+      { "comando": "git pull", "descripcion": "Fetch + merge" },
+      { "comando": "git push", "descripcion": "Sube cambios al remoto" },
+      { "comando": "git push -u origin <rama>", "descripcion": "Sube y establece upstream" },
+      { "comando": "git push --force-with-lease", "descripcion": "Force push seguro" },
+      { "comando": "git push origin --delete <rama>", "descripcion": "Elimina una rama remota" }
+    ]},
+
+    { "categoria": "Git", "titulo": "GitHub", "comandos": [
+      { "comando": "gh auth login", "descripcion": "Autenticación con GitHub CLI" },
+      { "comando": "gh repo create <nombre>", "descripcion": "Crea un repositorio en GitHub" },
+      { "comando": "gh repo clone <owner>/<repo>", "descripcion": "Clona un repositorio de GitHub" },
+      { "comando": "gh pr create", "descripcion": "Crea un Pull Request" },
+      { "comando": "gh pr list", "descripcion": "Lista Pull Requests abiertos" },
+      { "comando": "gh pr checkout <n>", "descripcion": "Checkout de un PR localmente" },
+      { "comando": "gh pr merge <n>", "descripcion": "Fusiona un Pull Request" },
+      { "comando": "gh issue create", "descripcion": "Crea un issue" },
+      { "comando": "gh issue list", "descripcion": "Lista issues" },
+      { "comando": "gh release create <tag>", "descripcion": "Crea una release" },
+      { "comando": "gh gist create <archivo>", "descripcion": "Crea un gist" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Navegación", "comandos": [
+      { "comando": "pwd", "descripcion": "Muestra el directorio actual" },
+      { "comando": "ls", "descripcion": "Lista archivos y directorios" },
+      { "comando": "ls -la", "descripcion": "Lista con detalles y archivos ocultos" },
+      { "comando": "cd <directorio>", "descripcion": "Cambia de directorio" },
+      { "comando": "cd ..", "descripcion": "Sube un nivel en el árbol" },
+      { "comando": "cd ~", "descripcion": "Va al directorio home" },
+      { "comando": "cd -", "descripcion": "Vuelve al directorio anterior" },
+      { "comando": "tree", "descripcion": "Muestra estructura de directorios" },
+      { "comando": "find <ruta> -name <patrón>", "descripcion": "Busca archivos por nombre" },
+      { "comando": "which <comando>", "descripcion": "Muestra la ruta de un comando" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Archivos", "comandos": [
+      { "comando": "touch <archivo>", "descripcion": "Crea un archivo vacío" },
+      { "comando": "mkdir <dir>", "descripcion": "Crea un directorio" },
+      { "comando": "mkdir -p <a/b/c>", "descripcion": "Crea directorios anidados" },
+      { "comando": "cp <origen> <destino>", "descripcion": "Copia archivos o directorios" },
+      { "comando": "cp -r <dir> <destino>", "descripcion": "Copia recursivamente" },
+      { "comando": "mv <origen> <destino>", "descripcion": "Mueve o renombra" },
+      { "comando": "rm <archivo>", "descripcion": "Elimina un archivo" },
+      { "comando": "rm -rf <dir>", "descripcion": "Elimina directorio recursivamente" },
+      { "comando": "cat <archivo>", "descripcion": "Muestra el contenido de un archivo" },
+      { "comando": "less <archivo>", "descripcion": "Visualiza archivo paginado" },
+      { "comando": "head -n <n> <archivo>", "descripcion": "Muestra las primeras n líneas" },
+      { "comando": "tail -f <archivo>", "descripcion": "Sigue las últimas líneas en vivo" },
+      { "comando": "ln -s <origen> <enlace>", "descripcion": "Crea enlace simbólico" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Permisos", "comandos": [
+      { "comando": "chmod 755 <archivo>", "descripcion": "Establece permisos rwxr-xr-x" },
+      { "comando": "chmod +x <archivo>", "descripcion": "Añade permiso de ejecución" },
+      { "comando": "chmod -R 644 <dir>", "descripcion": "Permisos recursivos" },
+      { "comando": "chown <usuario>:<grupo> <archivo>", "descripcion": "Cambia propietario y grupo" },
+      { "comando": "chown -R <usuario> <dir>", "descripcion": "Cambia propietario recursivamente" },
+      { "comando": "umask", "descripcion": "Muestra la máscara de permisos" },
+      { "comando": "ls -l", "descripcion": "Ver permisos de archivos" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Usuarios", "comandos": [
+      { "comando": "whoami", "descripcion": "Muestra el usuario actual" },
+      { "comando": "id", "descripcion": "Muestra UID, GID y grupos" },
+      { "comando": "useradd <usuario>", "descripcion": "Crea un usuario" },
+      { "comando": "userdel -r <usuario>", "descripcion": "Elimina usuario y su home" },
+      { "comando": "passwd <usuario>", "descripcion": "Cambia contraseña de usuario" },
+      { "comando": "usermod -aG <grupo> <usuario>", "descripcion": "Añade usuario a un grupo" },
+      { "comando": "groupadd <grupo>", "descripcion": "Crea un grupo" },
+      { "comando": "su - <usuario>", "descripcion": "Cambia de usuario" },
+      { "comando": "sudo <comando>", "descripcion": "Ejecuta como superusuario" },
+      { "comando": "cat /etc/passwd", "descripcion": "Lista usuarios del sistema" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Procesos", "comandos": [
+      { "comando": "ps aux", "descripcion": "Lista todos los procesos" },
+      { "comando": "ps -ef", "descripcion": "Lista procesos con formato completo" },
+      { "comando": "top", "descripcion": "Monitor de procesos en tiempo real" },
+      { "comando": "htop", "descripcion": "Monitor interactivo de procesos" },
+      { "comando": "kill <pid>", "descripcion": "Termina un proceso por PID" },
+      { "comando": "kill -9 <pid>", "descripcion": "Fuerza la terminación de un proceso" },
+      { "comando": "pkill <nombre>", "descripcion": "Mata procesos por nombre" },
+      { "comando": "bg", "descripcion": "Envía proceso a segundo plano" },
+      { "comando": "fg", "descripcion": "Trae proceso a primer plano" },
+      { "comando": "jobs", "descripcion": "Lista trabajos en background" },
+      { "comando": "nohup <comando> &", "descripcion": "Ejecuta comando inmune a cierre de sesión" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Servicios", "comandos": [
+      { "comando": "systemctl start <servicio>", "descripcion": "Inicia un servicio" },
+      { "comando": "systemctl stop <servicio>", "descripcion": "Detiene un servicio" },
+      { "comando": "systemctl restart <servicio>", "descripcion": "Reinicia un servicio" },
+      { "comando": "systemctl status <servicio>", "descripcion": "Estado del servicio" },
+      { "comando": "systemctl enable <servicio>", "descripcion": "Habilita al arranque" },
+      { "comando": "systemctl disable <servicio>", "descripcion": "Deshabilita al arranque" },
+      { "comando": "systemctl list-units --type=service", "descripcion": "Lista servicios activos" },
+      { "comando": "service <servicio> restart", "descripcion": "Reinicia servicio (sysvinit)" },
+      { "comando": "journalctl -u <servicio>", "descripcion": "Logs de un servicio" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Red", "comandos": [
+      { "comando": "ip a", "descripcion": "Muestra interfaces de red" },
+      { "comando": "ip r", "descripcion": "Muestra tabla de rutas" },
+      { "comando": "ifconfig", "descripcion": "Configuración de interfaces (clásico)" },
+      { "comando": "ping <host>", "descripcion": "Prueba conectividad" },
+      { "comando": "traceroute <host>", "descripcion": "Traza la ruta a un host" },
+      { "comando": "netstat -tulpn", "descripcion": "Puertos en escucha" },
+      { "comando": "ss -tulpn", "descripcion": "Puertos y sockets (moderno)" },
+      { "comando": "curl <url>", "descripcion": "Realiza petición HTTP" },
+      { "comando": "wget <url>", "descripcion": "Descarga archivos de la web" },
+      { "comando": "dig <dominio>", "descripcion": "Consulta DNS" },
+      { "comando": "nslookup <dominio>", "descripcion": "Consulta DNS interactiva" },
+      { "comando": "nmap <host>", "descripcion": "Escanea puertos" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "SSH", "comandos": [
+      { "comando": "ssh <usuario>@<host>", "descripcion": "Conexión SSH remota" },
+      { "comando": "ssh -p <puerto> <usuario>@<host>", "descripcion": "SSH en puerto personalizado" },
+      { "comando": "ssh-keygen -t ed25519 -C \"email\"", "descripcion": "Genera par de claves SSH" },
+      { "comando": "ssh-copy-id <usuario>@<host>", "descripcion": "Copia la clave pública al remoto" },
+      { "comando": "scp <archivo> <usuario>@<host>:<ruta>", "descripcion": "Copia archivos por SSH" },
+      { "comando": "scp -r <dir> <usuario>@<host>:<ruta>", "descripcion": "Copia directorio por SSH" },
+      { "comando": "ssh -L <local>:<host>:<remoto> <usuario>@<host>", "descripcion": "Túnel SSH local" },
+      { "comando": "ssh -i <clave> <usuario>@<host>", "descripcion": "SSH con clave específica" },
+      { "comando": "cat ~/.ssh/id_ed25519.pub", "descripcion": "Muestra clave pública" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "APT", "comandos": [
+      { "comando": "sudo apt update", "descripcion": "Actualiza índices de paquetes" },
+      { "comando": "sudo apt upgrade", "descripcion": "Actualiza paquetes instalados" },
+      { "comando": "sudo apt full-upgrade", "descripcion": "Actualización completa" },
+      { "comando": "sudo apt install <paquete>", "descripcion": "Instala un paquete" },
+      { "comando": "sudo apt remove <paquete>", "descripcion": "Elimina un paquete" },
+      { "comando": "sudo apt purge <paquete>", "descripcion": "Elimina paquete y configuración" },
+      { "comando": "sudo apt autoremove", "descripcion": "Elimina dependencias huérfanas" },
+      { "comando": "apt search <término>", "descripcion": "Busca paquetes" },
+      { "comando": "apt show <paquete>", "descripcion": "Muestra info de un paquete" },
+      { "comando": "dpkg -l", "descripcion": "Lista paquetes instalados" },
+      { "comando": "sudo dpkg -i <archivo.deb>", "descripcion": "Instala paquete .deb" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Logs", "comandos": [
+      { "comando": "tail -f /var/log/syslog", "descripcion": "Sigue el log del sistema" },
+      { "comando": "tail -f /var/log/auth.log", "descripcion": "Logs de autenticación" },
+      { "comando": "journalctl -xe", "descripcion": "Últimos logs del sistema" },
+      { "comando": "journalctl -f", "descripcion": "Sigue logs en tiempo real" },
+      { "comando": "journalctl --since \"1 hour ago\"", "descripcion": "Logs de la última hora" },
+      { "comando": "journalctl -b", "descripcion": "Logs del arranque actual" },
+      { "comando": "dmesg", "descripcion": "Mensajes del kernel" },
+      { "comando": "grep -i error /var/log/syslog", "descripcion": "Busca errores en logs" },
+      { "comando": "less /var/log/nginx/access.log", "descripcion": "Ver logs de nginx" }
+    ]},
+
+    { "categoria": "Linux", "titulo": "Compresión", "comandos": [
+      { "comando": "tar -czvf <archivo>.tar.gz <dir>", "descripcion": "Comprime en tar.gz" },
+      { "comando": "tar -xzvf <archivo>.tar.gz", "descripcion": "Descomprime tar.gz" },
+      { "comando": "tar -cjvf <archivo>.tar.bz2 <dir>", "descripcion": "Comprime en tar.bz2" },
+      { "comando": "tar -xjvf <archivo>.tar.bz2", "descripcion": "Descomprime tar.bz2" },
+      { "comando": "zip -r <archivo>.zip <dir>", "descripcion": "Comprime en zip" },
+      { "comando": "unzip <archivo>.zip", "descripcion": "Descomprime zip" },
+      { "comando": "gzip <archivo>", "descripcion": "Comprime con gzip" },
+      { "comando": "gunzip <archivo>.gz", "descripcion": "Descomprime gzip" },
+      { "comando": "7z x <archivo>.7z", "descripcion": "Descomprime 7z" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Variables", "comandos": [
+      { "comando": "let nombre = \"Juan\";", "descripcion": "Variable mutable" },
+      { "comando": "const PI = 3.14;", "descripcion": "Constante inmutable" },
+      { "comando": "var viejo = 1;", "descripcion": "Variable con scope de función (evitar)" },
+      { "comando": "typeof variable", "descripcion": "Devuelve el tipo" },
+      { "comando": "let a = 1, b = 2;", "descripcion": "Declaración múltiple" },
+      { "comando": "let x;", "descripcion": "Variable sin inicializar (undefined)" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Tipos de datos", "comandos": [
+      { "comando": "let n = 42;", "descripcion": "Number" },
+      { "comando": "let s = \"texto\";", "descripcion": "String" },
+      { "comando": "let b = true;", "descripcion": "Boolean" },
+      { "comando": "let nulo = null;", "descripcion": "Null" },
+      { "comando": "let indef;", "descripcion": "Undefined" },
+      { "comando": "let sym = Symbol('id');", "descripcion": "Symbol" },
+      { "comando": "let big = 123n;", "descripcion": "BigInt" },
+      { "comando": "Number(\"42\")", "descripcion": "Conversión a número" },
+      { "comando": "String(42)", "descripcion": "Conversión a string" },
+      { "comando": "Boolean(0)", "descripcion": "Conversión a boolean" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Arrays", "comandos": [
+      { "comando": "let arr = [1, 2, 3];", "descripcion": "Declaración de array" },
+      { "comando": "arr.push(4)", "descripcion": "Añade al final" },
+      { "comando": "arr.pop()", "descripcion": "Elimina el último" },
+      { "comando": "arr.unshift(0)", "descripcion": "Añade al inicio" },
+      { "comando": "arr.shift()", "descripcion": "Elimina el primero" },
+      { "comando": "arr.length", "descripcion": "Longitud del array" },
+      { "comando": "arr.map(x => x * 2)", "descripcion": "Transforma cada elemento" },
+      { "comando": "arr.filter(x => x > 2)", "descripcion": "Filtra elementos" },
+      { "comando": "arr.reduce((a, b) => a + b, 0)", "descripcion": "Reduce a un valor" },
+      { "comando": "arr.find(x => x === 2)", "descripcion": "Encuentra el primer match" },
+      { "comando": "arr.includes(2)", "descripcion": "Comprueba si existe" },
+      { "comando": "arr.slice(1, 3)", "descripcion": "Extrae subarray" },
+      { "comando": "arr.splice(1, 1)", "descripcion": "Elimina/inserta elementos" },
+      { "comando": "arr.sort((a, b) => a - b)", "descripcion": "Ordena numéricamente" },
+      { "comando": "arr.join(\", \")", "descripcion": "Une en string" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Objetos", "comandos": [
+      { "comando": "let obj = { nombre: \"Juan\", edad: 30 };", "descripcion": "Declaración de objeto" },
+      { "comando": "obj.nombre", "descripcion": "Acceso por punto" },
+      { "comando": "obj[\"nombre\"]", "descripcion": "Acceso por corchetes" },
+      { "comando": "obj.email = \"a@b.com\"", "descripcion": "Añade/modifica propiedad" },
+      { "comando": "delete obj.edad", "descripcion": "Elimina propiedad" },
+      { "comando": "Object.keys(obj)", "descripcion": "Devuelve claves" },
+      { "comando": "Object.values(obj)", "descripcion": "Devuelve valores" },
+      { "comando": "Object.entries(obj)", "descripcion": "Devuelve pares [clave, valor]" },
+      { "comando": "Object.assign({}, obj)", "descripcion": "Copia propiedades" },
+      { "comando": "{ ...obj, extra: 1 }", "descripcion": "Spread de objeto" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Funciones", "comandos": [
+      { "comando": "function suma(a, b) { return a + b; }", "descripcion": "Función declarada" },
+      { "comando": "const suma = function(a, b) { return a + b; }", "descripcion": "Expresión de función" },
+      { "comando": "suma(2, 3)", "descripcion": "Llamada a función" },
+      { "comando": "function f(a = 1) {}", "descripcion": "Parámetro por defecto" },
+      { "comando": "function f(...args) {}", "descripcion": "Rest parameters" },
+      { "comando": "function f() { return; }", "descripcion": "Return implícito undefined" },
+      { "comando": "(function() {})()", "descripcion": "IIFE" },
+      { "comando": "function f() { return arguments; }", "descripcion": "Objeto arguments" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Arrow functions", "comandos": [
+      { "comando": "const suma = (a, b) => a + b;", "descripcion": "Arrow function compacta" },
+      { "comando": "const cuadrado = x => x * x;", "descripcion": "Un solo parámetro sin paréntesis" },
+      { "comando": "const f = () => { return 1; }", "descripcion": "Con cuerpo y return" },
+      { "comando": "const f = () => ({ a: 1 })", "descripcion": "Retorna objeto (paréntesis)" },
+      { "comando": "arr.map(x => x * 2)", "descripcion": "Uso común en callbacks" },
+      { "comando": "const f = (...args) => args.length", "descripcion": "Con rest parameters" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Destructuring", "comandos": [
+      { "comando": "const [a, b] = [1, 2];", "descripcion": "Destructuring de array" },
+      { "comando": "const [a, , c] = [1, 2, 3];", "descripcion": "Saltar elementos" },
+      { "comando": "const { nombre, edad } = obj;", "descripcion": "Destructuring de objeto" },
+      { "comando": "const { nombre: n } = obj;", "descripcion": "Renombrar propiedad" },
+      { "comando": "const { a = 1 } = obj;", "descripcion": "Valor por defecto" },
+      { "comando": "const [x, ...resto] = [1, 2, 3];", "descripcion": "Rest en destructuring" },
+      { "comando": "function f({ nombre }) {}", "descripcion": "Destructuring en parámetros" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "DOM", "comandos": [
+      { "comando": "document.getElementById(\"id\")", "descripcion": "Selecciona por ID" },
+      { "comando": "document.querySelector(\".clase\")", "descripcion": "Selecciona el primer match CSS" },
+      { "comando": "document.querySelectorAll(\"div\")", "descripcion": "Selecciona todos los matches" },
+      { "comando": "document.createElement(\"div\")", "descripcion": "Crea un elemento" },
+      { "comando": "padre.appendChild(hijo)", "descripcion": "Añade hijo al DOM" },
+      { "comando": "elemento.remove()", "descripcion": "Elimina elemento del DOM" },
+      { "comando": "elemento.textContent = \"Hola\"", "descripcion": "Cambia texto" },
+      { "comando": "elemento.innerHTML = \"<b>Hola</b>\"", "descripcion": "Cambia HTML interno" },
+      { "comando": "elemento.setAttribute(\"href\", \"#\")", "descripcion": "Establece atributo" },
+      { "comando": "elemento.classList.add(\"activo\")", "descripcion": "Añade clase" },
+      { "comando": "elemento.classList.remove(\"activo\")", "descripcion": "Elimina clase" },
+      { "comando": "elemento.classList.toggle(\"activo\")", "descripcion": "Alterna clase" },
+      { "comando": "elemento.style.color = \"red\"", "descripcion": "Cambia estilo inline" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Eventos", "comandos": [
+      { "comando": "elemento.addEventListener(\"click\", fn)", "descripcion": "Añade listener" },
+      { "comando": "elemento.removeEventListener(\"click\", fn)", "descripcion": "Elimina listener" },
+      { "comando": "evento.preventDefault()", "descripcion": "Previene comportamiento por defecto" },
+      { "comando": "evento.stopPropagation()", "descripcion": "Detiene la propagación" },
+      { "comando": "evento.target", "descripcion": "Elemento que disparó el evento" },
+      { "comando": "document.addEventListener(\"DOMContentLoaded\", fn)", "descripcion": "DOM listo" },
+      { "comando": "\"click\", \"input\", \"submit\", \"keydown\"", "descripcion": "Eventos comunes" },
+      { "comando": "elemento.onclick = fn", "descripcion": "Asignación directa (menos flexible)" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Fetch", "comandos": [
+      { "comando": "fetch(url)", "descripcion": "Petición GET básica" },
+      { "comando": "fetch(url).then(res => res.json())", "descripcion": "Parsear JSON" },
+      { "comando": "fetch(url, { method: \"POST\" })", "descripcion": "Petición POST" },
+      { "comando": "fetch(url, { headers: { \"Content-Type\": \"application/json\" } })", "descripcion": "Con headers" },
+      { "comando": "fetch(url, { body: JSON.stringify(data) })", "descripcion": "Enviar body JSON" },
+      { "comando": "if (!res.ok) throw new Error(res.status)", "descripcion": "Manejo de errores HTTP" },
+      { "comando": "res.text()", "descripcion": "Respuesta como texto" },
+      { "comando": "res.blob()", "descripcion": "Respuesta como blob" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "Async/Await", "comandos": [
+      { "comando": "async function f() {}", "descripcion": "Función asíncrona" },
+      { "comando": "await promesa", "descripcion": "Espera resolución de promesa" },
+      { "comando": "const data = await fetch(url)", "descripcion": "Fetch con await" },
+      { "comando": "try { await f() } catch (e) {}", "descripcion": "Manejo de errores" },
+      { "comando": "const [a, b] = await Promise.all([p1, p2])", "descripcion": "Ejecución paralela" },
+      { "comando": "await Promise.allSettled([p1, p2])", "descripcion": "Espera todas sin fallar" },
+      { "comando": "await Promise.race([p1, p2])", "descripcion": "Primera en resolverse" },
+      { "comando": "new Promise((resolve, reject) => {})", "descripcion": "Crear promesa" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "JSON", "comandos": [
+      { "comando": "JSON.stringify(obj)", "descripcion": "Objeto a string JSON" },
+      { "comando": "JSON.stringify(obj, null, 2)", "descripcion": "JSON formateado" },
+      { "comando": "JSON.parse(str)", "descripcion": "String JSON a objeto" },
+      { "comando": "JSON.parse(str, reviver)", "descripcion": "Parse con función reviver" },
+      { "comando": "JSON.stringify(obj, [\"a\", \"b\"])", "descripcion": "Filtrar propiedades" },
+      { "comando": "JSON.stringify(obj, replacer)", "descripcion": "Personalizar serialización" }
+    ]},
+
+    { "categoria": "JavaScript", "titulo": "LocalStorage", "comandos": [
+      { "comando": "localStorage.setItem(\"clave\", \"valor\")", "descripcion": "Guardar dato" },
+      { "comando": "localStorage.getItem(\"clave\")", "descripcion": "Obtener dato" },
+      { "comando": "localStorage.removeItem(\"clave\")", "descripcion": "Eliminar dato" },
+      { "comando": "localStorage.clear()", "descripcion": "Limpiar todo" },
+      { "comando": "localStorage.key(0)", "descripcion": "Obtener clave por índice" },
+      { "comando": "localStorage.length", "descripcion": "Número de elementos" },
+      { "comando": "JSON.parse(localStorage.getItem(\"k\"))", "descripcion": "Recuperar objeto" },
+      { "comando": "localStorage.setItem(\"k\", JSON.stringify(obj))", "descripcion": "Guardar objeto" },
+      { "comando": "sessionStorage.setItem(\"k\", \"v\")", "descripcion": "Almacenamiento de sesión" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Sintaxis", "comandos": [
+      { "comando": "<?php echo \"Hola\"; ?>", "descripcion": "Imprimir en PHP" },
+      { "comando": "<?php // comentario ?>", "descripcion": "Comentario de línea" },
+      { "comando": "<?php /* bloque */ ?>", "descripcion": "Comentario de bloque" },
+      { "comando": "$variable = 5;", "descripcion": "Declaración de variable" },
+      { "comando": "echo $variable;", "descripcion": "Imprimir variable" },
+      { "comando": "print \"texto\";", "descripcion": "Alternativa a echo" },
+      { "comando": "var_dump($var);", "descripcion": "Debug de variable" },
+      { "comando": "print_r($array);", "descripcion": "Imprime array legible" },
+      { "comando": "require 'archivo.php';", "descripcion": "Incluye archivo obligatorio" },
+      { "comando": "include 'archivo.php';", "descripcion": "Incluye archivo opcional" },
+      { "comando": "declare(strict_types=1);", "descripcion": "Tipado estricto" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Condicionales", "comandos": [
+      { "comando": "if ($a > $b) { }", "descripcion": "If simple" },
+      { "comando": "if ($a) { } elseif ($b) { } else { }", "descripcion": "If-elseif-else" },
+      { "comando": "$r = $a ? $b : $c;", "descripcion": "Operador ternario" },
+      { "comando": "$r = $a ?? $b;", "descripcion": "Null coalescing" },
+      { "comando": "$r = $a ?: $b;", "descripcion": "Elvis operator" },
+      { "comando": "switch ($x) { case 1: break; default: break; }", "descripcion": "Switch" },
+      { "comando": "match($x) { 1 => \"a\", default => \"b\" };", "descripcion": "Match (PHP 8)" },
+      { "comando": "$a == $b", "descripcion": "Comparación débil" },
+      { "comando": "$a === $b", "descripcion": "Comparación estricta" },
+      { "comando": "$a <=> $b", "descripcion": "Spaceship operator" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Bucles", "comandos": [
+      { "comando": "for ($i = 0; $i < 10; $i++) {}", "descripcion": "Bucle for" },
+      { "comando": "while ($cond) {}", "descripcion": "Bucle while" },
+      { "comando": "do { } while ($cond);", "descripcion": "Do-while" },
+      { "comando": "foreach ($arr as $v) {}", "descripcion": "Recorre valores" },
+      { "comando": "foreach ($arr as $k => $v) {}", "descripcion": "Recorre clave-valor" },
+      { "comando": "foreach ($arr as &$v) {}", "descripcion": "Por referencia" },
+      { "comando": "break;", "descripcion": "Rompe el bucle" },
+      { "comando": "continue;", "descripcion": "Salta a siguiente iteración" },
+      { "comando": "break 2;", "descripcion": "Rompe dos niveles" },
+      { "comando": "goto etiqueta;", "descripcion": "Salto (evitar)" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "POO", "comandos": [
+      { "comando": "class Persona {}", "descripcion": "Declaración de clase" },
+      { "comando": "$p = new Persona();", "descripcion": "Instanciación" },
+      { "comando": "public $nombre;", "descripcion": "Propiedad pública" },
+      { "comando": "private $edad;", "descripcion": "Propiedad privada" },
+      { "comando": "protected $email;", "descripcion": "Propiedad protegida" },
+      { "comando": "public function saludar() {}", "descripcion": "Método público" },
+      { "comando": "public function __construct($n) {}", "descripcion": "Constructor" },
+      { "comando": "public function __destruct() {}", "descripcion": "Destructor" },
+      { "comando": "$this->nombre", "descripcion": "Acceso a propiedad" },
+      { "comando": "$this->metodo()", "descripcion": "Llamada a método" },
+      { "comando": "self::CONSTANTE", "descripcion": "Acceso a constante de clase" },
+      { "comando": "parent::metodo()", "descripcion": "Llamada al padre" },
+      { "comando": "Persona::class", "descripcion": "Nombre de la clase" },
+      { "comando": "instanceof Persona", "descripcion": "Comprueba instancia" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Clases", "comandos": [
+      { "comando": "class Persona { public string $nombre; }", "descripcion": "Clase con tipado" },
+      { "comando": "public function __construct(public string $nombre) {}", "descripcion": "Promoción de propiedades (PHP 8)" },
+      { "comando": "const VERSION = \"1.0\";", "descripcion": "Constante de clase" },
+      { "comando": "static public function crear() {}", "descripcion": "Método estático" },
+      { "comando": "self::crear();", "descripcion": "Llamada a método estático" },
+      { "comando": "abstract class Base {}", "descripcion": "Clase abstracta" },
+      { "comando": "abstract public function f();", "descripcion": "Método abstracto" },
+      { "comando": "final class Cerrada {}", "descripcion": "Clase final (no heredable)" },
+      { "comando": "public function __toString(): string {}", "descripcion": "Método mágico toString" },
+      { "comando": "public function __get($name) {}", "descripcion": "Método mágico get" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Herencia", "comandos": [
+      { "comando": "class Hijo extends Padre {}", "descripcion": "Herencia simple" },
+      { "comando": "parent::__construct();", "descripcion": "Llamada al constructor padre" },
+      { "comando": "public function f(): void { parent::f(); }", "descripcion": "Override con llamada al padre" },
+      { "comando": "trait Loggable {}", "descripcion": "Declaración de trait" },
+      { "comando": "use Loggable;", "descripcion": "Usar trait en clase" },
+      { "comando": "interface Volador {}", "descripcion": "Declaración de interfaz" },
+      { "comando": "class Ave implements Volador {}", "descripcion": "Implementar interfaz" },
+      { "comando": "class A extends B implements C, D {}", "descripcion": "Herencia + interfaces" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Interfaces", "comandos": [
+      { "comando": "interface Figura { public function area(): float; }", "descripcion": "Declaración de interfaz" },
+      { "comando": "class Circulo implements Figura {}", "descripcion": "Implementación" },
+      { "comando": "interface A extends B {}", "descripcion": "Herencia de interfaces" },
+      { "comando": "class C implements A, B {}", "descripcion": "Múltiples interfaces" },
+      { "comando": "public function area(): float { return 0; }", "descripcion": "Método implementado" },
+      { "comando": "$obj instanceof Figura", "descripcion": "Comprueba interfaz" },
+      { "comando": "interface Contador { const MAX = 100; }", "descripcion": "Constante en interfaz" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Sesiones", "comandos": [
+      { "comando": "session_start();", "descripcion": "Inicia sesión (al inicio del script)" },
+      { "comando": "$_SESSION['usuario'] = \"Juan\";", "descripcion": "Guardar dato en sesión" },
+      { "comando": "echo $_SESSION['usuario'];", "descripcion": "Leer dato de sesión" },
+      { "comando": "isset($_SESSION['usuario']);", "descripcion": "Comprueba si existe" },
+      { "comando": "unset($_SESSION['usuario']);", "descripcion": "Elimina una variable" },
+      { "comando": "session_unset();", "descripcion": "Elimina todas las variables" },
+      { "comando": "session_destroy();", "descripcion": "Destruye la sesión" },
+      { "comando": "session_regenerate_id(true);", "descripcion": "Regenera ID (seguridad)" },
+      { "comando": "setcookie(\"user\", \"Juan\", time()+3600);", "descripcion": "Crear cookie" },
+      { "comando": "$_COOKIE['user'];", "descripcion": "Leer cookie" }
+    ]},
+
+    { "categoria": "PHP", "titulo": "Formularios", "comandos": [
+      { "comando": "<form method=\"POST\" action=\"procesar.php\">", "descripcion": "Formulario POST" },
+      { "comando": "<input type=\"text\" name=\"nombre\">", "descripcion": "Campo de texto" },
+      { "comando": "<input type=\"email\" name=\"email\" required>", "descripcion": "Campo email obligatorio" },
+      { "comando": "<input type=\"password\" name=\"pass\">", "descripcion": "Campo contraseña" },
+      { "comando": "<input type=\"checkbox\" name=\"acepto\">", "descripcion": "Checkbox" },
+      { "comando": "<input type=\"radio\" name=\"sexo\" value=\"M\">", "descripcion": "Radio button" },
+      { "comando": "<select name=\"pais\"><option>ES</option></select>", "descripcion": "Select" },
+      { "comando": "<textarea name=\"msg\"></textarea>", "descripcion": "Área de texto" },
+      { "comando": "$_POST['nombre'];", "descripcion": "Recibir dato POST" },
+      { "comando": "$_GET['id'];", "descripcion": "Recibir dato GET" },
+      { "comando": "htmlspecialchars($_POST['nombre']);", "descripcion": "Sanitizar salida" },
+      { "comando": "filter_var($email, FILTER_VALIDATE_EMAIL);", "descripcion": "Validar email" },
+      { "comando": "trim($_POST['nombre']);", "descripcion": "Elimina espacios" },
+      { "comando": "empty($_POST['nombre']);", "descripcion": "Comprueba si está vacío" }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Navegación y Gestión del Sistema de Archivos (Linux)", "comandos": [
+      { "comando": "pwd", "descripcion": "Muestra la ruta absoluta del directorio de trabajo actual." },
+      { "comando": "ls", "descripcion": "Lista el contenido de un directorio. Admite modificadores como -l para ver permisos, propietarios y tamaños." },
+      { "comando": "cd", "descripcion": "Cambia el directorio actual de trabajo. Soporta 'cd ..' (subir de nivel) y 'cd -' (volver al directorio anterior)." },
+      { "comando": "tree", "descripcion": "Muestra la estructura jerárquica de directorios en forma de árbol visual." },
+      { "comando": "mkdir", "descripcion": "Crea nuevos directorios en la ruta especificada." },
+      { "comando": "touch", "descripcion": "Crea un archivo vacío si no existe o actualiza su fecha de modificación." },
+      { "comando": "cp", "descripcion": "Copia archivos o directorios de una ubicación a otra." },
+      { "comando": "cat", "descripcion": "Muestra el contenido completo de un archivo en la terminal o lo canaliza hacia tuberías." },
+      { "comando": "grep", "descripcion": "Busca lineas que coincidan con un patrón dentro de archivos o de la salida de otro comando, y muestra las lineas que coinciden. "}
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Administración de Usuarios y Grupos (Linux)", "comandos": [
+      { "comando": "sudo useradd", "descripcion": "Crea un nuevo usuario especificando directorio personal (-m), comentario (-c), shell (-s) y grupos secundarios (-G)." },
+      { "comando": "sudo usermod", "descripcion": "Modifica parámetros de un usuario existente. El flag -aG añade grupos secundarios sin sobrescribir los anteriores." },
+      { "comando": "sudo userdel", "descripcion": "Elimina una cuenta de usuario del sistema. La opción -r borra también su directorio home." },
+      { "comando": "sudo groupadd", "descripcion": "Crea un nuevo grupo de usuarios en el sistema." },
+      { "comando": "sudo groupdel", "descripcion": "Elimina un grupo de usuarios existente." },
+      { "comando": "sudo passwd", "descripcion": "Establece o cambia la contraseña de una cuenta de usuario." },
+      { "comando": "su", "descripcion": "Permite cambiar de identidad de usuario en la terminal y adquirir acceso como superusuario (root)." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Administración de Usuarios y Grupos (Windows CMD)", "comandos": [
+      { "comando": "net user", "descripcion": "Gestiona cuentas de usuario locales en Windows: listar, ver detalles, crear, cambiar contraseña, activar/desactivar (/active:no) y eliminar (/delete)." },
+      { "comando": "net localgroup", "descripcion": "Gestiona grupos locales en Windows: listar grupos, ver miembros, crear (/add), agregar/quitar usuarios y eliminar grupo (/delete)." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Administración de Cuentas Locales (PowerShell)", "comandos": [
+      { "comando": "Get-LocalUser", "descripcion": "Consulta y muestra información de las cuentas de usuario locales." },
+      { "comando": "New-LocalUser", "descripcion": "Crea una nueva cuenta de usuario local especificando la contraseña como SecureString." },
+      { "comando": "Set-LocalUser", "descripcion": "Modifica las propiedades o la contraseña de una cuenta de usuario local." },
+      { "comando": "Disable-LocalUser / Enable-LocalUser", "descripcion": "Desactiva o activa una cuenta de usuario local en el sistema." },
+      { "comando": "Remove-LocalUser", "descripcion": "Elimina una cuenta de usuario local existente." },
+      { "comando": "Get-LocalGroup", "descripcion": "Obtiene la lista de grupos locales del sistema." },
+      { "comando": "New-LocalGroup", "descripcion": "Crea un nuevo grupo local." },
+      { "comando": "Add-LocalGroupMember / Get-LocalGroupMember / Remove-LocalGroupMember", "descripcion": "Añade, lista o elimina miembros de un grupo local específico." },
+      { "comando": "Remove-LocalGroup", "descripcion": "Elimina un grupo local del sistema." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Administración de Active Directory (PowerShell)", "comandos": [
+      { "comando": "Import-Module ActiveDirectory", "descripcion": "Carga el módulo de cmdlets para administrar Active Directory mediante RSAT." },
+      { "comando": "Get-ADUser / New-ADUser", "descripcion": "Consulta o crea cuentas de usuario en el dominio de Active Directory." },
+      { "comando": "Get-ADGroup / New-ADGroup", "descripcion": "Consulta o crea grupos en la estructura jerárquica del dominio." },
+      { "comando": "Add-ADGroupMember / Get-ADGroupMember / Remove-ADGroupMember", "descripcion": "Agrega, consulta o revoca la pertenencia de miembros a grupos del dominio." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Permisos de Archivos y Permisos Especiales", "comandos": [
+      { "comando": "chmod (modo octal y simbólico)", "descripcion": "Modifica los permisos de acceso de un archivo/directorio mediante sintaxis numérica (octal: 754, 640) o simbólica (ug+r)." },
+      { "comando": "Sticky Bit", "descripcion": "Permiso especial en directorios compartidos que impide que los usuarios borren o renombren archivos de otros." },
+      { "comando": "SUID (Set User ID)", "descripcion": "Permite que un ejecutable se corra con los privilegios del propietario del archivo (por ejemplo, root)." },
+      { "comando": "SGID (Set Group ID)", "descripcion": "Hace que los archivos o subdirectorios creados dentro hereden automáticamente el grupo propietario del directorio padre." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Gestión de Discos y Sistemas de Archivos", "comandos": [
+      { "comando": "fdisk / gdisk", "descripcion": "Herramientas interactivas para gestionar tablas de particiones MBR (fdisk) y GPT (gdisk)." },
+      { "comando": "parted", "descripcion": "Herramienta avanzada de particionado adecuada para automatización en scripts." },
+      { "comando": "mkfs.ext4", "descripcion": "Crea y formatea un sistema de archivos ext4 en la partición indicada." },
+      { "comando": "mount", "descripcion": "Enlaza un sistema de archivos de una partición a un punto de montaje en el árbol de directorios." },
+      { "comando": "blkid", "descripcion": "Muestra los UUID y atributos de las particiones y bloques de almacenamiento." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Monitorización del Sistema y Rendimiento", "comandos": [
+      { "comando": "top / htop", "descripcion": "Muestra paneles interactivos en tiempo real con uso de CPU, memoria, carga del sistema y tabla de procesos." },
+      { "comando": "iotop", "descripcion": "Monitoriza el uso de entrada/salida (E/S) en disco desglosado por proceso." },
+      { "comando": "iftop", "descripcion": "Monitoriza el ancho de banda y tráfico de red en tiempo real por cada conexión." },
+      { "comando": "df", "descripcion": "Muestra el espacio en disco usado y disponible en los sistemas de archivos montados en formato legible (-h)." },
+      { "comando": "du", "descripcion": "Estima el espacio en disco consumido por archivos o directorios específicos." },
+      { "comando": "free", "descripcion": "Muestra el estado de la memoria RAM física y de la memoria de intercambio (Swap)." },
+      { "comando": "vmstat", "descripcion": "Reporta estadísticas de procesos, memoria, paginación, E/S y CPU con intervalo de refresco." },
+      { "comando": "iostat", "descripcion": "Muestra métricas detalladas de rendimiento de entrada/salida para discos y particiones." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Análisis y Lectura de Logs", "comandos": [
+      { "comando": "tail", "descripcion": "Muestra las últimas líneas de un archivo de log. Con -f permite seguir la escritura de eventos en tiempo real." },
+      { "comando": "grep", "descripcion": "Filtra e imprime líneas que coincidan con un patrón de búsqueda (modo insensible a mayúsculas con -i)." },
+      { "comando": "journalctl", "descripcion": "Consulta y filtra los registros centralizados del demonio journald en systemd." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Procesos, Servicios y Programación de Tareas", "comandos": [
+      { "comando": "ps", "descripcion": "Muestra una instantánea de los procesos en ejecución con detalles como PID, usuario, CPU y memoria." },
+      { "comando": "kill / pkill", "descripcion": "Envía señales de terminación a procesos por su PID (kill) o por coincidencia de nombre (pkill)." },
+      { "comando": "systemctl", "descripcion": "Controla servicios en systemd: start, stop, restart, reload, enable, disable y status." },
+      { "comando": "cron / crontab", "descripcion": "Edita y programa tareas automáticas periódicas ejecutadas por el demonio cron." },
+      { "comando": "at", "descripcion": "Programa la ejecución de un comando diferido para un instante único en el futuro." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Empaquetado, Compresión y Archivos", "comandos": [
+      { "comando": "tar", "descripcion": "Empaqueta y comprime/descomprime archivos combinando flags según el algoritmo: gzip (-z), bzip2 (-j), xz (-J)." },
+      { "comando": "gzip / gunzip", "descripcion": "Comprime o descompone ficheros individuales en formato .gz." },
+      { "comando": "bzip2 / bunzip2", "descripcion": "Comprime o descompone ficheros individuales en formato .bz2 ofreciendo alta compresión." },
+      { "comando": "xz / unxz", "descripcion": "Comprime o descompone ficheros individuales en formato .xz." },
+      { "comando": "zip / unzip", "descripcion": "Empaqueta y comprime directorios en formato .zip estándar compatible multiplataforma." },
+      { "comando": "7z", "descripcion": "Crea y extrae archivos comprimidos con el formato de alta relación de compresión 7-Zip." }
+    ]},
+
+    { "categoria": "SysAdmin", "titulo": "Documentación, Tuberías y Redirecciones", "comandos": [
+      { "comando": "man", "descripcion": "Abre el manual oficial e interactivo de ayuda de cualquier comando." },
+      { "comando": "--help", "descripcion": "Muestra en consola la ayuda rápida con resumen de opciones del comando." },
+      { "comando": "tldr", "descripcion": "Muestra páginas de ayuda simplificadas con ejemplos prácticos orientados a casos reales." },
+      { "comando": "| (Pipe)", "descripcion": "Redirige la salida estándar de un comando como la entrada estándar del siguiente." },
+      { "comando": "> / >> (Redirecciones)", "descripcion": "Redirige la salida a un archivo: > sobrescribe el fichero y >> añade contenido al final." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Recon", "comandos": [
+      { "comando": "Nmap", "descripcion": "Escáner de red y puertos. Descubrimiento de hosts y servicios." },
+      { "comando": "Masscan", "descripcion": "Escáner de puertos masivo, extremadamente rápido." },
+      { "comando": "Subfinder", "descripcion": "Descubrimiento pasivo de subdominios." },
+      { "comando": "HTTPX", "descripcion": "Sonda HTTP multihilo para verificar hosts y servicios web." },
+      { "comando": "theHarvester", "descripcion": "Recolección de correos, subdominios y nombres desde fuentes públicas." },
+      { "comando": "DNSEnum", "descripcion": "Enumeración de registros DNS y transferencias de zona." },
+      { "comando": "DNSRecon", "descripcion": "Script de enumeración DNS con múltiples técnicas." },
+      { "comando": "ExifTool", "descripcion": "Extracción de metadatos de imágenes y documentos." },
+      { "comando": "macchanger", "descripcion": "Cambia la dirección MAC de una interfaz de red." },
+      { "comando": "netdiscover", "descripcion": "Descubrimiento de hosts en red mediante ARP." },
+      { "comando": "searchsploit", "descripcion": "Búsqueda offline de exploits en la base de datos de Exploit-DB." },
+      { "comando": "Sublist3r", "descripcion": "Enumeración de subdominios usando múltiples fuentes OSINT." },
+      { "comando": "Wireshark", "descripcion": "Analizador de tráfico de red con captura en tiempo real." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Web", "comandos": [
+      { "comando": "Gobuster", "descripcion": "Enumeración de directorios, archivos, DNS y VHosts." },
+      { "comando": "ffuf", "descripcion": "Fuzzing web rápido para directorios, parámetros y subdominios." },
+      { "comando": "Nikto", "descripcion": "Escáner de vulnerabilidades en servidores web." },
+      { "comando": "Dirb", "descripcion": "Fuerza bruta de directorios y archivos web." },
+      { "comando": "SQLMap", "descripcion": "Detección y explotación automática de inyecciones SQL." },
+      { "comando": "Nuclei", "descripcion": "Escáner basado en plantillas para detección de vulnerabilidades." },
+      { "comando": "Feroxbuster", "descripcion": "Fuerza bruta recursiva de contenido web en Rust." },
+      { "comando": "WPScan", "descripcion": "Escáner de vulnerabilidades específico de WordPress." },
+      { "comando": "Wfuzz", "descripcion": "Fuzzing web flexible con múltiples payloads y filtros." },
+      { "comando": "WhatWeb", "descripcion": "Fingerprinting de tecnologías web." },
+      { "comando": "Burp Suite", "descripcion": "Proxy de intercepción y suite de pruebas de seguridad web." },
+      { "comando": "DirBuster", "descripcion": "Fuerza bruta multihilo de directorios y archivos en aplicaciones web." },
+      { "comando": "Dirsearch", "descripcion": "Escáner de rutas web con soporte para extensiones y diccionarios." },
+      { "comando": "MySQL", "descripcion": "Cliente y servidor de base de datos relacional." },
+      { "comando": "MongoDB", "descripcion": "Base de datos NoSQL orientada a documentos." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Cracking", "comandos": [
+      { "comando": "Hydra", "descripcion": "Herramienta de fuerza bruta para múltiples protocolos de autenticación." },
+      { "comando": "Hashcat", "descripcion": "Recuperación de contraseñas por GPU, soporta cientos de algoritmos." },
+      { "comando": "John the Ripper", "descripcion": "Cracker de contraseñas con soporte de múltiples formatos de hash." },
+      { "comando": "Crunch", "descripcion": "Generador de wordlists personalizadas según patrones." },
+      { "comando": "CeWL", "descripcion": "Genera wordlists a partir del contenido de un sitio web." },
+      { "comando": "HashID", "descripcion": "Identifica el tipo de hash a partir de su formato." },
+      { "comando": "Medusa", "descripcion": "Fuerza bruta paralela contra servicios de autenticación." },
+      { "comando": "Wordlists (Custom Dictionaries)", "descripcion": "Diccionarios personalizados para ataques de fuerza bruta y cracking." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "AD (Active Directory)", "comandos": [
+      { "comando": "Enum4linux", "descripcion": "Enumeración de recursos SMB y usuarios en entornos Windows/Linux." },
+      { "comando": "NetExec", "descripcion": "Suite de pentesting para redes Windows/AD (sucesor de CrackMapExec)." },
+      { "comando": "BloodHound", "descripcion": "Mapeo visual de relaciones y rutas de ataque en Active Directory." },
+      { "comando": "Impacket", "descripcion": "Colección de scripts Python para protocolos de red Windows." },
+      { "comando": "Evil-WinRM", "descripcion": "Shell remota sobre WinRM para post-explotación." },
+      { "comando": "Kerbrute", "descripcion": "Enumeración y brute-force de cuentas Kerberos." },
+      { "comando": "Certipy", "descripcion": "Enumeración y explotación de servicios AD CS." },
+      { "comando": "Responder", "descripcion": "Envenenador LLMNR, NBT-NS y MDNS para capturar credenciales." },
+      { "comando": "SMBMap", "descripcion": "Enumeración de recursos compartidos SMB y permisos." },
+      { "comando": "LDAPSearch", "descripcion": "Consultas contra servidores LDAP/Active Directory." },
+      { "comando": "Mimikatz", "descripcion": "Extracción de credenciales y tickets de memoria Windows." },
+      { "comando": "SMBClient", "descripcion": "Cliente SMB para interactuar con recursos compartidos." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Shells", "comandos": [
+      { "comando": "Reverse Shells", "descripcion": "Conexiones inversas para obtener acceso remoto a un sistema." },
+      { "comando": "Netcat", "descripcion": "Navaja suiza TCP/IP para conexiones, listeners y transferencias." },
+      { "comando": "Socat", "descripcion": "Multiplexor de sockets avanzado para relays y túneles." },
+      { "comando": "Chisel", "descripcion": "Túnel TCP/UDP sobre HTTP para pivoting." },
+      { "comando": "Ligolo-ng", "descripcion": "Túnel TUN avanzado para pivoting a través de múltiples redes." },
+      { "comando": "Msfvenom", "descripcion": "Generador de payloads de Metasploit." },
+      { "comando": "Metasploit", "descripcion": "Framework de explotación y post-explotación." },
+      { "comando": "Telnet", "descripcion": "Cliente de conexión remota a puertos TCP." },
+      { "comando": "VNCViewer", "descripcion": "Cliente de escritorio remoto VNC." },
+      { "comando": "Tmux", "descripcion": "Multiplexor de terminal para gestionar múltiples sesiones." },
+      { "comando": "xfreerdp", "descripcion": "Cliente RDP para conexión a escritorios Windows." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Privesc", "comandos": [
+      { "comando": "LinPEAS", "descripcion": "Script de enumeración automática para escalada de privilegios en Linux." },
+      { "comando": "WinPEAS", "descripcion": "Script de enumeración automática para escalada de privilegios en Windows." },
+      { "comando": "Pspy", "descripcion": "Monitoriza procesos sin privilegios para detectar tareas programadas." },
+      { "comando": "PowerUp", "descripcion": "Módulo PowerShell para detectar vectores de escalada en Windows." }
+    ]},
+
+    { "categoria": "Cybersecurity", "titulo": "Forensics", "comandos": [
+      { "comando": "Volatility", "descripcion": "Framework de análisis forense de volcados de memoria RAM." }
+    ]}
+
   ]
 }

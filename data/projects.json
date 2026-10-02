@@ -23,15 +23,22 @@
         "featured": true
     },
     {
-        "title": "SecureAudit",
-        "description": "Proyecto experimental orientado a auditoría y monitorización de sistemas.",
+        "title": "NovaWarehouse",
+        "description": "Proyecto real de clase orientado a ver como funciona un programa en C",
         "technologies": [
-            "React",
-            "Spring",
-            "PostgreSQL",
-            "Nmap"
+            "C#"
         ],
-        "status": "Experimental",
+        "status": "En desarrollo",
+        "featured": true
+    },
+
+    {
+        "title": "Agenda en Python",
+        "description": "Diseño de una agenda telefónica en Python",
+        "technologies": [
+            "Python"
+        ],
+        "status": "Finalizada",
         "featured": true
     }
 ]

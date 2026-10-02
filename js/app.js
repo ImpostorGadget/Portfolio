@@ -1,683 +1,500 @@
 /* =========================================================
    ÁNGEL GARCÍA — PORTFOLIO
    Main application logic
+   Carga data.json desde la raíz del sitio
 ========================================================= */
 
+const DATA_URL = `${import.meta.env.BASE_URL}data.json`;
+
+/* =========================================================
+   UTILIDADES
+========================================================= */
+
+function escapeHtml(valor) {
+    if (valor === null || valor === undefined) return "";
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function escapeAttr(valor) {
+    return escapeHtml(valor);
+}
+
+function esUrlSegura(url) {
+    if (!url || url === "#") return false;
+    try {
+        const u = new URL(url, window.location.origin);
+        return u.protocol === "http:" || u.protocol === "https:";
+    } catch {
+        return false;
+    }
+}
+
+function capitalizar(texto) {
+    if (!texto) return "";
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function normalizarCategoria(categoria) {
+    if (!categoria) return "otros";
+
+    const slug = String(categoria)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    return slug || "otros";
+}
+
+function formatearFecha(date) {
+    if (!date) return "";
+
+    const tieneHora = String(date).includes("T");
+    const fecha = new Date(tieneHora ? date : `${date}T00:00:00`);
+
+    if (Number.isNaN(fecha.getTime())) return String(date);
+
+    return fecha.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
+}
 
 /* =========================================================
    INIT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+    cargarAño(); // Siempre, independiente de data.json
     cargarPortfolio();
 });
-
 
 /* =========================================================
    CARGAR PORTFOLIO
 ========================================================= */
 
 async function cargarPortfolio() {
+    let data;
+
     try {
-        const response = await fetch("/data.json");
+        const response = await fetch(DATA_URL);
 
         if (!response.ok) {
-            throw new Error(
-                `No se pudo cargar data.json: HTTP ${response.status}`
-            );
+            throw new Error(`HTTP ${response.status} al cargar ${DATA_URL}`);
         }
 
-        const data = await response.json();
-
-        /* Perfil */
-        if (data.profile) {
-            cargarPerfil(data.profile);
-        }
-
-        /* Skills */
-        if (Array.isArray(data.skills)) {
-            cargarSkills(data.skills);
-        }
-
-        /* Proyectos */
-        if (Array.isArray(data.projects)) {
-            cargarProyectos(data.projects);
-        }
-
-        /* Writeups */
-        if (Array.isArray(data.writeups)) {
-            cargarWriteups(data.writeups);
-        }
-
-        /* Año */
-        cargarAño();
-
-        /*
-         * Los filtros se inicializan DESPUÉS de pintar
-         * los writeups porque necesitan encontrar
-         * las tarjetas ya creadas en el DOM.
-         */
-        initWriteupFilters();
-
+        data = await response.json();
+        console.log("data.json cargado:", data);
     } catch (error) {
-        console.error(
-            "Error cargando los datos del portfolio:",
-            error
-        );
+        console.error("Error cargando los datos del portfolio:", error);
+        return;
     }
-}
 
+    if (!data || typeof data !== "object") return;
+
+    if (data.profile) cargarPerfil(data.profile);
+
+    if (data.skills && typeof data.skills === "object") {
+        cargarSkills(data.skills);
+    }
+
+    if (
+        data.security &&
+        typeof data.security === "object" &&
+        !Array.isArray(data.security)
+    ) {
+        cargarSeguridad(data.security);
+    }
+
+    if (Array.isArray(data.projects)) cargarProyectos(data.projects);
+    if (Array.isArray(data.writeups)) cargarWriteups(data.writeups);
+}
 
 /* =========================================================
    PERFIL
 ========================================================= */
 
 function cargarPerfil(profile) {
-    /* Nombre del hero */
     const heroName = document.querySelector("#hero-name");
 
     if (heroName) {
+        const cursor = heroName.querySelector(".terminal-logo-cursor");
         heroName.textContent = profile.name || "";
+        if (cursor) heroName.appendChild(cursor);
     }
 
+    const camposSimples = {
+        "hero-role": profile.role,
+        "hero-description": profile.description,
+        "profile-currently": profile.currently,
+        "profile-specialization": profile.specialization,
+        "profile-base": profile.base,
+        "profile-objective": profile.objective
+    };
 
-    /* Descripción del hero */
-    const heroDescription =
-        document.querySelector("#hero-description");
+    Object.entries(camposSimples).forEach(([id, valor]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = valor || "";
+    });
 
-    if (heroDescription) {
-        heroDescription.textContent =
-            profile.description || "";
-    }
-
-
-    /* Sobre mí */
-    const aboutContent =
-        document.querySelector("#about-content");
-
+    const aboutContent = document.querySelector("#about-content");
     if (aboutContent) {
-        aboutContent.innerHTML = `
-            <p>${profile.about || ""}</p>
-        `;
+        aboutContent.textContent = "";
+        const p = document.createElement("p");
+        p.textContent = profile.about || "";
+        aboutContent.appendChild(p);
     }
 }
-
 
 /* =========================================================
    SKILLS
 ========================================================= */
 
 function cargarSkills(skills) {
-    const container =
-        document.querySelector("#skills-container");
+    const container = document.querySelector("#skills-container");
+    if (!container) return;
 
-    if (!container) {
-        return;
+    container.textContent = "";
+
+    let grupos = {};
+
+    if (Array.isArray(skills)) {
+        skills.forEach((skill) => {
+            const categoria = skill.category || "Otros";
+            (grupos[categoria] ??= []).push(skill);
+        });
+    } else {
+        grupos = skills;
     }
 
-    container.innerHTML = "";
-
-
-    skills.forEach((skill) => {
-        const card =
-            document.createElement("article");
-
-        card.className = "skill-card";
-
-
-        card.innerHTML = `
-            <span class="skill-category">
-                ${skill.category || "Tecnología"}
-            </span>
-
-            <h3>
-                ${skill.name || ""}
-            </h3>
-
-            <span class="skill-level">
-                ${skill.level || ""}
-            </span>
-        `;
-
-
-        container.appendChild(card);
+    Object.entries(grupos).forEach(([categoria, items]) => {
+        if (!Array.isArray(items)) return;
+        container.appendChild(
+            construirGrupoSkills(categoria, items, false)
+        );
     });
 }
 
+/* =========================================================
+   CIBERSEGURIDAD
+========================================================= */
+
+function cargarSeguridad(security) {
+    const container = document.querySelector("#security-container");
+    if (!container) return;
+
+    container.textContent = "";
+
+    Object.entries(security).forEach(([categoria, items]) => {
+        if (!Array.isArray(items)) return;
+        container.appendChild(
+            construirGrupoSkills(categoria, items, true)
+        );
+    });
+}
+
+/**
+ * Construye un bloque <section class="skills-group"> reutilizable
+ * para skills y ciberseguridad.
+ */
+function construirGrupoSkills(categoria, items, conDescripcion) {
+    const bloque = document.createElement("section");
+    bloque.className = "skills-group";
+
+    const header = document.createElement("header");
+    header.className = "skills-group-header";
+
+    const label = document.createElement("span");
+    label.className = "skills-group-label";
+    label.textContent = categoria;
+
+    const count = document.createElement("span");
+    count.className = "skills-group-count";
+    count.textContent = items.length;
+
+    header.append(label, count);
+
+    const grid = document.createElement("div");
+    grid.className = "skills-grid";
+
+    items.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "skill-card";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = item.name || "";
+
+        const level = document.createElement("span");
+        level.className = "skill-level";
+        level.textContent = item.level || "";
+
+        card.append(h3, level);
+
+        if (conDescripcion && item.description) {
+            const p = document.createElement("p");
+            p.className = "skill-desc";
+            p.textContent = item.description;
+            card.appendChild(p);
+        }
+
+        grid.appendChild(card);
+    });
+
+    bloque.append(header, grid);
+    return bloque;
+}
 
 /* =========================================================
    PROYECTOS
 ========================================================= */
 
 function cargarProyectos(projects) {
-    const container =
-        document.querySelector("#projects-container");
+    const container = document.querySelector("#projects-container");
+    if (!container) return;
 
-    if (!container) {
-        return;
-    }
-
-    container.innerHTML = "";
-
+    container.textContent = "";
 
     projects.forEach((project) => {
-        const card =
-            document.createElement("article");
-
+        const card = document.createElement("article");
         card.className = "project-card";
 
+        const h3 = document.createElement("h3");
+        h3.textContent = project.title || "";
 
-        /* -----------------------------------------
-           TECNOLOGÍAS
-        ----------------------------------------- */
+        const p = document.createElement("p");
+        p.textContent = project.description || "";
 
-        const technologies =
-            Array.isArray(project.technologies)
-                ? project.technologies
-                    .map(
-                        (technology) => `
-                            <span class="tech">
-                                ${technology}
-                            </span>
-                        `
-                    )
-                    .join("")
-                : "";
+        card.append(h3, p);
 
-
-        /* -----------------------------------------
-           ENLACES
-        ----------------------------------------- */
-
-        const links = [];
-
-
-        /* GitHub */
-
-        if (
-            project.github &&
-            project.github !== "#"
-        ) {
-            links.push(`
-                <a
-                    href="${project.github}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link"
-                >
-                    GitHub
-                </a>
-            `);
+        if (Array.isArray(project.technologies) && project.technologies.length) {
+            const techWrap = document.createElement("div");
+            techWrap.className = "project-tech";
+            project.technologies.forEach((t) => {
+                const span = document.createElement("span");
+                span.className = "tech";
+                span.textContent = t;
+                techWrap.appendChild(span);
+            });
+            card.appendChild(techWrap);
         }
 
-
-        /* Demo */
-
-        if (
-            project.demo &&
-            project.demo !== "#"
-        ) {
-            links.push(`
-                <a
-                    href="${project.demo}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link primary"
-                >
-                    Ver proyecto
-                </a>
-            `);
+        if (project.status) {
+            const status = document.createElement("small");
+            status.className = "project-status";
+            status.textContent = project.status;
+            card.appendChild(status);
         }
 
+        const linksWrap = document.createElement("div");
+        linksWrap.className = "project-links";
 
-        /* -----------------------------------------
-           CONTENIDO DE LA TARJETA
-        ----------------------------------------- */
+        if (esUrlSegura(project.github)) {
+            linksWrap.appendChild(
+                crearEnlace(project.github, "GitHub", "project-link")
+            );
+        }
 
-        card.innerHTML = `
-            <h3>
-                ${project.title || ""}
-            </h3>
+        if (esUrlSegura(project.demo)) {
+            linksWrap.appendChild(
+                crearEnlace(project.demo, "Ver proyecto", "project-link primary")
+            );
+        }
 
-            <p>
-                ${project.description || ""}
-            </p>
-
-            ${
-                technologies
-                    ? `
-                        <div class="project-tech">
-                            ${technologies}
-                        </div>
-                    `
-                    : ""
-            }
-
-            ${
-                project.status
-                    ? `
-                        <small class="project-status">
-                            ${project.status}
-                        </small>
-                    `
-                    : ""
-            }
-
-            ${
-                links.length
-                    ? `
-                        <div class="project-links">
-                            ${links.join("")}
-                        </div>
-                    `
-                    : ""
-            }
-        `;
-
+        if (linksWrap.children.length) {
+            card.appendChild(linksWrap);
+        }
 
         container.appendChild(card);
     });
 }
 
+function crearEnlace(href, texto, clase) {
+    const a = document.createElement("a");
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.className = clase;
+    a.textContent = texto;
+    return a;
+}
 
 /* =========================================================
    WRITEUPS
 ========================================================= */
 
 function cargarWriteups(writeups) {
-    const container =
-        document.querySelector("#writeups-container");
+    const container = document.querySelector("#writeups-container");
+    if (!container) return;
 
-    if (!container) {
-        return;
-    }
+    container.textContent = "";
 
-    container.innerHTML = "";
-
-
-    /* -----------------------------------------
-       SIN WRITEUPS
-    ----------------------------------------- */
+    const emptyState = document.getElementById("empty-state");
 
     if (writeups.length === 0) {
-        container.innerHTML = `
-            <p class="empty-state">
-                No hay writeups disponibles actualmente.
-            </p>
-        `;
-
+        if (emptyState) emptyState.hidden = false;
         return;
     }
 
+    // Mapa slug -> etiqueta original (para mostrar "Máquinas Linux")
+    const categoriasMap = new Map();
+    writeups.forEach((w) => {
+        const slug = normalizarCategoria(w.category);
+        if (!categoriasMap.has(slug)) {
+            categoriasMap.set(slug, w.category || "Ciberseguridad");
+        }
+    });
 
-    /* -----------------------------------------
-       WRITEUPS
-    ----------------------------------------- */
-
-    writeups.forEach((writeup, index) => {
-        const card =
-            document.createElement("article");
-
-
-        /* -------------------------------------
-           CLASE
-        ------------------------------------- */
-
+    writeups.forEach((writeup) => {
+        const card = document.createElement("article");
         card.className = "writeup-card";
+        card.dataset.category = normalizarCategoria(writeup.category);
 
+        const main = document.createElement("div");
+        main.className = "writeup-card-main";
 
-        /* -------------------------------------
-           NÚMERO
+        const header = document.createElement("div");
+        header.className = "writeup-card-header";
 
-           01
-           02
-           03
-           ...
-        ------------------------------------- */
+        const catSpan = document.createElement("span");
+        catSpan.className = "writeup-category";
+        catSpan.textContent = writeup.category || "Ciberseguridad";
+        header.appendChild(catSpan);
 
-        card.dataset.number =
-            String(index + 1).padStart(2, "0");
+        if (writeup.difficulty) {
+            const diff = document.createElement("span");
+            diff.className = "writeup-difficulty";
+            diff.textContent = writeup.difficulty;
+            header.appendChild(diff);
+        }
 
+        const h2 = document.createElement("h2");
+        h2.textContent = writeup.title || "";
 
-        /* -------------------------------------
-           CATEGORÍA
+        const p = document.createElement("p");
+        p.textContent = writeup.summary || "";
 
-           Necesaria para los filtros.
-        ------------------------------------- */
+        main.append(header, h2, p);
 
-        card.dataset.category =
-            writeup.category || "Ciberseguridad";
+        const fecha = formatearFecha(writeup.date);
+        if (fecha) {
+            const meta = document.createElement("div");
+            meta.className = "writeup-meta";
+            meta.textContent = fecha;
+            main.appendChild(meta);
+        }
 
+        if (Array.isArray(writeup.tools) && writeup.tools.length) {
+            const techWrap = document.createElement("div");
+            techWrap.className = "project-tech";
+            writeup.tools.forEach((t) => {
+                const span = document.createElement("span");
+                span.className = "tech";
+                span.textContent = t;
+                techWrap.appendChild(span);
+            });
+            main.appendChild(techWrap);
+        }
 
-        /* -------------------------------------
-           TECNOLOGÍAS
-        ------------------------------------- */
+        const footer = document.createElement("div");
+        footer.className = "writeup-card-footer";
 
-        const tools =
-            Array.isArray(writeup.tools)
-                ? writeup.tools
-                    .map(
-                        (tool) => `
-                            <span class="tech">
-                                ${tool}
-                            </span>
-                        `
-                    )
-                    .join("")
-                : "";
+        if (writeup.slug) {
+            const a = document.createElement("a");
+            a.href = `${import.meta.env.BASE_URL}writeups/${encodeURIComponent(
+                writeup.slug
+            )}.html`;
+            a.className = "project-link primary";
+            a.textContent = "Leer writeup →";
+            footer.appendChild(a);
+        }
 
-
-        /* -------------------------------------
-           FECHA
-        ------------------------------------- */
-
-        const formattedDate =
-            formatearFecha(writeup.date);
-
-
-        /* -------------------------------------
-           CONTENIDO
-        ------------------------------------- */
-
-        card.innerHTML = `
-            <div class="writeup-card-main">
-
-                <div class="writeup-card-header">
-
-                    <span class="writeup-category">
-                        ${writeup.category || "Ciberseguridad"}
-                    </span>
-
-                    ${
-                        writeup.difficulty
-                            ? `
-                                <span class="writeup-difficulty">
-                                    ${writeup.difficulty}
-                                </span>
-                            `
-                            : ""
-                    }
-
-                </div>
-
-
-                <h2>
-                    ${writeup.title || ""}
-                </h2>
-
-
-                <p>
-                    ${writeup.summary || ""}
-                </p>
-
-
-                ${
-                    formattedDate
-                        ? `
-                            <div class="writeup-meta">
-                                ${formattedDate}
-                            </div>
-                        `
-                        : ""
-                }
-
-
-                ${
-                    tools
-                        ? `
-                            <div class="project-tech">
-                                ${tools}
-                            </div>
-                        `
-                        : ""
-                }
-
-            </div>
-
-
-            <div class="writeup-card-footer">
-
-                <a
-                    href="/writeups/${writeup.slug}.html"
-                    class="project-link primary"
-                >
-                    Leer writeup →
-                </a>
-
-            </div>
-        `;
-
-
+        card.append(main, footer);
         container.appendChild(card);
     });
+
+    pintarFiltros(categoriasMap);
 }
 
-
 /* =========================================================
-   FILTRADO DE WRITEUPS
+   FILTROS DINÁMICOS + LISTENERS
 ========================================================= */
 
-function initWriteupFilters() {
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
+function pintarFiltros(categoriasMap) {
+    const container = document.getElementById("writeups-filters");
+    if (!container) return;
 
-    const container =
-        document.getElementById("writeups-container");
+    container.textContent = "";
 
-    const emptyState =
-        document.getElementById("empty-state");
+    const crearBoton = (slug, label) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-btn";
+        btn.dataset.filter = slug;
+        btn.textContent = label;
+        return btn;
+    };
 
-    const toolbarTitle =
-        document.querySelector(
-            ".writeups-toolbar h2"
-        );
+    const btnTodos = crearBoton("all", "Todos");
+    btnTodos.classList.add("active");
+    container.appendChild(btnTodos);
 
+    categoriasMap.forEach((label, slug) => {
+        container.appendChild(crearBoton(slug, label));
+    });
 
-    /*
-     * Si esta página no tiene filtros o
-     * no tiene contenedor de writeups,
-     * no hacemos nada.
-     */
+    // Listeners justo aquí: acoplados a la creación
+    initWriteupFilters(container);
+}
 
-    if (
-        !filterButtons.length ||
-        !container
-    ) {
-        return;
-    }
+function initWriteupFilters(filtersContainer) {
+    const filterButtons = filtersContainer.querySelectorAll(".filter-btn");
+    const container = document.getElementById("writeups-container");
+    const emptyState = document.getElementById("empty-state");
+    const toolbarTitle = document.querySelector(".writeups-toolbar h2");
 
-
-    /* -----------------------------------------
-       BOTONES
-    ----------------------------------------- */
+    if (!filterButtons.length || !container) return;
 
     filterButtons.forEach((button) => {
-
         button.addEventListener("click", () => {
-
-            /* -------------------------------
-               BOTÓN ACTIVO
-            ------------------------------- */
-
-            filterButtons.forEach((btn) => {
-                btn.classList.remove("active");
-            });
-
+            filterButtons.forEach((b) => b.classList.remove("active"));
             button.classList.add("active");
 
-
-            /* -------------------------------
-               FILTRO
-            ------------------------------- */
-
-            const filter =
-                button.dataset.filter || "all";
-
-
-            /* -------------------------------
-               TARJETAS
-            ------------------------------- */
-
-            const cards =
-                container.querySelectorAll(
-                    ".writeup-card"
-                );
-
+            const filter = button.dataset.filter || "all";
+            const cards = container.querySelectorAll(".writeup-card");
 
             let visibleCount = 0;
 
-
-            /* -------------------------------
-               FILTRAR
-            ------------------------------- */
-
             cards.forEach((card) => {
-
-                const category =
-                    card.dataset.category || "";
-
-
                 const matches =
-                    filter === "all" ||
-                    category === filter;
-
-
-                card.classList.toggle(
-                    "hidden",
-                    !matches
-                );
-
-
-                if (matches) {
-                    visibleCount++;
-                }
-
+                    filter === "all" || card.dataset.category === filter;
+                card.classList.toggle("hidden", !matches);
+                if (matches) visibleCount++;
             });
 
-
-            /* -------------------------------
-               EMPTY STATE
-            ------------------------------- */
-
-            if (emptyState) {
-
-                emptyState.hidden =
-                    visibleCount !== 0;
-
-            }
-
-
-            /* -------------------------------
-               TÍTULO
-            ------------------------------- */
+            if (emptyState) emptyState.hidden = visibleCount !== 0;
 
             if (toolbarTitle) {
-
-                const filterName =
-                    button.textContent.trim();
-
-
                 toolbarTitle.textContent =
                     filter === "all"
                         ? "Laboratorios y análisis"
-                        : `Laboratorios y análisis · ${filterName}`;
-
+                        : `Laboratorios y análisis · ${button.textContent.trim()}`;
             }
-
         });
-
     });
 }
-
-
-/* =========================================================
-   CREAR EMPTY STATE DE FILTROS
-========================================================= */
-
-function crearEmptyState() {
-    const container =
-        document.querySelector(
-            "#writeups-container"
-        );
-
-    if (!container) {
-        return;
-    }
-
-
-    /*
-     * Si ya existe, no hacemos nada.
-     */
-
-    if (
-        document.getElementById("empty-state")
-    ) {
-        return;
-    }
-
-
-    const emptyState =
-        document.createElement("p");
-
-
-    emptyState.id = "empty-state";
-
-    emptyState.className = "empty-state";
-
-    emptyState.hidden = true;
-
-    emptyState.textContent =
-        "No hay writeups en esta categoría.";
-
-
-    container.parentElement.appendChild(
-        emptyState
-    );
-}
-
-
-/* =========================================================
-   FECHAS
-========================================================= */
-
-function formatearFecha(date) {
-
-    if (!date) {
-        return "";
-    }
-
-
-    const fecha =
-        new Date(`${date}T00:00:00`);
-
-
-    if (Number.isNaN(fecha.getTime())) {
-        return date;
-    }
-
-
-    return fecha.toLocaleDateString(
-        "es-ES",
-        {
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-        }
-    );
-}
-
 
 /* =========================================================
    AÑO
 ========================================================= */
 
 function cargarAño() {
-    const year =
-        document.querySelector("#year");
-
-
-    if (year) {
-        year.textContent =
-            new Date().getFullYear();
-    }
+    const year = document.querySelector("#year");
+    if (year) year.textContent = new Date().getFullYear();
 }

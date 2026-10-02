@@ -1,0 +1,885 @@
+/* =========================================================
+   ÁNGEL GARCÍA — PORTFOLIO
+   Main application logic
+========================================================= */
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarPortfolio();
+    escribirNombre();
+});
+
+
+/* =========================================================
+   CARGAR PORTFOLIO
+========================================================= */
+
+async function cargarPortfolio() {
+    try {
+        const response = await fetch("/data.json");
+
+        if (!response.ok) {
+            throw new Error(
+                `No se pudo cargar data.json: HTTP ${response.status}`
+            );
+        }
+
+        const data = await response.json();
+
+        /* Perfil */
+        if (data.profile) {
+            cargarPerfil(data.profile);
+        }
+
+        /* Skills */
+        if (
+            data.skills &&
+            typeof data.skills === "object" &&
+            !Array.isArray(data.skills)
+        ) {
+            cargarSkills(data.skills);
+        }
+
+        /* Ciberseguridad */
+        if (
+            data.security &&
+            typeof data.security === "object" &&
+            !Array.isArray(data.security)
+        ) {
+            cargarSeguridad(data.security);
+        }
+
+        /* Proyectos */
+        if (Array.isArray(data.projects)) {
+            cargarProyectos(data.projects);
+        }
+
+        /* Writeups */
+        if (Array.isArray(data.writeups)) {
+            cargarWriteups(data.writeups);
+        }
+
+        /* Año */
+        cargarAño();
+
+        /* Filtros de writeups */
+        initWriteupFilters();
+
+        /* Índice de cheatsheets (solo en /cheatsheets/index.html) */
+        const path = window.location.pathname;
+
+        if (
+            /\/cheatsheets\/(index\.html)?$/.test(path) &&
+            data.cheatsheets
+        ) {
+            cargarCheatsheetsIndex(data.cheatsheets);
+        }
+
+        /* Cheatsheet específica (según la página actual) */
+        const cheatsheetKey = detectarCheatsheet();
+
+        if (
+            cheatsheetKey &&
+            data.cheatsheets &&
+            data.cheatsheets[cheatsheetKey]
+        ) {
+            cargarCheatsheet(data.cheatsheets[cheatsheetKey]);
+        }
+
+    } catch (error) {
+        console.error(
+            "Error cargando los datos del portfolio:",
+            error
+        );
+    }
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+function cargarPerfil(profile) {
+    const heroName = document.querySelector("#hero-name");
+
+    if (heroName) {
+        heroName.textContent = profile.name || "";
+    }
+
+    const heroDescription =
+        document.querySelector("#hero-description");
+
+    if (heroDescription) {
+        heroDescription.textContent =
+            profile.description || "";
+    }
+
+    const aboutContent =
+        document.querySelector("#about-content");
+
+    if (aboutContent) {
+        aboutContent.innerHTML = `
+            <p>${profile.about || ""}</p>
+        `;
+    }
+
+    /* Datos técnicos del hero */
+
+    const currently =
+        document.querySelector("#profile-currently");
+
+    const specialization =
+        document.querySelector("#profile-specialization");
+
+    const base =
+        document.querySelector("#profile-base");
+
+    const objective =
+        document.querySelector("#profile-objective");
+
+    if (currently) {
+        currently.textContent = profile.currently || "";
+    }
+
+    if (specialization) {
+        specialization.textContent =
+            profile.specialization || "";
+    }
+
+    if (base) {
+        base.textContent = profile.base || "";
+    }
+
+    if (objective) {
+        objective.textContent = profile.objective || "";
+    }
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+function cargarSkills(skills) {
+    const container =
+        document.querySelector("#skills-container");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    let grupos = {};
+
+    if (Array.isArray(skills)) {
+        skills.forEach((skill) => {
+            const categoria = skill.category || "Otros";
+
+            if (!grupos[categoria]) {
+                grupos[categoria] = [];
+            }
+
+            grupos[categoria].push(skill);
+        });
+    } else {
+        grupos = skills;
+    }
+
+    Object.entries(grupos).forEach(([categoria, items]) => {
+        if (!Array.isArray(items)) {
+            return;
+        }
+
+        const bloque = document.createElement("section");
+        bloque.className = "skills-group";
+
+        const header = document.createElement("header");
+        header.className = "skills-group-header";
+
+        header.innerHTML = `
+            <span class="skills-group-label">
+                ${categoria}
+            </span>
+
+            <span class="skills-group-count">
+                ${items.length}
+            </span>
+        `;
+
+        const grid = document.createElement("div");
+        grid.className = "skills-grid";
+
+        items.forEach((skill) => {
+            const card = document.createElement("article");
+            card.className = "skill-card";
+
+            card.innerHTML = `
+                <h3>${skill.name || ""}</h3>
+                <span class="skill-level">${skill.level || ""}</span>
+            `;
+
+            grid.appendChild(card);
+        });
+
+        bloque.appendChild(header);
+        bloque.appendChild(grid);
+
+        container.appendChild(bloque);
+    });
+}
+
+
+/* =========================================================
+   CIBERSEGURIDAD
+========================================================= */
+
+function cargarSeguridad(security) {
+    const container =
+        document.querySelector("#security-container");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    Object.entries(security).forEach(([categoria, items]) => {
+        if (!Array.isArray(items)) {
+            return;
+        }
+
+        const bloque = document.createElement("section");
+        bloque.className = "skills-group";
+
+        const header = document.createElement("header");
+        header.className = "skills-group-header";
+
+        header.innerHTML = `
+            <span class="skills-group-label">
+                ${categoria}
+            </span>
+
+            <span class="skills-group-count">
+                ${items.length}
+            </span>
+        `;
+
+        const grid = document.createElement("div");
+        grid.className = "skills-grid";
+
+        items.forEach((tool) => {
+            const card = document.createElement("article");
+            card.className = "skill-card";
+
+            card.innerHTML = `
+                <h3>${tool.name || ""}</h3>
+
+                <span class="skill-level">
+                    ${tool.level || ""}
+                </span>
+
+                ${
+                    tool.description
+                        ? `
+                            <p class="skill-desc">
+                                ${tool.description}
+                            </p>
+                        `
+                        : ""
+                }
+            `;
+
+            grid.appendChild(card);
+        });
+
+        bloque.appendChild(header);
+        bloque.appendChild(grid);
+
+        container.appendChild(bloque);
+    });
+}
+
+
+/* =========================================================
+   DETECTAR CHEATSHEET SEGÚN LA PÁGINA
+========================================================= */
+
+function detectarCheatsheet() {
+    const path = window.location.pathname;
+
+    const match = path.match(
+        /\/cheatsheets\/([^\/]+)\.html$/
+    );
+
+    if (!match) {
+        return null;
+    }
+
+    return match[1].toLowerCase();
+}
+
+
+/* =========================================================
+   CARGAR CHEATSHEET INDIVIDUAL
+   (para páginas como /cheatsheets/git.html)
+========================================================= */
+
+function cargarCheatsheet(cheatsheet) {
+    const titleEl =
+        document.querySelector("#cheatsheet-title");
+
+    const subtitleEl =
+        document.querySelector("#cheatsheet-subtitle");
+
+    const container =
+        document.querySelector("#cheatsheet-content");
+
+    if (titleEl) {
+        titleEl.textContent = cheatsheet.title || "";
+    }
+
+    if (subtitleEl) {
+        subtitleEl.textContent = cheatsheet.subtitle || "";
+    }
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    const commands = cheatsheet.commands || [];
+
+    const bloque = document.createElement("section");
+    bloque.className = "skills-group";
+
+    const header = document.createElement("header");
+    header.className = "skills-group-header";
+
+    header.innerHTML = `
+        <span class="skills-group-label">
+            ${cheatsheet.title || "Comandos"}
+        </span>
+
+        <span class="skills-group-count">
+            ${commands.length}
+        </span>
+    `;
+
+    const grid = document.createElement("div");
+    grid.className = "command-grid";
+
+    commands.forEach((cmd) => {
+        const card = document.createElement("article");
+        card.className = "command-card";
+
+        card.innerHTML = `
+            <code>${cmd.command || ""}</code>
+
+            ${
+                cmd.description
+                    ? `<p>${cmd.description}</p>`
+                    : ""
+            }
+        `;
+
+        grid.appendChild(card);
+    });
+
+    bloque.appendChild(header);
+    bloque.appendChild(grid);
+
+    container.appendChild(bloque);
+}
+
+
+/* =========================================================
+   CARGAR ÍNDICE DE CHEATSHEETS
+   (para /cheatsheets/index.html)
+   Genera un bloque por categoría con un acordeón.
+========================================================= */
+
+function cargarCheatsheetsIndex(cheatsheets) {
+    const container =
+        document.querySelector("#cheatsheets-container");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    Object.entries(cheatsheets).forEach(
+        ([slug, sheet]) => {
+
+            if (!sheet || !Array.isArray(sheet.commands)) {
+                return;
+            }
+
+
+            /* Bloque */
+
+            const bloque = document.createElement("section");
+            bloque.className = "skills-group";
+
+
+            /* Cabecera del bloque */
+
+            const header = document.createElement("header");
+            header.className = "skills-group-header";
+
+            header.innerHTML = `
+                <span class="skills-group-label">
+                    ${sheet.title || slug}
+                </span>
+
+                <span class="skills-group-count">
+                    ${sheet.commands.length}
+                </span>
+            `;
+
+
+            /* Acordeón */
+
+            const card = document.createElement("article");
+            card.className = "cheatsheet-card";
+
+            const toggle = document.createElement("button");
+            toggle.className = "cheatsheet-toggle";
+            toggle.type = "button";
+
+            toggle.innerHTML = `
+                <h3>${sheet.title || slug}</h3>
+
+                <span class="cheatsheet-count">
+                    ${sheet.commands.length}
+                </span>
+            `;
+
+            toggle.addEventListener("click", () => {
+                card.classList.toggle("open");
+            });
+
+
+            /* Lista */
+
+            const list = document.createElement("ul");
+            list.className = "cheatsheet-list";
+
+            sheet.commands.forEach((cmd) => {
+                const item = document.createElement("li");
+                item.className = "cheatsheet-item";
+
+                item.innerHTML = `
+                    <span class="cheatsheet-command">
+                        ${cmd.command || ""}
+                    </span>
+
+                    ${
+                        cmd.description
+                            ? `
+                                <span class="cheatsheet-desc">
+                                    ${cmd.description}
+                                </span>
+                            `
+                            : ""
+                    }
+                `;
+
+                list.appendChild(item);
+            });
+
+
+            /* Montar */
+
+            card.appendChild(toggle);
+            card.appendChild(list);
+
+            bloque.appendChild(header);
+            bloque.appendChild(card);
+
+            container.appendChild(bloque);
+        }
+    );
+}
+
+
+/* =========================================================
+   PROYECTOS
+========================================================= */
+
+function cargarProyectos(projects) {
+    const container =
+        document.querySelector("#projects-container");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    projects.forEach((project) => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+
+        const technologies =
+            Array.isArray(project.technologies)
+                ? project.technologies
+                    .map((t) => `<span class="tech">${t}</span>`)
+                    .join("")
+                : "";
+
+        const links = [];
+
+        if (project.github && project.github !== "#") {
+            links.push(`
+                <a
+                    href="${project.github}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                >
+                    GitHub
+                </a>
+            `);
+        }
+
+        if (project.demo && project.demo !== "#") {
+            links.push(`
+                <a
+                    href="${project.demo}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link primary"
+                >
+                    Ver proyecto
+                </a>
+            `);
+        }
+
+        card.innerHTML = `
+            <h3>${project.title || ""}</h3>
+            <p>${project.description || ""}</p>
+
+            ${
+                technologies
+                    ? `<div class="project-tech">${technologies}</div>`
+                    : ""
+            }
+
+            ${
+                project.status
+                    ? `<small class="project-status">${project.status}</small>`
+                    : ""
+            }
+
+            ${
+                links.length
+                    ? `<div class="project-links">${links.join("")}</div>`
+                    : ""
+            }
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+
+/* =========================================================
+   WRITEUPS
+========================================================= */
+
+function cargarWriteups(writeups) {
+    const container =
+        document.querySelector("#writeups-container");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    if (writeups.length === 0) {
+        const emptyState =
+            document.getElementById("empty-state");
+
+        if (emptyState) {
+            emptyState.hidden = false;
+        }
+
+        return;
+    }
+
+    const categorias = new Set();
+
+    writeups.forEach((writeup) => {
+        categorias.add(normalizarCategoria(writeup.category));
+    });
+
+    pintarFiltros([...categorias]);
+
+    writeups.forEach((writeup, index) => {
+        const card = document.createElement("article");
+        card.className = "writeup-card";
+
+        card.dataset.number =
+            String(index + 1).padStart(2, "0");
+
+        card.dataset.category =
+            normalizarCategoria(writeup.category);
+
+        const categoriaLabel =
+            writeup.category || "Ciberseguridad";
+
+        const tools =
+            Array.isArray(writeup.tools)
+                ? writeup.tools
+                    .map((t) => `<span class="tech">${t}</span>`)
+                    .join("")
+                : "";
+
+        const formattedDate = formatearFecha(writeup.date);
+
+        card.innerHTML = `
+            <div class="writeup-card-main">
+                <div class="writeup-card-header">
+                    <span class="writeup-category">${categoriaLabel}</span>
+                    ${
+                        writeup.difficulty
+                            ? `<span class="writeup-difficulty">${writeup.difficulty}</span>`
+                            : ""
+                    }
+                </div>
+
+                <h2>${writeup.title || ""}</h2>
+                <p>${writeup.summary || ""}</p>
+
+                ${
+                    formattedDate
+                        ? `<div class="writeup-meta">${formattedDate}</div>`
+                        : ""
+                }
+
+                ${
+                    tools
+                        ? `<div class="project-tech">${tools}</div>`
+                        : ""
+                }
+            </div>
+
+            <div class="writeup-card-footer">
+                <a
+                    href="/writeups/${writeup.slug}.html"
+                    class="project-link primary"
+                >
+                    Leer writeup →
+                </a>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+
+/* =========================================================
+   NORMALIZAR CATEGORÍA
+========================================================= */
+
+function normalizarCategoria(categoria) {
+    if (!categoria) {
+        return "otros";
+    }
+
+    return String(categoria)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+
+/* =========================================================
+   CAPITALIZAR
+========================================================= */
+
+function capitalizar(texto) {
+    if (!texto) {
+        return "";
+    }
+
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+
+/* =========================================================
+   PINTAR FILTROS DINÁMICOS
+========================================================= */
+
+function pintarFiltros(categorias) {
+    const container =
+        document.getElementById("writeups-filters");
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    const btnTodos = document.createElement("button");
+    btnTodos.className = "filter-btn active";
+    btnTodos.dataset.filter = "all";
+    btnTodos.textContent = "Todos";
+
+    container.appendChild(btnTodos);
+
+    categorias.forEach((slug) => {
+        const btn = document.createElement("button");
+
+        btn.className = "filter-btn";
+        btn.dataset.filter = slug;
+        btn.textContent = capitalizar(slug);
+
+        container.appendChild(btn);
+    });
+}
+
+
+/* =========================================================
+   FILTRADO DE WRITEUPS
+========================================================= */
+
+function initWriteupFilters() {
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
+
+    const container =
+        document.getElementById("writeups-container");
+
+    const emptyState =
+        document.getElementById("empty-state");
+
+    const toolbarTitle =
+        document.querySelector(".writeups-toolbar h2");
+
+    if (!filterButtons.length || !container) {
+        return;
+    }
+
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            filterButtons.forEach((btn) =>
+                btn.classList.remove("active")
+            );
+
+            button.classList.add("active");
+
+            const filter = button.dataset.filter || "all";
+
+            const cards =
+                container.querySelectorAll(".writeup-card");
+
+            let visibleCount = 0;
+
+            cards.forEach((card) => {
+                const category = card.dataset.category || "";
+
+                const matches =
+                    filter === "all" || category === filter;
+
+                card.classList.toggle("hidden", !matches);
+
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            if (emptyState) {
+                emptyState.hidden = visibleCount !== 0;
+            }
+
+            if (toolbarTitle) {
+                const filterName = button.textContent.trim();
+
+                toolbarTitle.textContent =
+                    filter === "all"
+                        ? "Laboratorios y análisis"
+                        : `Laboratorios y análisis · ${filterName}`;
+            }
+        });
+    });
+}
+
+
+/* =========================================================
+   FECHAS
+========================================================= */
+
+function formatearFecha(date) {
+    if (!date) {
+        return "";
+    }
+
+    const fecha = new Date(`${date}T00:00:00`);
+
+    if (Number.isNaN(fecha.getTime())) {
+        return date;
+    }
+
+    return fecha.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
+}
+
+
+/* =========================================================
+   AÑO
+========================================================= */
+
+function cargarAño() {
+    const year = document.querySelector("#year");
+
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
+}
+
+
+/* =========================================================
+   NOMBRE ANIMADO (typewriter)
+   Escribe el nombre letra a letra en #typed-name
+========================================================= */
+
+function escribirNombre() {
+    const nameElement = document.getElementById("typed-name");
+
+    if (!nameElement) {
+        return;
+    }
+
+    const name = "Ángel García";
+
+    let index = 0;
+
+    /* Vaciar por si acaso */
+    nameElement.textContent = "";
+
+    function typeName() {
+        if (index < name.length) {
+            nameElement.textContent += name[index];
+            index++;
+
+            setTimeout(typeName, 120);
+        }
+    }
+
+    typeName();
+}

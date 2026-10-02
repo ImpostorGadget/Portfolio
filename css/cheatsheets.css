@@ -1,261 +1,689 @@
 /* =========================================
-   CHEATSHEETS — Compacto
-========================================= */
-
-/* Contenedor */
-
-.page-container {
-    width: min(1250px, calc(100% - 80px));
-    margin: 0 auto;
-}
-
-
-/* =========================================
-   CABECERA
-========================================= */
-
-.page-header {
-    padding-top: 3rem;
-    padding-bottom: 0.5rem;
-}
-
-.page-header h1 {
-    margin: 0.4rem 0 0.6rem;
-
-    font-size: clamp(1.7rem, 4vw, 2.4rem);
-    line-height: 1.1;
-}
-
-.page-header p {
-    max-width: 640px;
-
-    margin: 0;
-
-    color: #a0a0a0;
-
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-.section-tag {
-    color: #00ffaa;
-
-    font-family: monospace;
-    font-size: 0.75rem;
-}
-
-
-/* =========================================
-   SECCIÓN + GRID
+   CHEATSHEETS — Estilo terminal
 ========================================= */
 
 .cheatsheets-section {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-}
-
-/* Grid denso: muchas tarjetas pequeñas por fila */
-
-.cheatsheets-grid {
-    display: grid;
-
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 
 /* =========================================
-   TARJETA
+   CONTENEDOR
 ========================================= */
 
-.cheatsheet-card {
-    position: relative;
+.cheatsheet-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+}
+
+
+/* =========================================
+   CATEGORÍA — ENLACE DIRECTO (INDEX)
+========================================= */
+
+.cheatsheet-category-link-only {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 0.75rem 0.9rem;
+
+    color: var(--text);
+
+    background: rgba(255, 255, 255, 0.015);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.cheatsheet-category-link-only:hover {
+    transform: translateY(-2px);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+.cheatsheet-category-link-only:hover .cheatsheet-category-label {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
+
+.cheatsheet-category-link-only:hover .cheatsheet-category-cta {
+    color: var(--accent);
+}
+
+.cheatsheet-category-cta {
+    display: inline-flex;
+    align-items: center;
+
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.cheatsheet-category-link-only:hover .cheatsheet-category-cta {
+    transform: translateX(2px);
+}
+
+
+/* =========================================
+   CABECERA DE CATEGORÍA (común)
+========================================= */
+
+.cheatsheet-category-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    min-width: 0;
+    flex: 1;
+}
+
+.cheatsheet-category-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    transition: color 0.15s ease;
+}
+
+.cheatsheet-category-label::before {
+    content: "//";
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+}
+
+.cheatsheet-category-desc {
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+    font-weight: 400;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   GRID DE TARJETAS
+========================================= */
+
+#cheatsheet-detail {
+    width: 100%;
+}
+
+.cheatsheet-grid {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+    align-items: stretch;
+
+    /* Móvil: 1 columna */
+    grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 columnas */
+@media (min-width: 640px) {
+    .cheatsheet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Desktop: 3 columnas */
+@media (min-width: 1024px) {
+    .cheatsheet-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Pantallas muy anchas: 4 columnas */
+@media (min-width: 1440px) {
+    .cheatsheet-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================
+   TARJETA COMPLETA (subcategoría)
+========================================= */
+
+.cheatsheet-card-full {
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 
-    padding: 0;
+    padding: 0.75rem 0.9rem;
 
-    background: rgba(255, 255, 255, 0.025);
+    background: rgba(255, 255, 255, 0.015);
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 10px;
-
-    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 8px;
 
     transition:
         border-color 0.18s ease,
         background 0.18s ease,
-        box-shadow 0.18s ease;
+        transform 0.18s ease;
 }
 
-.cheatsheet-card:hover {
-    background: rgba(0, 255, 170, 0.03);
-
-    border-color: rgba(0, 255, 170, 0.35);
-
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+.cheatsheet-card-full:hover {
+    transform: translateY(-2px);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
 }
 
 
 /* =========================================
-   CABECERA DE LA TARJETA (toggle si acordeón)
+   HEADER ROW (común)
 ========================================= */
 
-.cheatsheet-toggle {
+.cheatsheet-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
+.cheatsheet-header-row .cheatsheet-title-row {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* =========================================
+   HEADER SUELTO (índice de categorías)
+   — cuando el header es hijo directo del grid,
+     sin tarjeta padre
+========================================= */
+
+.cheatsheet-grid > .cheatsheet-header-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 1rem;
 
-    width: 100%;
+    padding: 0.75rem 0.9rem;
 
-    padding: 0.65rem 0.9rem;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border);
+    border-radius: 8px;
 
-    color: #ffffff;
-    text-align: left;
-
-    background: transparent;
-    border: none;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    cursor: pointer;
-
-    font-family: inherit;
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
 }
 
-.cheatsheet-toggle h3 {
-    margin: 0;
-
-    font-size: 0.85rem;
-    font-weight: 600;
-    line-height: 1.2;
-
-    letter-spacing: -0.01em;
-}
-
-.cheatsheet-count {
-    flex-shrink: 0;
-
-    padding: 0.15rem 0.5rem;
-
-    color: #00ffaa;
-
-    background: rgba(0, 255, 170, 0.08);
-
-    border: 1px solid rgba(0, 255, 170, 0.2);
-
-    border-radius: 999px;
-
-    font-family: monospace;
-    font-size: 0.65rem;
-
-    line-height: 1;
-}
-
-.cheatsheet-toggle::after {
-    content: "+";
-
-    color: #00ffaa;
-
-    font-family: monospace;
-    font-size: 0.9rem;
-
-    transition: transform 0.15s ease;
-}
-
-.cheatsheet-card.open .cheatsheet-toggle::after {
-    transform: rotate(45deg);
+.cheatsheet-grid > .cheatsheet-header-row:hover {
+    transform: translateY(-2px);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
 }
 
 
 /* =========================================
-   LISTA DE COMANDOS
+   TÍTULO Y BOTÓN
 ========================================= */
 
-/* Si usas acordeón, por defecto oculto: */
-.cheatsheet-list {
-    display: none;
-
-    flex-direction: column;
-
-    gap: 0;
-
+.cheatsheet-title-row {
     margin: 0;
-    padding: 0;
 
-    list-style: none;
+    color: var(--text);
 
-    max-height: 320px;
-    overflow-y: auto;
-}
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
 
-.cheatsheet-card.open .cheatsheet-list {
-    display: flex;
-}
+    letter-spacing: -0.01em;
 
-/* Si prefieres SIN acordeón (siempre visibles), cambia la regla de arriba por:
-   .cheatsheet-list { display: flex; } */
+    transition: color 0.18s ease;
 
-.cheatsheet-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-
-    padding: 0.45rem 0.9rem;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-
-    font-size: 0.78rem;
-}
-
-.cheatsheet-item:last-child {
-    border-bottom: none;
-}
-
-.cheatsheet-item:hover {
-    background: rgba(0, 255, 170, 0.04);
-}
-
-.cheatsheet-command {
-    color: #00ffaa;
-
-    font-family: monospace;
-    font-size: 0.78rem;
-
+    overflow-wrap: anywhere;
     word-break: break-word;
 }
 
-.cheatsheet-desc {
-    color: #9a9a9a;
+.cheatsheet-card-full:hover .cheatsheet-title-row,
+.cheatsheet-grid > .cheatsheet-header-row:hover .cheatsheet-title-row {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
 
-    font-size: 0.72rem;
-    line-height: 1.35;
+.cheatsheet-header-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.cheatsheet-read-more-inline {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.35rem 0.8rem;
+
+    color: var(--accent);
+
+    background: transparent;
+
+    border: 1px solid var(--accent-border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.cheatsheet-read-more-inline:hover {
+    color: #0a0e0c;
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 
 /* =========================================
-   SCROLLBAR COMPACTA (en la lista)
+   DESCRIPCIÓN DENTRO DE TARJETA
 ========================================= */
 
-.cheatsheet-list::-webkit-scrollbar {
-    width: 6px;
+.cheatsheet-desc {
+    margin: 0.6rem 0 0 0;
+
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+    line-height: 1.45;
 }
 
-.cheatsheet-list::-webkit-scrollbar-track {
+
+/* =========================================
+   TARJETA DE COMANDO (página de detalle)
+========================================= */
+
+.command-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 0.75rem;
+
+    padding: 0.9rem 1rem;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    height: fit-content;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.command-card:hover {
+    transform: translateY(-2px);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+.command-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.command-card-name {
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.4;
+
+    word-break: break-word;
+    overflow-wrap: anywhere;
+
+    transition: color 0.18s ease;
+}
+
+.command-card:hover .command-card-name {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
+
+.command-card-desc {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+    line-height: 1.55;
+}
+
+.command-card-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 0.35rem 0.7rem;
+
+    color: var(--accent);
+
     background: transparent;
+
+    border: 1px solid var(--accent-border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    text-decoration: none;
+    align-self: flex-end;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
 }
 
-.cheatsheet-list::-webkit-scrollbar-thumb {
-    background: rgba(0, 255, 170, 0.2);
+.command-card-link:hover {
+    color: #0a0e0c;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* =========================================
+   LISTA DE COMANDOS (detalle de herramienta)
+========================================= */
+
+.cheatsheet-commands {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cheatsheet-command {
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.75rem;
+}
+
+.cheatsheet-command:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cmd-code-wrapper {
+    margin: 0 0 0.35rem 0;
+    overflow-x: auto;
+}
+
+.cmd-code {
+    display: inline-block;
+
+    background: rgba(0, 255, 136, 0.08);
+    color: var(--accent);
+
+    padding: 0.35rem 0.6rem;
+
     border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+
+    white-space: pre;
 }
 
-.cheatsheet-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 255, 170, 0.4);
+.cmd-desc {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FILTROS
+========================================= */
+
+.cheatsheet-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.cheatsheet-filter-btn {
+    padding: 0.35rem 0.75rem;
+
+    color: var(--text-muted);
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+.cheatsheet-filter-btn:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+.cheatsheet-filter-btn.active {
+    color: #0a0e0c;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* =========================================
+   BOTÓN VOLVER
+========================================= */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.back-link:hover {
+    opacity: 0.75;
+}
+
+
+/* =========================================
+   BLOQUES DE COMANDO (página individual)
+========================================= */
+
+.command-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+
+    border-top: 1px solid var(--border);
+}
+
+.command-block-label {
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.command-block pre {
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    overflow-x: auto;
+}
+
+.command-block pre code {
+    padding: 0;
+    color: var(--accent);
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.command-block p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+.command-example {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.7rem;
+}
+
+.command-example:last-child {
+    margin-bottom: 0;
+}
+
+.command-example span {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.command-flags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.command-flags li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+.command-flags code {
+    flex-shrink: 0;
+    min-width: 90px;
+
+    padding: 0;
+
+    color: var(--accent);
+    background: transparent;
+
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.command-flags span {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.command-list {
+    margin: 0;
+    padding-left: 1.2rem;
+
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.command-list li {
+    margin-bottom: 0.25rem;
 }
 
 
@@ -266,31 +694,18 @@
 .loading,
 .empty-state,
 .error-state {
-    grid-column: 1 / -1;
-
     padding: 2rem;
 
     text-align: center;
 
-    color: #999;
+    color: var(--text-muted);
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
 
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-secondary);
 
-    font-size: 0.85rem;
-}
-
-.error-state {
-    border-color: rgba(255, 80, 80, 0.3);
-    background: rgba(255, 80, 80, 0.025);
-}
-
-.error-state h2 {
-    margin-top: 0;
-    color: #ff7070;
-    font-size: 1rem;
+    font-size: 0.82rem;
 }
 
 
@@ -298,24 +713,26 @@
    RESPONSIVE
 ========================================= */
 
-@media (max-width: 700px) {
-
-    .page-container {
-        width: calc(100% - 30px);
-    }
-
-    .cheatsheets-grid {
+@media (max-width: 640px) {
+    .cheatsheet-grid {
         grid-template-columns: 1fr;
-
-        gap: 0.75rem;
     }
 
-    .cheatsheet-toggle {
-        padding: 0.55rem 0.75rem;
+    .cheatsheet-header-row {
+        gap: 0.5rem;
     }
 
-    .cheatsheet-item {
-        padding: 0.4rem 0.75rem;
+    .cheatsheet-title-row {
+        font-size: 0.8rem;
     }
 
+    .cheatsheet-read-more-inline {
+        font-size: 0.62rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .cheatsheet-filter-btn {
+        font-size: 0.62rem;
+        padding: 0.3rem 0.6rem;
+    }
 }

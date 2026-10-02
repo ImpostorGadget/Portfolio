@@ -1,52 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Cheatsheets | Ángel García</title>
+    <meta name="description" content="Cheatsheets técnicas de Impostor Gadget.">
+    <title>Cheatsheets · Impostor Gadget</title>
 
-  <script type="module" crossorigin src="/assets/cheatsheets-_e20rFyn.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/navbar-CTgxvK4O.js">
-  <link rel="stylesheet" crossorigin href="/assets/cheatsheets-B6th1hqD.css">
-  <link rel="stylesheet" crossorigin href="/assets/styles-D1uMWF_N.css">
+  <script type="module" crossorigin src="/assets/cheatsheets-rrsGd6TM.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="stylesheet" crossorigin href="/assets/styles-CF6PF51b.css">
+  <link rel="stylesheet" crossorigin href="/assets/cheatsheets-Cf-LI5Kl.css">
 </head>
 
 <body>
 
-    <div id="navbar"></div>
+    <div class="terminal-wrapper">
 
-    <main class="page-container">
+        <div class="terminal-bar">
+            <div class="terminal-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+            </div>
+            <div class="terminal-path">root@angel:~/cheatsheets</div>
+            <div class="terminal-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </div>
 
-        <section class="page-header">
-            <span class="section-tag">// documentación</span>
+        <div class="terminal-body">
 
-            <h1>Cheatsheets</h1>
+            <header class="terminal-header">
+                <h1 class="terminal-logo">
+                    Impostor Gadget<span class="terminal-logo-cursor">▌</span>
+                </h1>
 
-            <p>
-                Comandos, sintaxis y referencias rápidas de las tecnologías
-                que utilizo durante mi formación y proyectos.
-            </p>
-        </section>
+                <nav class="terminal-nav">
+                    <a href="/">~/home</a>
+                    <a href="/pages/stack.html">~/stack</a>
+                    <a href="/pages/proyectos.html">~/proyectos</a>
+                    <a href="/pages/tools.html">~/tools</a>
+                    <a href="/cheatsheets/index.html" class="active">~/cheatsheets</a>
+                    <a href="/writeups/writeups.html">~/writeups</a>
+                    <a href="/pages/sobre-mi.html">~/sobre-mi</a>
+                </nav>
 
-        <section class="cheatsheets-section">
+                <div class="terminal-subnav">
+                    <div class="terminal-lang">
+                        <span class="active">ES</span> · <span>EN</span>
+                    </div>
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="terminal-account">
+                        account
+                    </a>
+                </div>
+            </header>
 
-            <div id="cheatsheets-grid" class="cheatsheets-grid">
-
-                <p class="loading">
-                    Cargando cheatsheets...
-                </p>
-
+            <div class="terminal-command">
+                <span class="prompt">root@angel</span><span class="sep">:</span><span class="path">~/cheatsheets</span><span class="sep">$</span> <span class="cmd">ls -la</span>
             </div>
 
-        </section>
+            <div id="cheatsheets-grid" class="cheatsheet-content">
+                <p class="loading">Cargando cheatsheets...</p>
+            </div>
 
-    </main>
+        </div>
 
-    <footer>
-        <p>© <span id="current-year"></span> Ángel García</p>
-    </footer>
-
+        <div class="term-footer">
+            <span>© <span id="current-year"></span> Impostor Gadget</span>
+            <span>Portfolio técnico</span>
+        </div>
+
+    </div>
+
+    <!-- ✅ RUTA RELATIVA -->
+
+    <script>
+        document.querySelector("#current-year").textContent =
+            new Date().getFullYear();
+    </script>
 
 </body>
+
 </html>

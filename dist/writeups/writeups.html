@@ -1,157 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Documentación técnica y writeups de ciberseguridad de Ángel García."
-    >
-
-    <title>Writeups | Ángel García</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Writeups de Impostor Gadget.">
+    <title>Writeups · Impostor Gadget</title>
 
-
-  <script type="module" crossorigin src="/assets/navbar-CTgxvK4O.js"></script>
-  <script type="module" crossorigin src="/assets/app-D13itZAJ.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/styles-D1uMWF_N.css">
+  <script type="module" crossorigin src="/assets/modulepreload-polyfill-P2Xu9kJm.js"></script>
+  <script type="module" crossorigin src="/assets/app-D4QwoWbi.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/styles-CF6PF51b.css">
 </head>
-
 
 <body>
 
-    <div id="navbar"></div>
+    <div class="terminal-wrapper">
 
-
-    <main>
-
-        <!-- =========================
-             HEADER
-        ========================== -->
-
-        <section class="writeups-hero">
-
-            <div class="container">
-
-                <div class="writeups-hero-content">
-
-                    <span class="section-label">
-                        TECHNICAL DOCUMENTATION
-                    </span>
-
-                    <h1>
-                        Writeups
-                    </h1>
-
-                    <p>
-                        Laboratorios, análisis y ejercicios técnicos
-                        documentados paso a paso.
-                    </p>
-
-                </div>
-
+        <div class="terminal-bar">
+            <div class="terminal-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
             </div>
+            <div class="terminal-path">root@angel:~/writeups</div>
+            <div class="terminal-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </div>
 
-        </section>
+        <div class="terminal-body">
 
+            <header class="terminal-header">
+                <h1 class="terminal-logo">
+                    Impostor Gadget<span class="terminal-logo-cursor">▌</span>
+                </h1>
 
-        <!-- =========================
-             WRITEUPS
-        ========================== -->
+                <nav class="terminal-nav">
+                    <a href="/">~/home</a>
+                    <a href="/pages/stack.html">~/stack</a>
+                    <a href="/pages/proyectos.html">~/proyectos</a>
+                    <a href="/pages/tools.html">~/tools</a>
+                    <a href="/cheatsheets/index.html">~/cheatsheets</a>
+                    <a href="/writeups/writeups.html" class="active">~/writeups</a>
+                    <a href="/pages/sobre-mi.html">~/sobre-mi</a>
+                </nav>
 
-        <section class="section writeups-section">
-
-            <div class="container">
-
-                <div class="writeups-toolbar">
-
-                    <div>
-
-                        <span class="writeups-count-label">
-                            DOCUMENTACIÓN
-                        </span>
-
-                        <h2>
-                            Laboratorios y análisis
-                        </h2>
-
+                <div class="terminal-subnav">
+                    <div class="terminal-lang">
+                        <span class="active">ES</span> · <span>EN</span>
                     </div>
-
-                    <span class="writeups-terminal">
-                        /security/writeups
-                    </span>
-
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="terminal-account">
+                        account
+                    </a>
                 </div>
+            </header>
 
-
-                <!-- Filtros por categoría -->
-                <div
-                    class="writeups-filters"
-                    id="writeups-filters"
-                >
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="web">Web</button>
-                    <button class="filter-btn" data-filter="pwn">Pwn</button>
-                    <button class="filter-btn" data-filter="crypto">Crypto</button>
-                    <button class="filter-btn" data-filter="reverse">Reverse</button>
-                    <button class="filter-btn" data-filter="forensics">Forensics</button>
-                    <button class="filter-btn" data-filter="misc">Misc</button>
-                </div>
-
-
-                <!-- Grid de writeups (lo rellena app.js) -->
-                <div
-                    id="writeups-container"
-                    class="writeups-grid"
-                ></div>
-
-
-                <!-- Mensaje vacío -->
-                <div
-                    class="empty-state"
-                    id="empty-state"
-                    hidden
-                >
-                    No hay writeups para esta categoría.
-                </div>
-
+            <div class="terminal-command">
+                <span class="prompt">root@angel</span><span class="sep">:</span><span class="path">~/writeups</span><span class="sep">$</span> <span class="cmd">ls -la</span>
             </div>
 
-        </section>
+            <h1>Writeups</h1>
+            <p class="term-muted">Laboratorios y ejercicios técnicos documentados.</p>
 
-    </main>
+            <div id="writeups-filters" class="writeups-filters"></div>
 
+            <div id="writeups-container" class="writeups-grid">
+                <p class="loading">Cargando writeups...</p>
+            </div>
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="container">
-
-            <p>
-                ©
-                <span id="year"></span>
-                Ángel García
-            </p>
-
-            <p>
-                Portfolio técnico
-            </p>
+            <div class="empty-state" id="empty-state" hidden>
+                No hay writeups para esta categoría.
+            </div>
 
         </div>
 
-    </footer>
+        <div class="term-footer">
+            <span>© <span id="current-year"></span> Impostor Gadget</span>
+            <span>Portfolio técnico</span>
+        </div>
 
+    </div>
 
-
+    <script>
+        document.querySelector("#current-year").textContent = new Date().getFullYear();
+    </script>
 
 </body>
 

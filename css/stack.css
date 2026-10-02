@@ -1,0 +1,396 @@
+/* =========================================
+   STACK — Grid de categorías desplegables
+   Estilo terminal · verde
+========================================= */
+
+
+/* =========================================
+   CONTENEDOR
+========================================= */
+
+.stack-section {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+
+/* =========================================
+   GRID DE CATEGORÍAS
+   4 columnas · cada categoría es una tarjeta
+========================================= */
+
+.stack-content {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 0.7rem;
+
+    width: 100%;
+
+    align-items: start;   /* al abrir una, las vecinas NO se estiran */
+}
+
+
+/* =========================================
+   CATEGORÍA (tarjeta desplegable)
+========================================= */
+
+.stack-category {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    min-height: 56px;   /* todas del mismo alto mínimo */
+
+    background: rgba(255, 255, 255, 0.015);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.stack-category.open {
+    background: rgba(255, 255, 255, 0.025);
+
+    border-color: var(--accent-border);
+}
+
+
+/* Cabecera clicable */
+
+.stack-category-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 0.65rem;
+
+    width: 100%;
+
+    padding: 0.65rem 0.8rem;
+
+    color: var(--text);
+    text-align: left;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    font-family: var(--font-mono);
+
+    transition: color 0.15s ease;
+}
+
+.stack-category-toggle:hover .stack-category-label,
+.stack-category-toggle:hover .stack-category-chevron {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
+
+.stack-category-toggle:hover .stack-category-label::before {
+    color: var(--accent);
+}
+
+
+/* Bloque izquierdo */
+
+.stack-category-title {
+    display: flex;
+    align-items: baseline;
+
+    gap: 0.5rem;
+
+    flex-wrap: wrap;
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+.stack-category-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    transition: color 0.15s ease;
+}
+
+.stack-category-label::before {
+    content: "//";
+    color: var(--text-muted);
+
+    transition: color 0.15s ease;
+}
+
+.stack-category-desc {
+    color: var(--text-muted);
+
+    font-size: 0.68rem;
+    font-weight: 400;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Bloque derecho: contador + chevron */
+
+.stack-category-meta {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 0.4rem;
+
+    flex-shrink: 0;
+}
+
+.stack-category-count {
+    padding: 0.12rem 0.45rem;
+
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+
+    line-height: 1;
+}
+
+.stack-category-chevron {
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1;
+
+    transition:
+        transform 0.18s ease,
+        color 0.15s ease;
+}
+
+.stack-category.open .stack-category-chevron {
+    transform: rotate(45deg);
+}
+
+
+/* Cuerpo: grid interno */
+
+.stack-category-body {
+    display: none;
+
+    padding: 0 0.65rem 0.65rem;
+}
+
+.stack-category.open .stack-category-body {
+    display: block;
+}
+
+
+/* Grid interno de tarjetas dentro de cada categoría */
+
+.stack-group-items {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0.4rem;
+
+    width: 100%;
+
+    align-items: start;
+    align-content: start;
+}
+
+
+/* =========================================
+   TARJETA de tecnología
+========================================= */
+
+.stack-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 0.2rem;
+
+    min-width: 0;
+
+    padding: 0.55rem 0.7rem;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    height: fit-content;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.stack-card:hover {
+    transform: translateY(-2px);
+
+    background: var(--accent-soft);
+
+    border-color: var(--accent-border);
+}
+
+.stack-card h3 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: -0.01em;
+
+    word-break: break-word;
+
+    transition: color 0.18s ease;
+}
+
+.stack-card:hover h3 {
+    color: var(--accent);
+
+    filter: brightness(1.35);
+}
+
+.stack-level {
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+
+    transition: color 0.18s ease;
+}
+
+.stack-card:hover .stack-level {
+    color: var(--accent);
+}
+
+
+/* =========================================
+   ESTADOS
+========================================= */
+
+.stack-content .loading,
+.stack-content .empty-state,
+.stack-content .error-state {
+    grid-column: 1 / -1;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--bg-secondary);
+
+    font-size: 0.82rem;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+    .stack-content {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .stack-content {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.6rem;
+    }
+
+    .stack-group-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .stack-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .stack-category-desc {
+        display: none;
+    }
+
+    .stack-category-toggle {
+        padding: 0.55rem 0.7rem;
+    }
+
+    .stack-category-label {
+        font-size: 0.6rem;
+    }
+
+    .stack-category-count {
+        font-size: 0.55rem;
+        padding: 0.1rem 0.4rem;
+    }
+
+    .stack-category-body {
+        padding: 0 0.5rem 0.5rem;
+    }
+
+    .stack-group-items {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+    }
+
+    .stack-card {
+        padding: 0.5rem 0.6rem;
+    }
+
+    .stack-card h3 {
+        font-size: 0.72rem;
+    }
+
+    .stack-level {
+        font-size: 0.58rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .stack-content {
+        grid-template-columns: 1fr;
+    }
+}

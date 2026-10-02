@@ -1,0 +1,109 @@
+/* =========================================================
+   ÁNGEL GARCÍA — CHEATSHEETS · INDEX
+   Carga data/cheatsheets.json y lista las categorías
+   como enlaces a sus páginas correspondientes.
+========================================================= */
+
+import data from "/data/cheatsheets.json";
+
+
+document.addEventListener("DOMContentLoaded", cargarIndice);
+
+
+/* =========================================================
+   SLUGIFY
+========================================================= */
+
+function slugify(texto) {
+    return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+
+/* =========================================================
+   DESCRIPCIÓN POR CATEGORÍA
+========================================================= */
+
+const DESCRIPCIONES = {
+    "Git": "Control de versiones",
+    "Linux": "Sistema operativo y comandos",
+    "JavaScript": "Lenguaje del navegador",
+    "PHP": "Backend y servidor",
+    "SysAdmin": "Administración de sistemas",
+    "Cybersecurity": "Herramientas de seguridad ofensiva"
+};
+
+
+/* =========================================================
+   CARGAR
+========================================================= */
+
+function cargarIndice() {
+    const grid = document.getElementById("cheatsheets-grid");
+
+    if (!grid) {
+        console.error("No existe #cheatsheets-grid");
+        return;
+    }
+
+    const secciones = data.secciones || [];
+
+    if (!secciones.length) {
+        grid.innerHTML = `<p class="loading">No hay cheatsheets disponibles.</p>`;
+        return;
+    }
+
+    /* Agrupar por categoría */
+
+    const grupos = {};
+
+    secciones.forEach((s) => {
+        const cat = s.categoria || "Otros";
+        if (!grupos[cat]) grupos[cat] = [];
+        grupos[cat].push(s);
+    });
+
+    console.log("Categorías encontradas:", Object.keys(grupos));
+
+    /* Pintar */
+
+    grid.innerHTML = "";
+
+    Object.entries(grupos).forEach(([categoria, items]) => {
+
+        const slug = slugify(categoria);
+        const descripcion = DESCRIPCIONES[categoria] || "";
+
+        const totalComandos = items.reduce(
+            (acc, s) => acc + (s.comandos || []).length,
+            0
+        );
+
+        const bloque = document.createElement("a");
+        bloque.className = "cheatsheet-category cheatsheet-category-link-only";
+        bloque.href = `/cheatsheets/${slug}.html`;
+
+        bloque.innerHTML = `
+            <span class="cheatsheet-category-title">
+                <span class="cheatsheet-category-label">${categoria}</span>
+                ${
+                    descripcion
+                        ? `<span class="cheatsheet-category-desc">${descripcion}</span>`
+                        : ""
+                }
+            </span>
+
+            <span class="cheatsheet-category-meta">
+                <span class="cheatsheet-category-cta">
+                    ${items.length} secciones · ${totalComandos} comandos →
+                </span>
+            </span>
+        `;
+
+        grid.appendChild(bloque);
+    });
+}

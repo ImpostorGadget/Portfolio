@@ -1,0 +1,1212 @@
+/* =========================================================
+   ÁNGEL GARCÍA — TERMINAL PORTFOLIO
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    /* Fondo */
+    --bg: #0a0e0c;
+    --bg-secondary: #0d1410;
+    --bg-tertiary: #0f1812;
+
+    /* Cards */
+    --bg-card: #0d1410;
+    --bg-card-hover: #111a14;
+
+    /* Texto */
+    --text: #d1d5db;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+
+    /* Acento verde terminal */
+    --accent: #4ade80;
+    --accent-hover: #6ee7a3;
+    --accent-soft: rgba(74, 222, 128, 0.08);
+    --accent-border: rgba(74, 222, 128, 0.25);
+
+    /* Colores auxiliares */
+    --term-orange: #fb923c;
+    --term-cyan: #67e8f9;
+    --term-red: #f87171;
+    --term-yellow: #fbbf24;
+
+    /* Bordes */
+    --border: #1a2a20;
+    --border-strong: #223328;
+    --border-soft: rgba(255, 255, 255, 0.045);
+
+    /* Layout */
+    --container: 1100px;
+
+    /* Radios */
+    --radius: 6px;
+    --radius-sm: 4px;
+    --radius-lg: 8px;
+
+    /* Transiciones */
+    --t-fast: 140ms ease;
+    --t: 220ms ease;
+
+    /* Fuente mono */
+    --font-mono:
+        "SF Mono",
+        "JetBrains Mono",
+        "Cascadia Code",
+        Consolas,
+        "Courier New",
+        monospace;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+main {
+    flex: 1;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+::selection {
+    color: #0a0e0c;
+    background: var(--accent);
+}
+
+
+/* =========================================================
+   WRAPPER TERMINAL
+========================================================= */
+
+.terminal-wrapper {
+    width: min(940px, calc(100% - 40px));
+    margin: 3rem auto 4rem;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 0 1px rgba(74, 222, 128, 0.03),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Barra superior con dots */
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 0.7rem 1rem;
+
+    background: var(--bg-secondary);
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 0.72rem;
+}
+
+.terminal-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.terminal-dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-dots .dot-red    { background: #ff5f56; }
+.terminal-dots .dot-yellow { background: #ffbd2e; }
+.terminal-dots .dot-green  { background: #27c93f; }
+
+.terminal-path {
+    flex: 1;
+
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+
+    padding-left: 0.75rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.terminal-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    color: var(--accent);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    background: var(--accent);
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 6px var(--accent);
+}
+
+
+/* Cuerpo */
+
+.terminal-body {
+    padding: 2rem 2.5rem 3rem;
+}
+
+
+/* Header (logo + nav) */
+
+.terminal-header {
+    margin-bottom: 2rem;
+}
+
+.terminal-logo {
+    margin: 0 0 0.75rem;
+
+    color: #ffffff;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+
+    display: inline-flex;
+    align-items: center;
+}
+
+.terminal-logo-cursor {
+    display: inline-block;
+
+    margin-left: 4px;
+
+    color: var(--accent);
+
+    animation: terminalBlink 0.9s steps(1, end) infinite;
+}
+
+.terminal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+
+    margin-bottom: 0.75rem;
+}
+
+.terminal-nav a {
+    color: var(--text-muted);
+
+    font-size: 0.78rem;
+
+    text-decoration: none;
+
+    transition: color var(--t-fast);
+}
+
+.terminal-nav a:hover,
+.terminal-nav a.active {
+    color: var(--accent);
+}
+
+.terminal-subnav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 1rem;
+}
+
+.terminal-lang {
+    color: var(--text-muted);
+
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+}
+
+.terminal-lang .active {
+    color: var(--accent);
+}
+
+.terminal-account {
+    padding: 0.35rem 0.85rem;
+
+    color: var(--text);
+
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+
+    font-size: 0.72rem;
+
+    text-decoration: none;
+
+    transition:
+        background var(--t-fast),
+        border-color var(--t-fast);
+}
+
+.terminal-account:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+
+/* =========================================================
+   LÍNEA DE COMANDO
+========================================================= */
+
+.terminal-command {
+    margin: 2rem 0 1rem;
+
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.terminal-command .prompt { color: var(--accent); }
+.terminal-command .sep    { color: var(--text-muted); }
+.terminal-command .path   { color: var(--term-cyan); }
+.terminal-command .cmd    { color: var(--text); }
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+h1, h2, h3 {
+    color: #ffffff;
+
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+
+    line-height: 1.2;
+}
+
+.term-title {
+    margin: 1rem 0 1.5rem;
+
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    line-height: 1.25;
+
+    color: #ffffff;
+
+    letter-spacing: -0.03em;
+}
+
+.term-h2 {
+    margin: 2rem 0 1rem;
+
+    padding-top: 1rem;
+
+    font-size: 1.2rem;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   PÁRRAFOS / TEXTO
+========================================================= */
+
+p {
+    margin-bottom: 1rem;
+
+    color: var(--text);
+
+    font-size: 0.88rem;
+    line-height: 1.8;
+}
+
+.term-muted {
+    color: var(--text-muted);
+}
+
+code {
+    padding: 0.1rem 0.4rem;
+
+    color: var(--term-orange);
+
+    background: rgba(251, 146, 60, 0.08);
+
+    border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+
+
+/* =========================================================
+   STATS (grid de contadores)
+========================================================= */
+
+.term-stats {
+    display: grid;
+
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+
+    margin: 1.75rem 0 2rem;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+.term-stat {
+    padding: 1rem 1.1rem;
+
+    border-right: 1px solid var(--border);
+}
+
+.term-stat:last-child {
+    border-right: none;
+}
+
+.term-stat-label {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    color: var(--text-muted);
+
+    font-size: 0.6rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.term-stat-value {
+    color: var(--accent);
+
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TABLA tipo log
+========================================================= */
+
+.term-table {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 0 1.5rem;
+
+    border-top: 1px solid var(--border);
+}
+
+.term-table-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr auto auto;
+
+    gap: 1rem;
+
+    align-items: center;
+
+    padding: 0.75rem 0;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 0.8rem;
+}
+
+.term-table-row .name {
+    color: var(--text);
+}
+
+.term-table-row .where,
+.term-table-row .when {
+    color: var(--text-muted);
+}
+
+.term-table-row .badge {
+    padding: 0.2rem 0.6rem;
+
+    color: var(--accent);
+
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+
+    font-size: 0.62rem;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.term-note {
+    margin-top: 0.5rem;
+
+    color: var(--text-muted);
+
+    font-size: 0.75rem;
+}
+
+
+/* Tabla tipo key / value (session_intel.log) */
+
+.term-kv {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 0 1.5rem;
+
+    border-top: 1px solid var(--border);
+}
+
+.term-kv-row {
+    display: grid;
+
+    grid-template-columns: 140px 1fr;
+
+    gap: 1rem;
+
+    padding: 0.7rem 0;
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 0.82rem;
+}
+
+.term-kv-row .key {
+    color: var(--term-green, var(--accent));
+}
+
+.term-kv-row .val {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   CALLOUT
+========================================================= */
+
+.term-callout {
+    padding: 1rem 1.25rem;
+
+    margin: 1.5rem 0;
+
+    background: rgba(251, 146, 60, 0.03);
+
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 6px;
+
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER DENTRO DEL WRAPPER
+========================================================= */
+
+.term-footer {
+    padding: 1.25rem 2.5rem 1.5rem;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-muted);
+
+    font-size: 0.7rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes terminalBlink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .terminal-wrapper {
+        width: calc(100% - 24px);
+        margin: 1.5rem auto 2rem;
+    }
+
+    .terminal-body {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .term-footer {
+        padding: 1rem 1.25rem 1.25rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .terminal-logo {
+        font-size: 1.1rem;
+    }
+
+    .terminal-nav {
+        gap: 0.85rem;
+    }
+
+    .terminal-nav a {
+        font-size: 0.72rem;
+    }
+
+    .term-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .term-stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .term-table-row {
+        grid-template-columns: 1fr auto;
+    }
+
+    .term-table-row .where,
+    .term-table-row .when {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .term-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .term-kv-row {
+        grid-template-columns: 110px 1fr;
+    }
+}
+/* =========================================================
+   PROJECTS — Tarjetas
+========================================================= */
+
+.projects-grid {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 0.75rem;
+
+    width: 100%;
+}
+
+
+/* Tarjeta */
+
+.project-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1.2rem 1.3rem;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    height: fit-content;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+
+    background: var(--accent-soft);
+
+    border-color: var(--accent-border);
+}
+
+
+/* Título */
+
+.project-card h3 {
+    margin: 0 0 0.5rem;
+
+    color: var(--text);
+
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+
+    letter-spacing: -0.015em;
+
+    transition: color 0.18s ease;
+}
+
+.project-card:hover h3 {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
+
+
+/* Descripción */
+
+.project-card p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+
+/* Estado (En desarrollo, etc.) */
+
+.project-status {
+    display: inline-flex;
+    align-self: flex-start;
+
+    margin-top: 0.75rem;
+    padding: 0.15rem 0.5rem;
+
+    color: var(--text-muted);
+
+    background: var(--bg-secondary);
+
+    border: 1px solid var(--border);
+    border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   TECH TAGS
+========================================= */
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.35rem;
+
+    margin: 0.9rem 0;
+}
+
+.tech {
+    padding: 0.18rem 0.5rem;
+
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border: 1px solid rgba(74, 222, 128, 0.18);
+
+    border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   LINKS
+========================================= */
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    margin-top: auto;
+    padding-top: 0.9rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.4rem 0.75rem;
+
+    color: var(--text-secondary);
+
+    background: transparent;
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        color 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.project-link:hover {
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border-color: var(--accent-border);
+}
+
+.project-link.primary {
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border-color: var(--accent-border);
+}
+
+.project-link.primary:hover {
+    color: #0a0e0c;
+
+    background: var(--accent);
+
+    border-color: var(--accent);
+}
+/* =========================================================
+   WRITEUPS — TARJETAS
+========================================================= */
+
+/* Filtros */
+
+.writeups-filters {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.4rem;
+
+    margin-bottom: 1.25rem;
+}
+
+.filter-btn {
+    padding: 0.35rem 0.75rem;
+
+    color: var(--text-muted);
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+.filter-btn:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+}
+
+.filter-btn.active {
+    color: #0a0e0c;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* Grid de writeups */
+
+.writeups-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    grid-auto-flow: row;
+
+    gap: 0.75rem;
+
+    width: 100%;
+}
+
+
+/* Tarjeta de writeup */
+
+.writeup-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem 1.1rem 1.1rem;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    height: fit-content;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.writeup-card:hover {
+    transform: translateY(-2px);
+
+    background: var(--accent-soft);
+
+    border-color: var(--accent-border);
+}
+
+
+/* Número de la tarjeta (01, 02, 03…) */
+
+.writeup-card::before {
+    content: attr(data-number);
+
+    display: block;
+
+    margin-bottom: 0.75rem;
+
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+}
+
+
+/* Contenido */
+
+.writeup-card-main {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.writeup-card-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    margin-bottom: 0.6rem;
+}
+
+.writeup-category {
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.writeup-difficulty {
+    padding: 0.15rem 0.45rem;
+
+    color: var(--text-muted);
+
+    background: var(--bg-secondary);
+
+    border: 1px solid var(--border);
+    border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+}
+
+.writeup-card h2 {
+    margin: 0 0 0.4rem;
+
+    color: var(--text);
+
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 700;
+
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+
+    transition: color 0.18s ease;
+}
+
+.writeup-card:hover h2 {
+    color: var(--accent);
+    filter: brightness(1.35);
+}
+
+.writeup-card p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+
+/* Fecha */
+
+.writeup-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 0.6rem;
+
+    margin-top: 0.75rem;
+
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+}
+
+.writeup-meta::before {
+    content: "DATE";
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}
+
+
+/* Tags (herramientas) */
+
+.writeup-card .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+
+    margin: 0.7rem 0 0;
+}
+
+.writeup-card .tech {
+    padding: 0.15rem 0.45rem;
+
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 3px;
+
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+}
+
+
+/* Footer de la tarjeta (botón "Leer writeup →") */
+
+.writeup-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+
+    border-top: 1px solid var(--border);
+}
+
+.writeup-card-footer .project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 0.4rem 0.75rem;
+
+    color: var(--accent);
+
+    background: var(--accent-soft);
+
+    border: 1px solid var(--accent-border);
+    border-radius: 4px;
+
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.writeup-card-footer .project-link:hover {
+    color: #0a0e0c;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* Ocultar tarjetas filtradas */
+
+.writeup-card.hidden {
+    display: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+    .writeups-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .writeups-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .writeups-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

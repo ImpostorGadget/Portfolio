@@ -1,0 +1,169 @@
+/* =========================================================
+   Impostor Gadget — STACK
+   Carga /data/skills.json (array plano con category)
+   y agrupa por categoría en bloques desplegables.
+========================================================= */
+
+
+/* =========================================================
+   DESCRIPCIÓN POR CATEGORÍA
+========================================================= */
+
+const DESCRIPCIONES = {
+    "Frontend": "Interfaces y experiencia de usuario",
+    "Backend": "Servidores, APIs y bases de datos",
+    "Programación": "Lenguajes y paradigmas",
+    "Scripting": "Automatización y utilidades",
+    "Ciberseguridad": "Ofensiva, análisis y auditoría",
+    "Sistemas": "Sistemas operativos e infraestructura",
+    "Bases de datos": "Almacenamiento y consultas",
+    "Herramientas": "Utilidades del día a día",
+    "DevOps": "Despliegue y contenedores",
+    "Redes": "Protocolos, servicios y seguridad",
+    "Virtualización": "Máquinas virtuales y entornos",
+    "IA": "Inteligencia artificial y herramientas generativas"
+};
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", cargarStack);
+
+
+async function cargarStack() {
+    const container = document.getElementById("stack-container");
+
+    if (!container) {
+        console.error("No existe #stack-container en el HTML");
+        return;
+    }
+
+    try {
+        const res = await fetch("/data/skills.json");
+
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        const skills = await res.json();
+
+        if (!Array.isArray(skills) || !skills.length) {
+            container.innerHTML = `
+                <p class="empty-state">No hay stack disponible.</p>
+            `;
+            return;
+        }
+
+        /* Agrupar por categoría */
+
+        const grupos = {};
+
+        skills.forEach((s) => {
+            const cat = s.category || "Otros";
+
+            if (!grupos[cat]) grupos[cat] = [];
+
+            grupos[cat].push(s);
+        });
+
+        pintarStack(grupos, container);
+
+    } catch (error) {
+        console.error("Error cargando stack:", error);
+
+        container.innerHTML = `
+            <p class="error-state">
+                No se pudo cargar el stack.
+            </p>
+        `;
+    }
+}
+
+
+/* =========================================================
+   PINTAR
+========================================================= */
+
+function pintarStack(skills, container) {
+    container.innerHTML = "";
+
+    Object.entries(skills).forEach(([categoria, items], index) => {
+
+        if (!Array.isArray(items)) return;
+
+        const descripcion = DESCRIPCIONES[categoria] || "";
+
+        /* Bloque */
+        const bloque = document.createElement("section");
+        bloque.className = "stack-category";
+
+
+        /* Cabecera */
+        const header = document.createElement("button");
+        header.className = "stack-category-toggle";
+        header.type = "button";
+
+        header.innerHTML = `
+            <span class="stack-category-title">
+                <span class="stack-category-label">${categoria}</span>
+                ${
+                    descripcion
+                        ? `<span class="stack-category-desc">${descripcion}</span>`
+                        : ""
+                }
+            </span>
+
+            <span class="stack-category-meta">
+                <span class="stack-category-count">${items.length}</span>
+                <span class="stack-category-chevron">+</span>
+            </span>
+        `;
+
+
+        /* Cuerpo */
+        const body = document.createElement("div");
+        body.className = "stack-category-body";
+
+        const grid = document.createElement("div");
+        grid.className = "stack-group-items";
+
+        items.forEach((skill) => {
+            grid.appendChild(crearTarjeta(skill));
+        });
+
+        body.appendChild(grid);
+
+
+        /* Toggle */
+        header.addEventListener("click", () => {
+            bloque.classList.toggle("open");
+        });
+
+       
+
+
+        bloque.appendChild(header);
+        bloque.appendChild(body);
+
+        container.appendChild(bloque);
+    });
+}
+
+
+/* =========================================================
+   TARJETA
+========================================================= */
+
+function crearTarjeta(skill) {
+    const card = document.createElement("article");
+    card.className = "stack-card";
+
+    card.innerHTML = `
+        <h3>${skill.name || ""}</h3>
+        <span class="stack-level">${skill.level || ""}</span>
+    `;
+
+    return card;
+}

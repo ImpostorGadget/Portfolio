@@ -2,85 +2,595 @@
     "profile": {
         "name": "Ángel García",
         "role": "Técnico Superior ASIR · Estudiante de DAW",
-        "description": "Desarrollo web, sistemas, redes y ciberseguridad. Construyo proyectos para aprender, experimentar y llevar los conocimientos de clase a entornos reales.",
-        "about": "Mi perfil combina desarrollo web con conocimientos de sistemas, redes y ciberseguridad. Actualmente estoy ampliando mis conocimientos en desarrollo de aplicaciones web y trabajando con diferentes tecnologías y herramientas."
+        "description": "Mi perfil parte del desarrollo web, pero con una base previa en sistemas, redes y ciberseguridad. Trabajo con una visión más amplia del entorno en el que se ejecuta una aplicación: desde el código y la arquitectura hasta los sistemas, servicios y seguridad que existen detrás",
+        "about": "Mi perfil combina desarrollo web con conocimientos de sistemas, redes y ciberseguridad. Actualmente estoy ampliando mis conocimientos en desarrollo de aplicaciones web y trabajando con diferentes tecnologías y herramientas.",
+        "currently": "2º DAW",
+        "specialization": "Desarrollo web",
+        "base": "Sistemas · Redes · Seguridad",
+        "objective": "Entorno profesional"
     },
 
-    "skills": [
+    "skills": {
+        "Frontend": [
+            { "name": "HTML5", "level": "Avanzado" },
+            { "name": "CSS3", "level": "Avanzado" },
+            { "name": "JavaScript", "level": "Intermedio" },
+            { "name": "React", "level": "Intermedio" }
+        ],
+        "Backend": [
+            { "name": "Node.js", "level": "Intermedio" },
+            { "name": "Express", "level": "Intermedio" },
+            { "name": "PostgreSQL", "level": "Básico" }
+        ],
+        "Programación": [
+            { "name": "Python", "level": "Avanzado" },
+            { "name": "Java", "level": "Intermedio" },
+            { "name": "C#", "level": "En aprendizaje" }
+        ],
+        "Scripting": [
+            { "name": "Bash", "level": "Avanzado" },
+            { "name": "PowerShell", "level": "Intermedio" },
+            { "name": "Python scripting", "level": "Avanzado" }
+        ],
+        "Ciberseguridad": [
+            { "name": "Burp Suite", "level": "Avanzado" },
+            { "name": "Nmap", "level": "Avanzado" },
+            { "name": "Metasploit", "level": "Intermedio" },
+            { "name": "Wireshark", "level": "Intermedio" }
+        ],
+        "Sistemas": [
+            { "name": "Linux", "level": "Avanzado" },
+            { "name": "Windows Server", "level": "Intermedio" },
+            { "name": "Docker", "level": "Intermedio" }
+        ]
+    },
+
+    "security": {
+        "Reconocimiento": [
+            {
+                "name": "Nmap",
+                "level": "Intermedio",
+                "description": "Escáner de red y descubrimiento de servicios."
+            },
+            {
+                "name": "Gobuster",
+                "level": "Intermedio",
+                "description": "Enumeración de directorios y subdominios."
+            }
+        ],
+        "Pentesting": [
+            {
+                "name": "Hydra",
+                "level": "Básico",
+                "description": "Herramienta de fuerza bruta para servicios de autenticación."
+            },
+            {
+                "name": "Metasploit",
+                "level": "Básico",
+                "description": "Framework de explotación."
+            }
+        ],
+        "Web Security": [
+            {
+                "name": "Burp Suite",
+                "level": "Intermedio",
+                "description": "Proxy de intercepción para pruebas de seguridad web."
+            }
+        ],
+        "Active Directory": [
+            {
+                "name": "BloodHound",
+                "level": "Básico",
+                "description": "Mapeo de relaciones y rutas de ataque en Active Directory."
+            }
+        ]
+    },
+
+    "cheatsheets": [
         {
-            "name": "HTML5",
-            "category": "Frontend",
-            "level": "Intermedio"
+            "slug": "git",
+            "title": "Git",
+            "subtitle": "Control de versiones y flujo de trabajo con repositorios.",
+            "url": "cheatsheets/git.html",
+            "sections": [
+                {
+                    "slug": "configuracion-inicial",
+                    "title": "Configuración inicial",
+                    "commands": [
+                        { "command": "git config --global user.name \"Nombre\"", "description": "Configura el nombre del usuario." },
+                        { "command": "git config --global user.email \"email@example.com\"", "description": "Configura el correo electrónico." }
+                    ]
+                },
+                {
+                    "slug": "repositorios",
+                    "title": "Repositorios",
+                    "commands": [
+                        { "command": "git init", "description": "Inicializa un repositorio Git." },
+                        { "command": "git clone URL", "description": "Clona un repositorio remoto." },
+                        { "command": "git remote -v", "description": "Lista los repositorios remotos." }
+                    ]
+                },
+                {
+                    "slug": "commits-y-staging",
+                    "title": "Commits y staging",
+                    "commands": [
+                        { "command": "git status", "description": "Muestra el estado actual del repositorio." },
+                        { "command": "git add .", "description": "Añade los cambios al área de staging." },
+                        { "command": "git commit -m \"mensaje\"", "description": "Crea un commit con los cambios preparados." },
+                        { "command": "git diff", "description": "Muestra diferencias entre versiones." },
+                        { "command": "git log --oneline", "description": "Muestra los commits en una línea." },
+                        { "command": "git show hash", "description": "Muestra información de un commit." },
+                        { "command": "git blame archivo", "description": "Muestra quién modificó cada línea." }
+                    ]
+                },
+                {
+                    "slug": "ramas",
+                    "title": "Ramas",
+                    "commands": [
+                        { "command": "git branch", "description": "Lista, crea o elimina ramas." },
+                        { "command": "git checkout rama", "description": "Cambia a otra rama." },
+                        { "command": "git merge rama", "description": "Fusiona una rama con la actual." },
+                        { "command": "git rebase rama", "description": "Reaplica commits sobre otra base." }
+                    ]
+                },
+                {
+                    "slug": "sincronizacion-remota",
+                    "title": "Sincronización remota",
+                    "commands": [
+                        { "command": "git push", "description": "Envía los commits al repositorio remoto." },
+                        { "command": "git pull", "description": "Trae y fusiona cambios del remoto." }
+                    ]
+                },
+                {
+                    "slug": "deshacer-cambios",
+                    "title": "Deshacer cambios",
+                    "commands": [
+                        { "command": "git restore archivo", "description": "Descarta cambios locales de un archivo." },
+                        { "command": "git reset --soft HEAD~1", "description": "Deshace el último commit manteniendo cambios." },
+                        { "command": "git stash", "description": "Guarda cambios temporalmente." }
+                    ]
+                },
+                {
+                    "slug": "github-cli-gh",
+                    "title": "GitHub CLI (gh)",
+                    "commands": [
+                        { "command": "gh repo clone usuario/repo", "description": "Clona un repositorio de GitHub con la CLI." },
+                        { "command": "gh pr create", "description": "Crea una pull request desde la terminal." },
+                        { "command": "gh issue list", "description": "Lista las issues del repositorio." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "CSS3",
-            "category": "Frontend",
-            "level": "Intermedio"
+            "slug": "linux",
+            "title": "Linux",
+            "subtitle": "Comandos esenciales del sistema operativo.",
+            "url": "cheatsheets/linux.html",
+            "sections": [
+                {
+                    "slug": "archivos-y-directorios",
+                    "title": "Archivos y directorios",
+                    "commands": [
+                        { "command": "ls -la", "description": "Lista archivos con detalles." },
+                        { "command": "cp -r origen destino", "description": "Copia archivos o directorios." },
+                        { "command": "mv origen destino", "description": "Mueve o renombra archivos." },
+                        { "command": "rm -rf carpeta", "description": "Elimina archivos o directorios." }
+                    ]
+                },
+                {
+                    "slug": "permisos-y-propietarios",
+                    "title": "Permisos y propietarios",
+                    "commands": [
+                        { "command": "chmod 755 archivo", "description": "Cambia permisos." },
+                        { "command": "chown usuario:grupo archivo", "description": "Cambia propietario." }
+                    ]
+                },
+                {
+                    "slug": "procesos-y-servicios",
+                    "title": "Procesos y servicios",
+                    "commands": [
+                        { "command": "ps aux", "description": "Lista procesos activos." },
+                        { "command": "kill -9 PID", "description": "Termina un proceso." },
+                        { "command": "systemctl status servicio", "description": "Estado de un servicio." }
+                    ]
+                },
+                {
+                    "slug": "red",
+                    "title": "Red",
+                    "commands": [
+                        { "command": "ip a", "description": "Muestra interfaces de red." },
+                        { "command": "ssh usuario@host", "description": "Conexión SSH." }
+                    ]
+                },
+                {
+                    "slug": "paquetes-logs-y-backups",
+                    "title": "Paquetes, logs y backups",
+                    "commands": [
+                        { "command": "apt update && apt upgrade", "description": "Actualiza paquetes." },
+                        { "command": "journalctl -xe", "description": "Muestra logs del sistema." },
+                        { "command": "tar -czvf archivo.tar.gz carpeta", "description": "Comprime una carpeta." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "JavaScript",
-            "category": "Frontend",
-            "level": "Intermedio"
+            "slug": "javascript",
+            "title": "JavaScript",
+            "subtitle": "Fundamentos, estructuras y API del navegador.",
+            "url": "cheatsheets/javascript.html",
+            "sections": [
+                {
+                    "slug": "variables-y-tipos",
+                    "title": "Variables y tipos",
+                    "commands": [
+                        { "command": "let x = 10;", "description": "Declaración de variable con ámbito de bloque." },
+                        { "command": "const PI = 3.14;", "description": "Declaración de constante." },
+                        { "command": "typeof valor", "description": "Devuelve el tipo de un valor." }
+                    ]
+                },
+                {
+                    "slug": "arrays",
+                    "title": "Arrays",
+                    "commands": [
+                        { "command": "array.map(fn)", "description": "Transforma cada elemento del array." },
+                        { "command": "array.filter(fn)", "description": "Filtra elementos del array." },
+                        { "command": "array.reduce(fn, 0)", "description": "Reduce el array a un único valor." }
+                    ]
+                },
+                {
+                    "slug": "objetos-y-funciones",
+                    "title": "Objetos y funciones",
+                    "commands": [
+                        { "command": "{ ...objeto }", "description": "Copia / desestructura un objeto." },
+                        { "command": "() => {}", "description": "Arrow function." }
+                    ]
+                },
+                {
+                    "slug": "dom",
+                    "title": "DOM",
+                    "commands": [
+                        { "command": "document.querySelector(sel)", "description": "Selecciona un elemento del DOM." },
+                        { "command": "addEventListener(event, fn)", "description": "Añade un listener de evento." }
+                    ]
+                },
+                {
+                    "slug": "async-y-almacenamiento",
+                    "title": "Async y almacenamiento",
+                    "commands": [
+                        { "command": "fetch(url).then(r => r.json())", "description": "Petición HTTP con fetch." },
+                        { "command": "async function f() { await ... }", "description": "Función asíncrona." },
+                        { "command": "JSON.parse(str)", "description": "Convierte string a objeto." },
+                        { "command": "localStorage.setItem(k, v)", "description": "Guarda un valor en localStorage." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "PHP",
-            "category": "Backend",
-            "level": "En aprendizaje"
+            "slug": "php",
+            "title": "PHP",
+            "subtitle": "Sesiones, formularios y conceptos del lado servidor.",
+            "url": "cheatsheets/php.html",
+            "sections": [
+                {
+                    "slug": "sesiones",
+                    "title": "Sesiones",
+                    "commands": [
+                        { "command": "session_start();", "description": "Inicia una sesión (PHP)." },
+                        { "command": "$_SESSION['user'] = 'admin';", "description": "Guarda un valor en sesión." },
+                        { "command": "session_destroy();", "description": "Destruye la sesión." }
+                    ]
+                },
+                {
+                    "slug": "formularios-y-post",
+                    "title": "Formularios y POST",
+                    "commands": [
+                        { "command": "<form action=\"\" method=\"POST\">", "description": "Formulario HTML." },
+                        { "command": "<input type=\"text\" name=\"user\">", "description": "Campo de texto." },
+                        { "command": "$_POST['user']", "description": "Recibe datos por POST." }
+                    ]
+                },
+                {
+                    "slug": "redirecciones-y-cookies",
+                    "title": "Redirecciones y cookies",
+                    "commands": [
+                        { "command": "header('Location: /login')", "description": "Redirección HTTP." },
+                        { "command": "setcookie('nombre', 'valor')", "description": "Crea una cookie." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "Laravel",
-            "category": "Backend",
-            "level": "En aprendizaje"
+            "slug": "programacion",
+            "title": "Programación",
+            "subtitle": "Conceptos generales de programación y POO.",
+            "url": "cheatsheets/programacion.html",
+            "sections": [
+                {
+                    "slug": "variables-y-control-de-flujo",
+                    "title": "Variables y control de flujo",
+                    "commands": [
+                        { "command": "int x = 10;", "description": "Declaración de variable tipada." },
+                        { "command": "if (cond) { ... } else { ... }", "description": "Condicional." },
+                        { "command": "for (let i = 0; i < n; i++)", "description": "Bucle for." },
+                        { "command": "while (cond) { ... }", "description": "Bucle while." }
+                    ]
+                },
+                {
+                    "slug": "funciones-y-poo",
+                    "title": "Funciones y POO",
+                    "commands": [
+                        { "command": "function nombre() {}", "description": "Declaración de función." },
+                        { "command": "class Persona {}", "description": "Definición de clase." },
+                        { "command": "class Hijo extends Padre {}", "description": "Herencia." },
+                        { "command": "interface Nombre {}", "description": "Definición de interfaz." },
+                        { "command": "new Objeto()", "description": "Instanciar un objeto." }
+                    ]
+                },
+                {
+                    "slug": "excepciones",
+                    "title": "Excepciones",
+                    "commands": [
+                        { "command": "try { ... } catch (e) { ... }", "description": "Manejo de excepciones." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "MySQL",
-            "category": "Bases de datos",
-            "level": "Intermedio"
+            "slug": "web",
+            "title": "Web",
+            "subtitle": "Sesiones, formularios y conceptos del lado servidor.",
+            "url": "cheatsheets/web.html",
+            "sections": [
+                {
+                    "slug": "sesiones",
+                    "title": "Sesiones",
+                    "commands": [
+                        { "command": "session_start();", "description": "Inicia una sesión." },
+                        { "command": "$_SESSION['user'] = 'admin';", "description": "Guarda un valor en sesión." },
+                        { "command": "session_destroy();", "description": "Destruye la sesión." }
+                    ]
+                },
+                {
+                    "slug": "formularios",
+                    "title": "Formularios",
+                    "commands": [
+                        { "command": "<form action=\"\" method=\"POST\">", "description": "Formulario HTML." },
+                        { "command": "<input type=\"text\" name=\"user\">", "description": "Campo de texto." },
+                        { "command": "$_POST['user']", "description": "Recibe datos por POST." }
+                    ]
+                },
+                {
+                    "slug": "http-y-cookies",
+                    "title": "HTTP y cookies",
+                    "commands": [
+                        { "command": "header('Location: /login')", "description": "Redirección HTTP." },
+                        { "command": "setcookie('nombre', 'valor')", "description": "Crea una cookie." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "Java",
-            "category": "Programación",
-            "level": "Básico"
+            "slug": "sysadmin",
+            "title": "SysAdmin",
+            "subtitle": "Administración de sistemas y servicios.",
+            "url": "cheatsheets/sysadmin.html",
+            "sections": [
+                {
+                    "slug": "usuarios-y-grupos",
+                    "title": "Usuarios y grupos",
+                    "commands": [
+                        { "command": "useradd -m usuario", "description": "Crea un usuario con su home." },
+                        { "command": "passwd usuario", "description": "Cambia la contraseña." },
+                        { "command": "usermod -aG grupo usuario", "description": "Añade un usuario a un grupo." },
+                        { "command": "groups usuario", "description": "Lista los grupos de un usuario." }
+                    ]
+                },
+                {
+                    "slug": "servicios-systemd",
+                    "title": "Servicios (systemd)",
+                    "commands": [
+                        { "command": "systemctl start servicio", "description": "Inicia un servicio." },
+                        { "command": "systemctl enable servicio", "description": "Habilita un servicio al arranque." },
+                        { "command": "systemctl status servicio", "description": "Estado de un servicio." },
+                        { "command": "journalctl -u servicio -f", "description": "Logs de un servicio en vivo." }
+                    ]
+                },
+                {
+                    "slug": "discos-y-almacenamiento",
+                    "title": "Discos y almacenamiento",
+                    "commands": [
+                        { "command": "df -h", "description": "Uso de disco en formato legible." },
+                        { "command": "du -sh carpeta", "description": "Tamaño total de una carpeta." },
+                        { "command": "mount /dev/sdb1 /mnt", "description": "Monta un dispositivo." },
+                        { "command": "lsblk", "description": "Lista dispositivos de bloque." }
+                    ]
+                },
+                {
+                    "slug": "red",
+                    "title": "Red",
+                    "commands": [
+                        { "command": "ip a", "description": "Muestra interfaces de red." },
+                        { "command": "ss -tuln", "description": "Puertos abiertos en escucha." },
+                        { "command": "ufw allow 22", "description": "Permite el puerto 22 con ufw." },
+                        { "command": "ufw status", "description": "Estado del firewall." }
+                    ]
+                },
+                {
+                    "slug": "backups",
+                    "title": "Backups",
+                    "commands": [
+                        { "command": "rsync -av origen/ destino/", "description": "Sincroniza carpetas." },
+                        { "command": "tar -czvf backup.tar.gz carpeta", "description": "Comprime una carpeta." },
+                        { "command": "crontab -e", "description": "Edita las tareas programadas del usuario." }
+                    ]
+                }
+            ]
         },
+
         {
-            "name": "Python",
-            "category": "Programación",
-            "level": "Básico"
-        },
-        {
-            "name": "Git",
-            "category": "Herramientas",
-            "level": "Intermedio"
-        },
-        {
-            "name": "Docker",
-            "category": "DevOps",
-            "level": "En aprendizaje"
-        },
-        {
-            "name": "Linux",
-            "category": "Sistemas",
-            "level": "Intermedio"
-        },
-        {
-            "name": "Windows Server",
-            "category": "Sistemas",
-            "level": "Intermedio"
-        },
-        {
-            "name": "Active Directory",
-            "category": "Sistemas",
-            "level": "Intermedio"
-        },
+            "slug": "cybersecurity",
+            "title": "Cybersecurity",
+            "subtitle": "Fundamentos de seguridad ofensiva y defensiva.",
+            "url": "cheatsheets/cybersecurity.html",
+            "sections": [
+                {
+                    "slug": "recon",
+                    "title": "Recon",
+                    "commands": [
+                        { "command": "dnsenum", "description": "Enumeración DNS y descubrimiento de subdominios." },
+                        { "command": "dnsrecon", "description": "Reconocimiento DNS con múltiples técnicas." },
+                        { "command": "exiftool", "description": "Extracción de metadatos de archivos." },
+                        { "command": "httpx", "description": "Sondeo HTTP masivo de hosts y URLs." },
+                        { "command": "macchange", "description": "Cambio de dirección MAC de la interfaz de red." },
+                        { "command": "masscan", "description": "Escáner de puertos masivo y rápido." },
+                        { "command": "netdiscover", "description": "Descubrimiento de hosts en red local (ARP)." },
+                        { "command": "nmap", "description": "Escáner de red y descubrimiento de servicios." },
+                        { "command": "searchsploit", "description": "Búsqueda de exploits en Exploit-DB." },
+                        { "command": "subfinder", "description": "Descubrimiento pasivo de subdominios." },
+                        { "command": "sublist3r", "description": "Enumeración de subdominios con múltiples fuentes." },
+                        { "command": "theHarvester", "description": "Recolección de correos, hosts y subdominios." },
+                        { "command": "wireshark", "description": "Análisis de tráfico de red en profundidad." }
+                    ]
+                },
+                {
+                    "slug": "web",
+                    "title": "Web",
+                    "commands": [
+                        { "command": "burp-suite", "description": "Proxy de intercepción para pruebas de seguridad web." },
+                        { "command": "dirb", "description": "Enumeración de directorios web con wordlists." },
+                        { "command": "dirbuster", "description": "Enumeración de directorios y archivos web (GUI)." },
+                        { "command": "dirsearch", "description": "Enumeración de rutas web en Python." },
+                        { "command": "feroxbuster", "description": "Fuzzing de directorios recursivo en Rust." },
+                        { "command": "ffuf", "description": "Fuzzing web rápido y flexible." },
+                        { "command": "gobuster", "description": "Enumeración de directorios, DNS y vhosts." },
+                        { "command": "mongodb", "description": "Cliente MongoDB para bases de datos NoSQL." },
+                        { "command": "mysql", "description": "Cliente MySQL para bases de datos SQL." },
+                        { "command": "nikto", "description": "Escáner de vulnerabilidades web." },
+                        { "command": "nuclei", "description": "Escáner de vulnerabilidades basado en plantillas." },
+                        { "command": "sqlmap", "description": "Detección y explotación de inyección SQL." },
+                        { "command": "wfuzz", "description": "Fuzzing web (rutas, parámetros, cabeceras)." },
+                        { "command": "whatweb", "description": "Fingerprinting de tecnologías web." },
+                        { "command": "wpscan", "description": "Escáner de vulnerabilidades en WordPress." }
+                    ]
+                },
+                {
+                    "slug": "cracking",
+                    "title": "Cracking",
+                    "commands": [
+                        { "command": "cewl", "description": "Generador de wordlists a partir de sitios web." },
+                        { "command": "crunch", "description": "Generador de wordlists personalizadas." },
+                        { "command": "hashcat", "description": "Cracking de hashes con GPU." },
+                        { "command": "hashid", "description": "Identificación del tipo de hash." },
+                        { "command": "hydra", "description": "Fuerza bruta en servicios de autenticación." },
+                        { "command": "john-the-ripper", "description": "Cracking de hashes con CPU." },
+                        { "command": "medusa", "description": "Fuerza bruta paralela en múltiples protocolos." },
+                        { "command": "wordlist-custom-dictionaries", "description": "Diccionarios personalizados para cracking." }
+                    ]
+                },
+                {
+                    "slug": "ad-active-directory",
+                    "title": "AD (Active Directory)",
+                    "commands": [
+                        { "command": "bloodhound", "description": "Mapeo visual de relaciones y rutas de ataque en AD." },
+                        { "command": "certipy", "description": "Enumeración y abuso de AD CS (certificados)." },
+                        { "command": "enum4linux", "description": "Enumeración de recursos en sistemas Windows/Samba." },
+                        { "command": "evil-winrm", "description": "Shell remota sobre WinRM con credenciales." },
+                        { "command": "impacket", "description": "Suite de scripts para protocolos de red de Windows." },
+                        { "command": "kerbrute", "description": "Enumeración y fuerza bruta sobre Kerberos." },
+                        { "command": "ldapsearch", "description": "Consultas LDAP contra directorios AD." },
+                        { "command": "mimikatz", "description": "Extracción de credenciales en memoria." },
+                        { "command": "netexec", "description": "Ejecución y enumeración remota (sucesor de crackmapexec)." },
+                        { "command": "responder", "description": "Envenenamiento LLMNR/NBT-NS/MDNS para capturar hashes." },
+                        { "command": "smbclient", "description": "Cliente SMB para listar y acceder a recursos compartidos." },
+                        { "command": "smbmap", "description": "Enumeración de permisos y recursos SMB." }
+                    ]
+                },
+                {
+                    "slug": "shells",
+                    "title": "Shells",
+                    "commands": [
+                        { "command": "chisel", "description": "Túnel TCP/UDP sobre HTTP para pivoting." },
+                        { "command": "ligolo-ng", "description": "Túnel inverso moderno para pivoting." },
+                        { "command": "metasploit", "description": "Framework de explotación y post-explotación." },
+                        { "command": "msfvenom", "description": "Generación de payloads para Metasploit." },
+                        { "command": "netcat", "description": "Navaja suiza de redes: shells y transferencia." },
+                        { "command": "reverse-shells", "description": "Colección de reverse shells en múltiples lenguajes." },
+                        { "command": "socat", "description": "Relay de conexiones y shells avanzadas." },
+                        { "command": "telnet", "description": "Cliente Telnet para conexiones remotas simples." },
+                        { "command": "tmux", "description": "Multiplexor de terminal para gestionar sesiones." },
+                        { "command": "vncviewer", "description": "Cliente VNC para escritorios remotos." },
+                        { "command": "xfreerdp", "description": "Cliente RDP para escritorios Windows remotos." }
+                    ]
+                },
+                {
+                    "slug": "privesc",
+                    "title": "Privesc",
+                    "commands": [
+                        { "command": "linpeas", "description": "Enumeración automática de escalada en Linux." },
+                        { "command": "winpeas", "description": "Enumeración automática de escalada en Windows." },
+                        { "command": "powerup", "description": "Comprobación de vectores de escalada en Windows." },
+                        { "command": "pspy", "description": "Monitorización de procesos sin privilegios." }
+                    ]
+                },
+                {
+                    "slug": "forensics",
+                    "title": "Forensics",
+                    "commands": [
+                        { "command": "volatility", "description": "Análisis forense de volcados de memoria." }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "tools": [
         {
             "name": "Nmap",
-            "category": "Ciberseguridad",
-            "level": "Básico"
+            "category": "Reconocimiento",
+            "level": "Intermedio",
+            "description": "Escáner de red y descubrimiento de servicios."
         },
         {
-            "name": "PowerShell",
-            "category": "Scripting",
-            "level": "Básico"
+            "name": "Gobuster",
+            "category": "Reconocimiento",
+            "level": "Intermedio",
+            "description": "Enumeración de directorios y subdominios."
+        },
+        {
+            "name": "Hydra",
+            "category": "Pentesting",
+            "level": "Básico",
+            "description": "Herramienta de fuerza bruta para servicios de autenticación."
+        },
+        {
+            "name": "Metasploit",
+            "category": "Pentesting",
+            "level": "Básico",
+            "description": "Framework de explotación."
+        },
+        {
+            "name": "Burp Suite",
+            "category": "Web Security",
+            "level": "Intermedio",
+            "description": "Proxy de intercepción para pruebas de seguridad web."
+        },
+        {
+            "name": "BloodHound",
+            "category": "Active Directory",
+            "level": "Básico",
+            "description": "Mapeo de relaciones y rutas de ataque en Active Directory."
+        },
+        {
+            "name": "Wireshark",
+            "category": "Redes",
+            "level": "Intermedio",
+            "description": "Análisis de tráfico de red."
         }
     ],
 
@@ -131,7 +641,6 @@
             "conclusions": "La enumeración inicial permitió reducir el espacio de búsqueda y orientar los siguientes pasos.",
             "mitigations": "Cerrar puertos no utilizados, revisar permisos de directorios y no exponer paneles de administración sin autenticación adicional."
         },
-
         {
             "slug": "laboratorio-ad-enumeracion",
             "title": "Enumeración básica en Active Directory",
@@ -149,7 +658,6 @@
             "conclusions": "BloodHound simplifica la visualización de relaciones complejas en AD.",
             "mitigations": "Revisar pertenencias a grupos privilegiados y aplicar el principio de mínimo privilegio."
         },
-
         {
             "slug": "burp-introduccion",
             "title": "Introducción a Burp Suite: interceptar y modificar peticiones",
@@ -167,7 +675,6 @@
             "conclusions": "Burp permite comprender el flujo HTTP de una aplicación con detalle.",
             "mitigations": "Validar y sanear entradas en el servidor."
         },
-
         {
             "slug": "wireshark-analisis-trafico",
             "title": "Análisis de tráfico HTTP con Wireshark",

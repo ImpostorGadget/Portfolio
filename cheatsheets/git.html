@@ -2,222 +2,86 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cheatsheet de Git de Impostor Gadget.">
+    <title>Git · Cheatsheet | Impostor Gadget</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Git Cheatsheet | Ángel García</title>
-
-    <link
-        rel="stylesheet"
-        href="../styles.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/cheatsheets.css"
-    >
-
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/cheatsheets.css">
 </head>
 
 <body>
 
-    <div id="navbar"></div>
+    <div class="terminal-wrapper">
 
+        <div class="terminal-bar">
+            <div class="terminal-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+            </div>
+            <div class="terminal-path">root@angel:~/cheatsheets/git</div>
+            <div class="terminal-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </div>
 
-    <main>
+        <div class="terminal-body">
 
-        <section class="page-header">
-
-            <div class="container">
-
-                <span class="section-number">
-                    CHEATSHEET
-                </span>
-
-                <h1>
-                    Git
+            <header class="terminal-header">
+                <h1 class="terminal-logo">
+                    Impostor Gadget<span class="terminal-logo-cursor">▌</span>
                 </h1>
 
-                <p>
-                    Referencia rápida de Git.
-                </p>
+                <nav class="terminal-nav">
+                    <a href="/">~/home</a>
+                    <a href="/pages/stack.html">~/stack</a>
+                    <a href="/pages/proyectos.html">~/proyectos</a>
+                    <a href="/pages/tools.html">~/tools</a>
+                    <a href="/cheatsheets/index.html" class="active">~/cheatsheets</a>
+                    <a href="/writeups/writeups.html">~/writeups</a>
+                    <a href="/pages/sobre-mi.html">~/sobre-mi</a>
+                </nav>
 
-            </div>
-
-        </section>
-
-
-        <section class="section">
-
-            <div class="container">
-
-                <div class="cheatsheet-content">
-
-
-                    <h2>
-                        Configuración
-                    </h2>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git config --global user.name "Nombre"
-                        </code>
-
-                        <p>
-                            Configura el nombre del usuario.
-                        </p>
-
+                <div class="terminal-subnav">
+                    <div class="terminal-lang">
+                        <span class="active">ES</span> · <span>EN</span>
                     </div>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git config --global user.email "email@example.com"
-                        </code>
-
-                        <p>
-                            Configura el correo electrónico.
-                        </p>
-
-                    </div>
-
-
-                    <h2>
-                        Repositorio
-                    </h2>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git init
-                        </code>
-
-                        <p>
-                            Inicializa un repositorio Git.
-                        </p>
-
-                    </div>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git clone URL
-                        </code>
-
-                        <p>
-                            Clona un repositorio remoto.
-                        </p>
-
-                    </div>
-
-
-                    <h2>
-                        Cambios
-                    </h2>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git status
-                        </code>
-
-                        <p>
-                            Muestra el estado actual del repositorio.
-                        </p>
-
-                    </div>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git add .
-                        </code>
-
-                        <p>
-                            Añade los cambios al área de staging.
-                        </p>
-
-                    </div>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git commit -m "mensaje"
-                        </code>
-
-                        <p>
-                            Crea un commit con los cambios preparados.
-                        </p>
-
-                    </div>
-
-
-                    <div class="command-card">
-
-                        <code>
-                            git push
-                        </code>
-
-                        <p>
-                            Envía los commits al repositorio remoto.
-                        </p>
-
-                    </div>
-
-
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="terminal-account">
+                        account
+                    </a>
                 </div>
+            </header>
 
+            <a href="/cheatsheets/index.html" class="back-link">← back to cheatsheets</a>
+
+            <div class="terminal-command">
+                <span class="prompt">root@angel</span><span class="sep">:</span><span class="path">~/cheatsheets/git</span><span class="sep">$</span> <span class="cmd">cat git.md</span>
             </div>
 
-        </section>
+            <h1 id="cheatsheet-title">Git</h1>
+            <p id="cheatsheet-subtitle"></p>
 
-    </main>
+            <div id="cheatsheet-filters" class="cheatsheet-filters"></div>
 
-
-    <footer>
-
-        <div class="container footer-content">
-
-            <p>
-                ©
-                <span id="year"></span>
-                Ángel García
-            </p>
-
-            <a
-                href="index.html"
-                class="text-link"
-            >
-                ← Volver a cheatsheets
-            </a>
+            <div id="cheatsheet-detail" class="cheatsheet-content">
+                <p class="loading">Cargando comandos...</p>
+            </div>
 
         </div>
 
-    </footer>
+        <div class="term-footer">
+            <span>© <span id="current-year"></span> Impostor Gadget</span>
+            <span>Portfolio técnico</span>
+        </div>
 
+    </div>
 
-    <script src="../js/navbar.js"></script>
-
-
+    <script type="module" src="./js/cheatsheet.js"></script>
     <script>
-
-        document.querySelector("#year")
-            .textContent =
-            new Date().getFullYear();
-
+        document.querySelector("#current-year").textContent = new Date().getFullYear();
     </script>
 
 </body>

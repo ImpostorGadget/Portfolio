@@ -1,20 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const navbarContainer = document.querySelector("#navbar");
 
-    const navbarContainer =
-        document.querySelector("#navbar");
+  if (!navbarContainer) {
+    return;
+  }
 
-    if (!navbarContainer) {
-        return;
-    }
-
-
-    navbarContainer.innerHTML = `
+  navbarContainer.innerHTML = `
 
         <header class="header">
 
             <div class="container nav">
-
-                <!-- LOGO -->
 
                 <a
                     href="/index.html"
@@ -23,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     AG<span>.</span>
                 </a>
 
-
-                <!-- NAVEGACIÓN -->
 
                 <nav
                     class="navbar-menu"
@@ -38,7 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                         Inicio
                     </a>
-
+ <a
+                        href="/pages/sobre-mi.html"
+                        class="nav-link"
+                        data-page="sobre-mi"
+                    >
+                        Sobre mí
+                    </a>
                     <a
                         href="/pages/stack.html"
                         class="nav-link"
@@ -56,12 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     </a>
 
                     <a
-                        href="/writeups/writeups.html"
+                        href="/pages/tools.html"
                         class="nav-link"
-                        data-page="writeups"
+                        data-page="Herramientas"
                     >
-                        Writeups
+                        Herramientas
                     </a>
+
 
                     <a
                         href="/cheatsheets/index.html"
@@ -71,23 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         Cheatsheets
                     </a>
 
-                    <a
-                        href="/pages/sobre-mi.html"
-                        class="nav-link"
-                        data-page="sobre-mi"
-                    >
-                        Sobre mí
-                    </a>
+                   
 
                 </nav>
 
 
-                <!-- GITHUB -->
-
                 <div class="navbar-actions">
 
                     <a
-                        href="https://github.com/"
+                        href="#"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="github-link"
@@ -97,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </div>
 
-
-                <!-- MENÚ MÓVIL -->
 
                 <button
                     id="navbar-toggle"
@@ -120,126 +110,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
     `;
 
-
-    activarPaginaActual();
-    activarMenuMovil();
-
+  activarPaginaActual();
+  activarMenuMovil();
 });
-
 
 /* =========================
    PÁGINA ACTUAL
 ========================= */
 
 function activarPaginaActual() {
+  const path = window.location.pathname;
 
-    const path =
-        window.location.pathname;
+  let pagina = "inicio";
 
-    let pagina = "inicio";
+  if (path.includes("/pages/stack")) {
+    pagina = "stack";
+  } else if (path.includes("/pages/proyectos")) {
+    pagina = "proyectos";
+  } else if (path.includes("/pages/ciberseguridad")) {
+    pagina = "ciberseguridad";
+  } else if (path.includes("/pages/sobre-mi")) {
+    pagina = "sobre-mi";
+  } else if (path.includes("/writeups")) {
+    pagina = "writeups";
+  } else if (path.includes("/cheatsheets")) {
+    pagina = "cheatsheets";
+  }
 
+  const enlace = document.querySelector(`[data-page="${pagina}"]`);
 
-    if (path.includes("/pages/stack")) {
-
-        pagina = "stack";
-
-    } else if (path.includes("/pages/proyectos")) {
-
-        pagina = "proyectos";
-
-    } else if (path.includes("/pages/sobre-mi")) {
-
-        pagina = "sobre-mi";
-
-    } else if (path.includes("/writeups")) {
-
-        pagina = "writeups";
-
-    } else if (path.includes("/cheatsheets")) {
-
-        pagina = "cheatsheets";
-    }
-
-
-    const enlace =
-        document.querySelector(
-            `[data-page="${pagina}"]`
-        );
-
-
-    if (enlace) {
-
-        enlace.classList.add("active");
-
-    }
-
+  if (enlace) {
+    enlace.classList.add("active");
+  }
 }
-
 
 /* =========================
    MENÚ MÓVIL
 ========================= */
 
 function activarMenuMovil() {
+  const button = document.querySelector("#navbar-toggle");
 
-    const button =
-        document.querySelector("#navbar-toggle");
+  const menu = document.querySelector(".navbar-menu");
 
-    const menu =
-        document.querySelector(".navbar-menu");
+  if (!button || !menu) {
+    return;
+  }
 
+  button.addEventListener("click", () => {
+    const abierto = menu.classList.toggle("active");
 
-    if (!button || !menu) {
-        return;
-    }
+    button.setAttribute("aria-expanded", abierto);
 
+    button.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  });
 
-    button.addEventListener("click", () => {
+  const enlaces = menu.querySelectorAll(".nav-link");
 
-        const abierto =
-            menu.classList.toggle("active");
+  enlaces.forEach((enlace) => {
+    enlace.addEventListener("click", () => {
+      menu.classList.remove("active");
 
+      button.setAttribute("aria-expanded", "false");
 
-        button.setAttribute(
-            "aria-expanded",
-            abierto
-        );
-
-
-        button.setAttribute(
-            "aria-label",
-            abierto
-                ? "Cerrar menú"
-                : "Abrir menú"
-        );
-
+      button.setAttribute("aria-label", "Abrir menú");
     });
-
-
-    const enlaces =
-        menu.querySelectorAll(".nav-link");
-
-
-    enlaces.forEach((enlace) => {
-
-        enlace.addEventListener("click", () => {
-
-            menu.classList.remove("active");
-
-
-            button.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-
-            button.setAttribute(
-                "aria-label",
-                "Abrir menú"
-            );
-
-        });
-
-    });
-
+  });
 }

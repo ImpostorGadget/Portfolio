@@ -1,0 +1,754 @@
+/* =========================================================
+   TERMINAL — Estilo Hacker Blog
+========================================================= */
+
+:root {
+    --term-bg: #0a0e0c;
+    --term-bg-card: #0d1410;
+    --term-bg-panel: #0f1812;
+
+    --term-border: #1a2a20;
+    --term-border-strong: #223328;
+
+    --term-green: #4ade80;
+    --term-green-soft: rgba(74, 222, 128, 0.08);
+    --term-green-border: rgba(74, 222, 128, 0.25);
+
+    --term-text: #d1d5db;
+    --term-text-dim: #6b7280;
+    --term-text-muted: #4b5563;
+
+    --term-orange: #fb923c;
+    --term-cyan: #67e8f9;
+
+    --term-font: "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+}
+
+
+/* =========================================================
+   Reset local
+========================================================= */
+
+body {
+    background: var(--term-bg);
+    color: var(--term-text);
+    font-family: var(--term-font);
+}
+
+body::before {
+    /* Quitar la línea de acento del portfolio */
+    display: none;
+}
+
+
+/* =========================================================
+   Wrapper principal
+========================================================= */
+
+.terminal-wrapper {
+    width: min(900px, calc(100% - 40px));
+    margin: 3rem auto 4rem;
+
+    background: var(--term-bg-card);
+
+    border: 1px solid var(--term-border);
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 0 1px rgba(74, 222, 128, 0.03),
+        0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   Barra superior (window bar)
+========================================================= */
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 0.7rem 1rem;
+
+    background: #0d1410;
+
+    border-bottom: 1px solid var(--term-border);
+
+    font-size: 0.72rem;
+}
+
+.terminal-dots {
+    display: flex;
+    align-items: center;
+
+    gap: 0.4rem;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.dot-red    { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green  { background: #27c93f; }
+
+.terminal-path {
+    flex: 1;
+
+    color: var(--term-text-dim);
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+
+    text-align: left;
+    padding-left: 0.75rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.terminal-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 0.4rem;
+
+    color: var(--term-green);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    background: var(--term-green);
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 6px var(--term-green);
+}
+
+
+/* =========================================================
+   Cuerpo
+========================================================= */
+
+.terminal-body {
+    padding: 2rem 2.5rem 3rem;
+}
+
+
+/* =========================================================
+   Cabecera (logo + nav)
+========================================================= */
+
+.terminal-header {
+    margin-bottom: 2rem;
+}
+
+.terminal-logo {
+    margin: 0 0 1rem;
+
+    color: #ffffff;
+
+    font-family: var(--term-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+}
+
+.terminal-logo-cursor {
+    display: inline-block;
+
+    margin-left: 4px;
+
+    color: var(--term-green);
+
+    animation: terminalBlink 0.9s steps(1, end) infinite;
+}
+
+@keyframes terminalBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+
+/* Navegación */
+
+.terminal-nav {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+.terminal-nav a {
+    color: var(--term-text-dim);
+
+    font-family: var(--term-font);
+    font-size: 0.78rem;
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+.terminal-nav a:hover {
+    color: var(--term-green);
+}
+
+
+/* Subnav (idioma + account) */
+
+.terminal-subnav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 1rem;
+}
+
+.terminal-lang {
+    color: var(--term-text-dim);
+
+    font-size: 0.7rem;
+
+    letter-spacing: 0.08em;
+}
+
+.terminal-lang .active {
+    color: var(--term-green);
+}
+
+.terminal-account {
+    padding: 0.35rem 0.8rem;
+
+    color: var(--term-text);
+
+    background: transparent;
+
+    border: 1px solid var(--term-border-strong);
+    border-radius: 4px;
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+
+    text-decoration: none;
+
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.terminal-account:hover {
+    background: var(--term-green-soft);
+
+    border-color: var(--term-green-border);
+}
+
+
+/* =========================================================
+   Back link
+========================================================= */
+
+.terminal-back {
+    display: inline-block;
+
+    margin-bottom: 2rem;
+
+    color: var(--term-text-dim);
+
+    font-family: var(--term-font);
+    font-size: 0.78rem;
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+.terminal-back:hover {
+    color: var(--term-green);
+}
+
+
+/* =========================================================
+   Línea de comando
+========================================================= */
+
+.terminal-command {
+    margin-bottom: 1.5rem;
+
+    font-family: var(--term-font);
+    font-size: 0.82rem;
+
+    line-height: 1.6;
+}
+
+.terminal-command .prompt {
+    color: var(--term-green);
+}
+
+.terminal-command .sep {
+    color: var(--term-text-muted);
+}
+
+.terminal-command .path {
+    color: var(--term-cyan);
+}
+
+.terminal-command .command {
+    color: var(--term-text);
+}
+
+
+/* =========================================================
+   Sección de comando (cargada desde JSON)
+========================================================= */
+
+#comando-detalle {
+    font-family: var(--term-font);
+}
+
+/* Etiqueta de categoría */
+
+.command-tag {
+    display: inline-block;
+
+    margin-bottom: 0.5rem;
+
+    color: var(--term-green);
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+
+    letter-spacing: 0.08em;
+}
+
+/* Título grande */
+
+.command-title {
+    margin: 0.25rem 0 0.75rem;
+
+    color: #ffffff;
+
+    font-family: var(--term-font);
+    font-size: 2rem;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+}
+
+/* Meta info (fecha + read time) */
+
+.command-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+
+    color: var(--term-text-dim);
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+}
+
+/* Tags */
+
+.command-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    margin-bottom: 2rem;
+}
+
+.command-tag-item {
+    color: var(--term-cyan);
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+
+    text-decoration: none;
+}
+
+.command-tag-item:hover {
+    color: var(--term-green);
+}
+
+
+/* =========================================================
+   Panel "ON THIS PAGE"
+========================================================= */
+
+.on-this-page {
+    padding: 1rem 1.25rem;
+
+    margin-bottom: 2rem;
+
+    background: var(--term-bg-panel);
+
+    border: 1px solid var(--term-border-strong);
+    border-radius: 6px;
+
+    font-family: var(--term-font);
+    font-size: 0.78rem;
+}
+
+.on-this-page-title {
+    display: block;
+
+    margin-bottom: 0.75rem;
+
+    color: var(--term-text-dim);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+}
+
+.on-this-page ol {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    color: var(--term-text);
+}
+
+.on-this-page li {
+    margin-bottom: 0.35rem;
+}
+
+.on-this-page a {
+    color: var(--term-text);
+
+    text-decoration: none;
+}
+
+.on-this-page a:hover {
+    color: var(--term-green);
+}
+
+
+/* =========================================================
+   Caja destacada (intro callout)
+========================================================= */
+
+.command-callout {
+    padding: 1.25rem 1.5rem;
+
+    margin-bottom: 2rem;
+
+    background: rgba(251, 146, 60, 0.03);
+
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 6px;
+
+    font-family: var(--term-font);
+    font-size: 0.85rem;
+
+    line-height: 1.7;
+}
+
+.command-callout p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   Encabezados y texto
+========================================================= */
+
+.command-h2 {
+    margin: 2.5rem 0 1rem;
+
+    padding-top: 1rem;
+
+    color: #ffffff;
+
+    font-family: var(--term-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+}
+
+.command-h3 {
+    margin: 1.75rem 0 0.75rem;
+
+    color: #ffffff;
+
+    font-family: var(--term-font);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.command-paragraph {
+    margin: 0 0 1rem;
+
+    color: var(--term-text);
+
+    font-family: var(--term-font);
+    font-size: 0.88rem;
+
+    line-height: 1.8;
+}
+
+.command-paragraph code {
+    padding: 0.1rem 0.4rem;
+
+    color: var(--term-orange);
+
+    background: rgba(251, 146, 60, 0.08);
+
+    border-radius: 3px;
+
+    font-family: var(--term-font);
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   Terminal embebido (ventana con dots)
+========================================================= */
+
+.command-terminal {
+    margin: 1.5rem 0;
+
+    background: var(--term-bg-panel);
+
+    border: 1px solid var(--term-border-strong);
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.command-terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 0.55rem 0.9rem;
+
+    background: #0d1410;
+
+    border-bottom: 1px solid var(--term-border);
+
+    font-family: var(--term-font);
+    font-size: 0.68rem;
+}
+
+.command-terminal-dots {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.command-terminal-dots span {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+.command-terminal-dots .dot-red    { background: #ff5f56; }
+.command-terminal-dots .dot-yellow { background: #ffbd2e; }
+.command-terminal-dots .dot-green  { background: #27c93f; }
+
+.command-terminal-user {
+    color: var(--term-green);
+
+    font-family: var(--term-font);
+    font-size: 0.7rem;
+}
+
+.command-terminal-badge {
+    padding: 0.2rem 0.55rem;
+
+    color: var(--term-green);
+
+    background: var(--term-green-soft);
+
+    border: 1px solid var(--term-green-border);
+    border-radius: 999px;
+
+    font-family: var(--term-font);
+    font-size: 0.62rem;
+    font-weight: 600;
+
+    letter-spacing: 0.06em;
+}
+
+.command-terminal-content {
+    padding: 1.25rem 1.5rem;
+}
+
+.command-terminal-title {
+    margin: 0 0 0.25rem;
+
+    color: var(--term-orange);
+
+    font-family: var(--term-font);
+    font-size: 0.72rem;
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+}
+
+.command-terminal-name {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family: var(--term-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.command-terminal-content pre {
+    margin: 0.75rem 0 0;
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    overflow-x: auto;
+}
+
+.command-terminal-content pre code {
+    color: var(--term-text);
+
+    font-family: var(--term-font);
+    font-size: 0.82rem;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   Listas / flags
+========================================================= */
+
+.command-flags {
+    margin: 1rem 0;
+    padding-left: 1.25rem;
+}
+
+.command-flags li {
+    margin-bottom: 0.4rem;
+
+    color: var(--term-text);
+
+    font-family: var(--term-font);
+    font-size: 0.85rem;
+
+    line-height: 1.7;
+}
+
+.command-flags code {
+    color: var(--term-orange);
+
+    font-family: var(--term-font);
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   Estados
+========================================================= */
+
+.loading,
+.empty-state,
+.error-state {
+    padding: 2rem;
+
+    color: var(--term-text-dim);
+
+    background: var(--term-bg-panel);
+
+    border: 1px solid var(--term-border-strong);
+    border-radius: 6px;
+
+    text-align: center;
+
+    font-family: var(--term-font);
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   Ocultar la navbar y el footer del portfolio
+   (ya que el terminal tiene su propio header/footer)
+========================================================= */
+
+#navbar .header {
+    display: none;
+}
+
+footer {
+    display: none;
+}
+
+
+/* =========================================================
+   Responsive
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .terminal-wrapper {
+        width: calc(100% - 20px);
+        margin: 1.5rem auto 2rem;
+    }
+
+    .terminal-body {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .terminal-logo {
+        font-size: 1.2rem;
+    }
+
+    .terminal-nav {
+        gap: 0.75rem;
+    }
+
+    .terminal-nav a {
+        font-size: 0.72rem;
+    }
+
+    .command-title {
+        font-size: 1.5rem;
+    }
+
+    .command-h2 {
+        font-size: 1.15rem;
+    }
+
+    .terminal-subnav {
+        justify-content: space-between;
+    }
+}

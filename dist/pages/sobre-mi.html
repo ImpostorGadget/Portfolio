@@ -2,159 +2,83 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Sobre mí | Ángel García</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre mí · Impostor Gadget.">
+    <title>Sobre mí · Impostor Gadget</title>
 
-
-  <link rel="stylesheet" crossorigin href="/assets/styles-D1uMWF_N.css">
+  <script type="module" crossorigin src="/assets/modulepreload-polyfill-P2Xu9kJm.js"></script>
+  <script type="module" crossorigin src="/assets/app-D4QwoWbi.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/styles-CF6PF51b.css">
 </head>
 
 <body>
 
-    <div id="navbar"></div>
+    <div class="terminal-wrapper">
 
+        <div class="terminal-bar">
+            <div class="terminal-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+            </div>
+            <div class="terminal-path">root@angel:~/sobre-mi</div>
+            <div class="terminal-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </div>
 
-    <main>
+        <div class="terminal-body">
 
-        <section class="page-header">
-
-            <div class="container">
-
-                <span class="section-number">
-                    03
-                </span>
-
-                <h1>
-                    Sobre mí
+            <header class="terminal-header">
+                <h1 class="terminal-logo">
+                    Impostor Gadget<span class="terminal-logo-cursor">▌</span>
                 </h1>
 
-                <p>
-                    Formación, experiencia y evolución técnica.
-                </p>
+                <nav class="terminal-nav">
+                    <a href="/">~/home</a>
+                    <a href="/pages/stack.html">~/stack</a>
+                    <a href="/pages/proyectos.html">~/proyectos</a>
+                    <a href="/pages/tools.html">~/tools</a>
+                    <a href="/cheatsheets/index.html">~/cheatsheets</a>
+                    <a href="/writeups/writeups.html">~/writeups</a>
+                    <a href="/pages/sobre-mi.html" class="active">~/sobre-mi</a>
+                </nav>
 
+                <div class="terminal-subnav">
+                    <div class="terminal-lang">
+                        <span class="active">ES</span> · <span>EN</span>
+                    </div>
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="terminal-account">
+                        Github
+                    </a>
+                </div>
+            </header>
+
+            <div class="terminal-command">
+                <span class="prompt">root@angel</span><span class="sep">:</span><span class="path">~/sobre-mi</span><span class="sep">$</span> <span class="cmd">cat about.md</span>
             </div>
 
-        </section>
+            <h1>Sobre mí</h1>
+            <p class="term-muted">Formación, experiencia, objetivos y perfil técnico.</p>
 
-
-        <section class="section">
-
-            <div class="container about-content">
-
-                <p>
-                    Soy Técnico Superior en Administración de
-                    Sistemas Informáticos en Red y actualmente
-                    curso 2º de Desarrollo de Aplicaciones Web.
-                    Mi objetivo profesional está orientado al
-                    desarrollo web, construyendo aplicaciones
-                    funcionales y entendiendo también el entorno
-                    técnico en el que se ejecutan.
-                </p>
-
-                <br>
-
-                <p>
-                    Mi formación en sistemas me ha proporcionado
-                    una base sólida en Windows, Linux, redes,
-                    Active Directory, DNS, DHCP, virtualización
-                    y administración de equipos y servicios.
-                    Durante mi experiencia profesional también
-                    he trabajado con soporte técnico, Microsoft
-                    365, Intune, Entra ID, Active Directory,
-                    impresoras, equipos Windows y entornos
-                    empresariales.
-                </p>
-
-                <br>
-
-                <p>
-                    Actualmente estoy centrado en el desarrollo
-                    web utilizando HTML, CSS, JavaScript, PHP y
-                    Laravel, junto con MySQL, Git, Node.js y npm.
-                    En mis proyectos trabajo con herramientas
-                    como Artisan, migraciones, Blade,
-                    Livewire y Tinker, además de Docker y
-                    Docker Compose para trabajar con entornos
-                    de desarrollo basados en contenedores.
-                </p>
-
-                <br>
-
-                <p>
-                    La ciberseguridad también forma parte de mi
-                    perfil técnico. Mi formación previa me ha
-                    permitido trabajar con Linux, PowerShell,
-                    Bash, redes y diferentes herramientas de
-                    análisis y auditoría. Aunque actualmente
-                    desarrollo web es mi principal línea de
-                    especialización, estos conocimientos me
-                    ayudan a entender las aplicaciones desde
-                    una perspectiva más amplia.
-                </p>
-
-                <br>
-
-                <p>
-                    Me gusta aprender entendiendo cómo funcionan
-                    realmente las herramientas que utilizo.
-                    Cuando desarrollo un proyecto intento no
-                    limitarme a conseguir que funcione, sino
-                    comprender su estructura, detectar problemas
-                    y buscar soluciones que puedan mantenerse y
-                    evolucionar con el tiempo.
-                </p>
-
-                <br>
-
-                <p>
-                    Este portfolio forma parte de ese proceso:
-                    es un espacio donde reúno proyectos,
-                    conocimientos y documentación técnica para
-                    mostrar de forma práctica lo que sé hacer,
-                    lo que estoy aprendiendo y cómo ha ido
-                    evolucionando mi perfil.
-                </p>
-
+            <div id="about-content" class="about-content">
+                <p class="loading">Cargando información...</p>
             </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <div class="container footer-content">
-
-            <p>
-                ©
-                <span id="year"></span>
-                Ángel García
-            </p>
-
-            <p>
-                Portfolio técnico
-            </p>
 
         </div>
 
-    </footer>
+        <div class="term-footer">
+            <span>© <span id="current-year"></span> Impostor Gadget</span>
+            <span>Portfolio técnico</span>
+        </div>
 
-
-    <script src="../js/navbar.js"></script>
-
+    </div>
+
+    
     <script>
-
-        document.querySelector("#year").textContent =
-            new Date().getFullYear();
-
+        document.querySelector("#current-year").textContent = new Date().getFullYear();
     </script>
 
 </body>

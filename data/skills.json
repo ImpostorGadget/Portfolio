@@ -25,7 +25,17 @@
         "level": "En aprendizaje"
     },
     {
+        "name": "Node.js",
+        "category": "Backend",
+        "level": "En aprendizaje"
+    },
+    {
         "name": "MySQL",
+        "category": "Bases de datos",
+        "level": "Intermedio"
+    },
+    {
+        "name": "SQL",
         "category": "Bases de datos",
         "level": "Intermedio"
     },
@@ -35,12 +45,22 @@
         "level": "Básico"
     },
     {
+        "name": "C#",
+        "category": "Programación",
+        "level": "En aprendizaje"
+    },
+    {
         "name": "Python",
         "category": "Programación",
         "level": "Básico"
     },
     {
         "name": "Git",
+        "category": "Herramientas",
+        "level": "Intermedio"
+    },
+    {
+        "name": "GitHub",
         "category": "Herramientas",
         "level": "Intermedio"
     },
@@ -60,6 +80,16 @@
         "level": "En aprendizaje"
     },
     {
+        "name": "Apache",
+        "category": "DevOps",
+        "level": "En mejora"
+    },
+    {
+        "name": "Kubernetes",
+        "category": "DevOps",
+        "level": "Básico"
+    },
+    {
         "name": "Linux",
         "category": "Sistemas",
         "level": "Intermedio"
@@ -75,13 +105,174 @@
         "level": "Intermedio"
     },
     {
+        "name": "VirtualBox",
+        "category": "Virtualización",
+        "level": "Intermedio"
+    },
+    {
+        "name": "VMware",
+        "category": "Virtualización",
+        "level": "Intermedio"
+    },
+    {
+        "name": "CMD",
+        "category": "Scripting",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Bash",
+        "category": "Scripting",
+        "level": "Básico"
+    },
+    {
         "name": "PowerShell",
         "category": "Scripting",
         "level": "Básico"
     },
     {
+        "name": "Wireshark",
+        "category": "Redes",
+        "level": "Básico"
+    },
+    {
+        "name": "VPN",
+        "category": "Redes",
+        "level": "Básico"
+    },
+    {
+        "name": "Tor",
+        "category": "Redes",
+        "level": "Básico"
+    },
+    {
         "name": "Nmap",
         "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Dirb",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Gobuster",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Sublist3r",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "WhatWeb",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Wappalyzer",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Maltego",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Burp Suite",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Nikto",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "SQLMap",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "Metasploit",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "GTFOBins",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "PSExec",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "CrackMapExec",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+    {
+        "name": "HackTricks",
+        "category": "Ciberseguridad",
+        "level": "Básico"
+    },
+
+    {
+        "name": "ChatGPT",
+        "category": "IA",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Gemini",
+        "category": "IA",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Qwen",
+        "category": "IA",
+        "level": "Básico"
+    },
+    {
+        "name": "DeepSeek",
+        "category": "IA",
+        "level": "Básico"
+    },
+    {
+        "name": "Claude",
+        "category": "IA",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Grok",
+        "category": "IA",
+        "level": "Básico"
+    },
+    {
+        "name": "Copilot",
+        "category": "IA",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Perplexity",
+        "category": "IA",
+        "level": "Intermedio"
+    },
+    {
+        "name": "Gamma (Presentaciones)",
+        "category": "IA",
+        "level": "Básico"
+    },
+    {
+        "name": "Suno (Música)",
+        "category": "IA",
+        "level": "Básico"
+    },
+    {
+        "name": "Leonardo AI",
+        "category": "IA",
         "level": "Básico"
     }
 ]
